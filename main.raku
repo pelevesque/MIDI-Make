@@ -2,21 +2,27 @@
 
 # Make an empty MIDI file.
 
+constant $ENDIANNESS = BigEndian;
+
+subset NonNegativeInt of Int where * ≥ 0;
+sub write_2-bytes(NonNegativeInt $int) { Buf.write-uint16(0, $int, $ENDIANNESS) }
+sub write_4-bytes(NonNegativeInt $int) { Buf.write-uint32(0, $int, $ENDIANNESS) }
+
 sub MAIN () {
 
-    my $fh = open 'file.mid', :w, :bin;
+    my $buf = Buf.new();
 
         # HEADER
-    $fh.write(Blob.new('MThd'.ords));      # header chunk ID
-    $fh.write(Blob.new(0, 0, 0, 6));       # number of bytes in header
-    $fh.write(Blob.new(0, 0));             # format type => 0 | 1 | 2
-    $fh.write(Blob.new(0, 1));             # number of tracks
-    $fh.write(Blob.new(0, 96));            # time division
+    $buf.append('MThd'.ords);      # header chunk ID
+    $buf.append(write_4-bytes(6)); # number of bytes in header
+    $buf.append(write_2-bytes(0)); # format type => 0 | 1 | 2
+    $buf.append(write_2-bytes(1)); # number of tracks
+    $buf.append(0, 96);            # time division
 
         # TRACK
-    $fh.write(Blob.new('MTrk'.ords));      # track chunk ID
-    $fh.write(Blob.new(0, 0, 0, 4));       # number of bytes in track
-    $fh.write(Blob.new(0, 0xFF, 0x2F, 0)); # track end marker
+    $buf.append('MTrk'.ords);      # track chunk ID
+    $buf.append(write_4-bytes(4)); # number of bytes in track
+    $buf.append(0, 0xFF, 0x2F, 0); # track end marker
 
-    $fh.close;
+    spurt 'file.mid', $buf;
 }
