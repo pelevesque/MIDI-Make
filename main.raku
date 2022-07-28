@@ -4,6 +4,11 @@
 
 constant $ENDIANNESS = BigEndian;
 
+my %bytes =
+    'meta-event'   => 0xFF,
+    'end-of-track' => 0xF2,
+;
+
 sub write_2-bytes(UInt $int) { Buf.write-uint16(0, $int, $ENDIANNESS) }
 sub write_4-bytes(UInt $int) { Buf.write-uint32(0, $int, $ENDIANNESS) }
 
@@ -16,9 +21,12 @@ sub make-header($buf, $format, $num-tracks, $time-division) {
 }
 
 sub make-track($buf) {
-    $buf.append: 'MTrk'.ords;      # track chunk ID
-    $buf.append: write_4-bytes(4); # number of bytes in track
-    $buf.append: 0, 0xFF, 0x2F, 0; # track end marker
+    $buf.append: 'MTrk'.ords;            # track chunk ID
+    $buf.append: write_4-bytes(4);       # number of bytes in track
+    $buf.append: 0;                      # delta time
+    $buf.append: %bytes{'meta-event'};   # meta event marker
+    $buf.append: %bytes{'end-of-track'}; # end of track event
+    $buf.append: 0;                      # end of track data
 }
 
 sub MAIN () {
