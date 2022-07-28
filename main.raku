@@ -5,6 +5,8 @@
 constant $ENDIANNESS = BigEndian;
 
 my %bytes =
+    'note-on'      => 0x90,
+    'note-off'     => 0x80,
     'meta-event'   => 0xFF,
     'end-of-track' => 0xF2,
 ;
@@ -21,16 +23,26 @@ sub make-header($buf, $format, $num-tracks, $time-division) {
 }
 
 sub make-track($buf) {
-    $buf.append: 'MTrk'.ords;            # track chunk ID
-    $buf.append: write_4-bytes(20);      # number of bytes in track
-    $buf.append: 0x00, 0x90, 0x3C, 0x7F; # note-on
-    $buf.append: 0x60, 0x80, 0x3C, 0x40; # note-off
-    $buf.append: 0x00, 0x90, 0x3E, 0x7F; # note-on
-    $buf.append: 0x60, 0x80, 0x3E, 0x40; # note-off
-    $buf.append: 0;                      # delta time
-    $buf.append: %bytes{'meta-event'};   # meta event marker
-    $buf.append: %bytes{'end-of-track'}; # end of track event
-    $buf.append: 0;                      # end of track data
+    $buf.append: 'MTrk'.ords;                              # track chunk ID
+    $buf.append: write_4-bytes(20);                        # number of bytes in track
+    $buf.append: make-note-on( note => 0x3C, vol => 0x7F); # note-on
+    $buf.append: make-note-off(note => 0x3C,  dt => 0x60); # note-off
+    $buf.append: make-note-on( note => 0x3E, vol => 0x7F); # note-on
+    $buf.append: make-note-off(note => 0x3E,  dt => 0x60); # note-off
+    $buf.append: 0;                                        # delta time
+    $buf.append: %bytes{'meta-event'};                     # meta event marker
+    $buf.append: %bytes{'end-of-track'};                   # end of track event
+    $buf.append: 0;                                        # end of track data
+}
+
+sub make-note-on(:$note, :$dt = 0, :$ch = 0, :$vol = 127) {
+    my $code = %bytes{'note-on'} + $ch;
+    return $dt, $code, $note, $vol;
+}
+
+sub make-note-off(:$note, :$dt = 0, :$ch = 0, :$vol = 0) {
+    my $code = %bytes{'note-off'} + $ch;
+    return $dt, $code, $note, $vol;
 }
 
 sub MAIN () {
