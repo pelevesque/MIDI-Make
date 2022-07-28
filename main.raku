@@ -4,9 +4,8 @@
 
 constant $ENDIANNESS = BigEndian;
 
-subset NonNegativeInt of Int where * ≥ 0;
-sub write_2-bytes(NonNegativeInt $int) { Buf.write-uint16(0, $int, $ENDIANNESS) }
-sub write_4-bytes(NonNegativeInt $int) { Buf.write-uint32(0, $int, $ENDIANNESS) }
+sub write_2-bytes(UInt $int) { Buf.write-uint16(0, $int, $ENDIANNESS) }
+sub write_4-bytes(UInt $int) { Buf.write-uint32(0, $int, $ENDIANNESS) }
 
 sub MAIN () {
 
