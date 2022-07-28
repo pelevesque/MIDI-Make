@@ -1,6 +1,6 @@
 #!/usr/bin/env raku
 
-# Make an empty MIDI file.
+# Play two notes.
 
 constant $ENDIANNESS = BigEndian;
 
@@ -22,7 +22,11 @@ sub make-header($buf, $format, $num-tracks, $time-division) {
 
 sub make-track($buf) {
     $buf.append: 'MTrk'.ords;            # track chunk ID
-    $buf.append: write_4-bytes(4);       # number of bytes in track
+    $buf.append: write_4-bytes(20);      # number of bytes in track
+    $buf.append: 0x00, 0x90, 0x3C, 0x7F; # note-on
+    $buf.append: 0x60, 0x80, 0x3C, 0x40; # note-off
+    $buf.append: 0x00, 0x90, 0x3E, 0x7F; # note-on
+    $buf.append: 0x60, 0x80, 0x3E, 0x40; # note-off
     $buf.append: 0;                      # delta time
     $buf.append: %bytes{'meta-event'};   # meta event marker
     $buf.append: %bytes{'end-of-track'}; # end of track event
