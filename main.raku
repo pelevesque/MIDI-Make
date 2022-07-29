@@ -45,6 +45,22 @@ sub make-note-off(:$note, :$dt = 0, :$ch = 0, :$vol = 0) {
     return $dt, $code, $note, $vol;
 }
 
+# Create the \ operator for time signatures.
+# Ex: my $ts = 2\8;
+#     say $ts.MIDI-denominator; # OUTPUT: «3␤»
+sub infix:<\\>(UInt $numerator, UInt $denominator) {
+    class TimeSignature {
+        has UInt $.numerator is readonly;
+        has UInt $.denominator is readonly;
+        method WHAT() { 'TimeSignature' }
+        method content() { $!numerator ~ "\\" ~ $!denominator }
+        method print() { $!numerator ~ "/" ~ $!denominator }
+        method MIDI-numerator() { $!numerator }
+        method MIDI-denominator() { $!denominator.log(2) }
+    }
+    TimeSignature.new: :$numerator, :$denominator;
+}
+
 sub MAIN () {
     my $buf = Buf.new();
 
