@@ -37,12 +37,12 @@ sub make-track($buf) {
 
 sub make-note-on(:$note, :$dt = 0, :$ch = 0, :$vol = 127) {
     my $code = %bytes{'note-on'} + $ch;
-    return $dt, $code, $note, $vol;
+    $dt, $code, $note, $vol;
 }
 
 sub make-note-off(:$note, :$dt = 0, :$ch = 0, :$vol = 0) {
     my $code = %bytes{'note-off'} + $ch;
-    return $dt, $code, $note, $vol;
+    $dt, $code, $note, $vol;
 }
 
 # Create the \ operator for time signatures.
