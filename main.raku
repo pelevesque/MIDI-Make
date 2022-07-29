@@ -17,7 +17,7 @@ sub write_4-bytes(UInt $int) { Buf.write-uint32(0, $int, $ENDIANNESS) }
 
 sub make-header($buf, $format, $num-tracks, $time-division) {
     $buf.append: 'MThd'.ords;                   # header chunk ID
-    $buf.append: write_4-bytes(6);              # number of bytes in header
+    $buf.append: write_4-bytes(6);              # constant: number of bytes remaining
     $buf.append: write_2-bytes($format);        # format type => 0 | 1 | 2
     $buf.append: write_2-bytes($num-tracks);    # number of tracks
     $buf.append: write_2-bytes($time-division); # time division
