@@ -84,3 +84,39 @@ sub MAIN () {
 
     spurt 'file.mid', $buf;
 }
+
+class MIDImake {
+    subset Format where * ~~ 0 | 1 | 2;
+    subset UInt8  of UInt where * ≤ 255;
+    subset UInt16 of UInt where * ≤ 65535;
+    subset UInt32 of UInt where * ≤ 4294967295;
+
+    has Format $.format is rw;        # MIDI default: ?
+    has UInt16 $.time-division is rw; # MIDI default: 48 ticks per quarter note
+
+    constant $ENDIANNESS = BigEndian;
+
+    method !write_2-bytes(UInt16 $uint16) {
+        Buf.write-uint16(0, $uint16, $ENDIANNESS)
+    }
+    method !write_4-bytes(UInt32 $uint32) {
+        Buf.write-uint32(0, $uint32, $ENDIANNESS)
+    }
+
+    method !make-header(:$num-tracks) {
+        # It should throw an error if format or time-division is not set!
+        'MThd'.ords,
+        self!write_2-bytes($.format),
+        self!write_4-bytes(6),
+        self!write_2-bytes($num-tracks), # Auto calculate from track array!
+        self!write_2-bytes($.time-division),
+        ;
+    }
+
+    method render() { #`[send renderered bytes as string] }
+}
+
+# Ex:
+my $mid = MIDImake.new();
+$mid.format = 1;
+$mid.time-division = 12;
