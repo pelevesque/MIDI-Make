@@ -8,3 +8,4 @@ A program to make MIDI files.
 - [Standard MIDI File Structure](https://ccrma.stanford.edu/~craig/14q/midifile/MidiFileFormat.html)
 - [Time Signature](http://midi.teragonaudio.com/tech/midifile/time.htm)
 - [Time Division](https://www.recordingblogs.com/wiki/time-division-of-a-midi-file)
+- [Standard MIDI File Processing 2.6](https://majicdesigns.github.io/MD_MIDIFile/page_timing.html)
