@@ -5,10 +5,11 @@
 constant $ENDIANNESS = BigEndian;
 
 my %bytes =
-    'note-on'      => 0x90,
-    'note-off'     => 0x80,
-    'meta-event'   => 0xFF,
-    'end-of-track' => 0xF2,
+    'note-on'        => 0x90,
+    'note-off'       => 0x80,
+    'meta-event'     => 0xFF,
+    'time-signature' => 0x58,
+    'end-of-track'   => 0xF2,
 ;
 
 sub write_2-bytes(UInt $int) { Buf.write-uint16(0, $int, $ENDIANNESS) }
@@ -59,6 +60,20 @@ sub infix:<\\>(UInt $numerator, UInt $denominator) {
         method MIDI-denominator() { $!denominator.log(2) }
     }
     TimeSignature.new: :$numerator, :$denominator;
+}
+
+sub make-time-signature(
+    :$time-signature = 4\4,
+    :$num-MIDI-clocks-per-metronome-click = 24, # Is there a default?
+    :$num_32nd-per-beat = 8
+) {
+    %bytes{'meta-event'},
+    %bytes{'time-signature'},
+    4, # constant: number of bytes remaining
+    $time-signature.MIDI-numerator,
+    $time-signature.MIDI-denominator,
+    $num-MIDI-clocks-per-metronome-click,
+    $num_32nd-per-beat;
 }
 
 sub MAIN () {
