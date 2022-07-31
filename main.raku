@@ -132,3 +132,22 @@ class MIDImake {
 my $mid = MIDImake.new();
 $mid.format = 1;
 $mid.time-division = 12;
+
+    # time-division-mode
+    # 0?
+    # Default is 48?
+    # Bool... ?
+    # ppqn = 0 + 15bits (32767)
+    # tpr = 1 + 7 bits (24, 25, 29.97, 30) + 8 bits (num frames...)
+    # 24 is default...
+    # 24, 25, 29.97 (represented by 29), or 30
+    # TPF 48 default
+    # TPQN 48 default
+    # pulses per quarter note (PPQN)
+    # pulses per quarter (PPQ)
+    # ticks per quarter note (TPQN)
+
+    # what is midi time-division?
+    # In a music sequencer and MIDI clock, pulses per quarter note (PPQN), also
+    # known as pulses per quarter (PPQ), and ticks per quarter note (TPQN),
+    # is the smallest unit of time used for sequencing note and automation events.
