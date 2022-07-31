@@ -8,6 +8,7 @@ my %bytes =
     'note-on'        => 0x90,
     'note-off'       => 0x80,
     'meta-event'     => 0xFF,
+    'tempo'          => 0x51,
     'time-signature' => 0x58,
     'end-of-track'   => 0xF2,
 ;
@@ -74,6 +75,17 @@ sub make-time-signature(
     $time-signature.MIDI-denominator,
     $num-MIDI-clocks-per-metronome-click,
     $num_32nd-per-beat;
+}
+
+subset UInt24 of UInt where * ≤ 16777215;
+sub make-tempo(
+    UInt24 :$ms-per-quarter-note = 500000 # MIDI default: => 120 BPM
+) {
+    my $buf = Buf.new();
+    $buf.append: %bytes{'meta-event'};
+    $buf.append: %bytes{'tempo'};
+    $buf.append: 3; # constant: number of bytes remaining
+    $buf.append: write_4-bytes($ms-per-quarter-note).splice(1);
 }
 
 sub MAIN () {
