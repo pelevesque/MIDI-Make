@@ -42,6 +42,14 @@ class MIDImake {
         self!write-header;
         return $!buf;
     }
+
+    has Int %!tracks_name-index{Str};
+    has @!tracks;
+
+    method add-track(Str $name) {
+        %!tracks_name-index{$name} = @!tracks.elems;
+        @!tracks.push([]);
+    }
 }
 
 #`[[
