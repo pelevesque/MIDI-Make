@@ -151,3 +151,30 @@ $mid.time-division = 12;
     # In a music sequencer and MIDI clock, pulses per quarter note (PPQN), also
     # known as pulses per quarter (PPQ), and ticks per quarter note (TPQN),
     # is the smallest unit of time used for sequencing note and automation events.
+
+#`[ Luc's example code
+    class M {
+
+        has $!ticks-mode = 0;
+        has $!ticks-per-unit = 48;
+
+        multi method time-division ('quarter', $ticks-per-quarter?) {
+            $!ticks-mode = 0;
+            $!ticks-per-unit = $ticks-per-quarter // 48;
+        }
+
+        multi method time-division ('format', $ticks-per-frame?, $frames-per-second?) {
+            $!ticks-mode = $frames-per-second // 24;
+            $!ticks-per-unit = $ticks-per-frame // 48;
+        }
+
+    }
+
+    my $m = M.new;
+
+    $m.time-division: 'quarter'           # Mode  0, ticks 48.
+    $m.time-division: 'frame';            # Mode 24, ticks 48.
+    $m.time-division: 'quarter' 1042;     # Mode  0, ticks 48.
+    $m.time-division: 'frame' 75;         # Mode 24, ticks 75.
+    $m.time-division: 'frame' 23, 30;     # Mode 30, ticks 23.
+]
