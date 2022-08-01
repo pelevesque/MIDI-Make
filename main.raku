@@ -5,6 +5,11 @@ class track {
 
     has Str $.name is rw;
 
+    my %bytes =
+        'meta-event'   => 0xFF,
+        'end-of-track' => 0xF2,
+    ;
+
     method !vlq-encode (UInt28 $n is copy) {
         my $byte = 0x7F +& $n;
         my $buf = Buf.new($byte);
@@ -14,6 +19,15 @@ class track {
             $buf.prepend: 0x80 +| $byte;
             $n +>= 7;
         }
+        return $buf;
+    }
+
+    method !write-end-of-track-marker() {
+        my $buf = Buf.new;
+        $buf.append: 0;
+        $buf.append: %bytes{'meta-event'};
+        $buf.append: %bytes{'end-of-track'};
+        $buf.append: 0;
         return $buf;
     }
 }
