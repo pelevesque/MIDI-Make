@@ -1,5 +1,23 @@
 #!/usr/bin/env raku
 
+class track {
+    subset UInt28 of UInt where * ≤ 268435455;
+
+    has Str $.name is rw;
+
+    method !vlq-encode (UInt28 $n is copy) {
+        my $byte = 0x7F +& $n;
+        my $buf = Buf.new($byte);
+        $n +>= 7;
+        while ($n) {
+            $byte = 0x7F +& $n;
+            $buf.prepend: 0x80 +| $byte;
+            $n +>= 7;
+        }
+        return $buf;
+    }
+}
+
 class MIDImake {
     subset format where * ~~ 0 | 1 | 2;
     subset time-division where * ~~ 'quarter-note' | 'frame';
@@ -7,7 +25,6 @@ class MIDImake {
     subset UInt8  of UInt where * ≤ 255;
     subset UInt15 of UInt where * ≤ 32767;
     subset UInt16 of UInt where * ≤ 65535;
-    subset UInt28 of UInt where * ≤ 268435455;
     subset UInt32 of UInt where * ≤ 4294967295;
 
     has format $.format is default(1) is rw;
@@ -43,26 +60,6 @@ class MIDImake {
     method render() {
         self!write-header;
         return $!buf;
-    }
-
-    has Int %!tracks_name-index{Str};
-    has @!tracks;
-
-    method add-track(Str $name) {
-        %!tracks_name-index{$name} = @!tracks.elems;
-        @!tracks.push([]);
-    }
-
-    method !vlq-encode (UInt28 $n is copy) {
-        my $byte = 0x7F +& $n;
-        my $buf = Buf.new($byte);
-        $n +>= 7;
-        while ($n) {
-            $byte = 0x7F +& $n;
-            $buf.prepend: 0x80 +| $byte;
-            $n +>= 7;
-        }
-        return $buf;
     }
 }
 
