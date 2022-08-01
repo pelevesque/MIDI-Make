@@ -33,6 +33,7 @@ class MIDImake {
                 $!buf.append: self!write_2-bytes($!TPQN);
             }
             when 'frame' {
+                    # Floor FPS because 29.97 is stored as 29 in MIDI.
                 $!buf.append: 0x80 + $!FPS.floor;
                 $!buf.append: $!TPF;
             }
