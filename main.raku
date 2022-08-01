@@ -1,5 +1,21 @@
 #!/usr/bin/env raku
 
+# Create the \ operator for time signatures.
+# Ex: my $ts = 2\8;
+#     say $ts.MIDI-denominator; # OUTPUT: «3␤»
+sub infix:<\\>(UInt $numerator, UInt $denominator) {
+    class TimeSignature {
+        has UInt $.numerator is readonly; # Need better type constraint!
+        has UInt $.denominator is readonly; # Need better type constraint!
+        method WHAT() { 'TimeSignature' }
+        method content() { $!numerator ~ "\\" ~ $!denominator }
+        method print() { $!numerator ~ "/" ~ $!denominator }
+        method MIDI-numerator() { $!numerator }
+        method MIDI-denominator() { $!denominator.log(2) }
+    }
+    TimeSignature.new: :$numerator, :$denominator;
+}
+
 class MIDImake {
     subset format where * ~~ 0 | 1 | 2;
     subset time-division where * ~~ 'quarter-note' | 'frame';
