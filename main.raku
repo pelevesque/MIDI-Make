@@ -33,7 +33,7 @@ class MIDImake {
                 $!buf.append: self!write_2-bytes($!TPQN);
             }
             when 'frame' {
-                $!buf.append: 128 + $!FPS.floor;
+                $!buf.append: 0x80 + $!FPS.floor;
                 $!buf.append: $!TPF;
             }
         }
