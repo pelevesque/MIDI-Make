@@ -10,3 +10,4 @@ A program to make MIDI files.
 - [Time Division](https://www.recordingblogs.com/wiki/time-division-of-a-midi-file)
 - [MIDI Beat Time Considerations](https://majicdesigns.github.io/MD_MIDIFile/page_timing.html)
 - [MIDI timting](https://paxstellar.fr/2020/09/11/midi-timing/)
+- [MIDI Files Specification](http://www.somascape.org/midi/tech/mfile.html)
