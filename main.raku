@@ -46,12 +46,14 @@ class MIDImake {
 }
 
 class track is MIDImake {
+    subset UInt24 of UInt where * ≤ 16777215;
     subset UInt28 of UInt where * ≤ 268435455;
 
     has Str $.name is rw;
 
     my %bytes =
         'meta-event'   => 0xFF,
+        'tempo'        => 0x51,
         'end-of-track' => 0xF2,
     ;
 
@@ -80,6 +82,17 @@ class track is MIDImake {
         my $buf = Buf.new;
         $buf.append: 'MTrk'.ords;
         $buf.append: self.write_4-bytes($num-bytes);
+        return $buf;
+    }
+
+    method !make-tempo(
+        UInt24 :$ms-per-quarter-note = 500000 # MIDI default: => 120 BPM
+    ) {
+        my $buf = Buf.new();
+        $buf.append: %bytes{'meta-event'};
+        $buf.append: %bytes{'tempo'};
+        $buf.append: 3; # constant: number of bytes remaining
+        $buf.append: self.write_4-bytes($ms-per-quarter-note).splice(1);
         return $buf;
     }
 }
