@@ -1,6 +1,51 @@
 #!/usr/bin/env raku
 
-class track {
+class MIDImake {
+    subset format where * ~~ 0 | 1 | 2;
+    subset time-division where * ~~ 'quarter-note' | 'frame';
+    subset FPS where * ~~ 24 | 25 | 29.97 | 30;
+    subset UInt8  of UInt where * ≤ 255;
+    subset UInt15 of UInt where * ≤ 32767;
+    subset UInt16 of UInt where * ≤ 65535;
+    subset UInt32 of UInt where * ≤ 4294967295;
+
+    has format $.format is default(1) is rw;
+    has time-division $.time-division is default('quarter-note') is rw;
+    has FPS $.FPS is default(24) is rw;
+    has UInt8 $.TPF is default(48) is rw;
+    has UInt15 $.TPQN is default(48) is rw;
+
+    constant $ENDIANNESS = BigEndian;
+
+    method !write_2-bytes(UInt16 $n) { Buf.write-uint16(0, $n, $ENDIANNESS) }
+    method write_4-bytes(UInt32 $n) { Buf.write-uint32(0, $n, $ENDIANNESS) }
+
+    has $!buf = Buf.new;
+
+    method !write-header() {
+        $!buf.append: 'MThd'.ords;                  # header chunk ID
+        $!buf.append: self.write_4-bytes(6);        # number of bytes remaining
+        $!buf.append: self.write_2-bytes($!format); # format
+        $!buf.append: self.swrite_2-bytes(0);       # number of tracks
+        given $!time-division {                     # time division
+            when 'quarter-note' {
+                $!buf.append: self!write_2-bytes($!TPQN);
+            }
+            when 'frame' {
+                    # Floor FPS because 29.97 is stored as 29 in MIDI.
+                $!buf.append: 0x80 + $!FPS.floor;
+                $!buf.append: $!TPF;
+            }
+        }
+    }
+
+    method render() {
+        self!write-header;
+        return $!buf;
+    }
+}
+
+class track is MIDImake {
     subset UInt28 of UInt where * ≤ 268435455;
 
     has Str $.name is rw;
@@ -30,50 +75,12 @@ class track {
         $buf.append: 0;
         return $buf;
     }
-}
 
-class MIDImake {
-    subset format where * ~~ 0 | 1 | 2;
-    subset time-division where * ~~ 'quarter-note' | 'frame';
-    subset FPS where * ~~ 24 | 25 | 29.97 | 30;
-    subset UInt8  of UInt where * ≤ 255;
-    subset UInt15 of UInt where * ≤ 32767;
-    subset UInt16 of UInt where * ≤ 65535;
-    subset UInt32 of UInt where * ≤ 4294967295;
-
-    has format $.format is default(1) is rw;
-    has time-division $.time-division is default('quarter-note') is rw;
-    has FPS $.FPS is default(24) is rw;
-    has UInt8 $.TPF is default(48) is rw;
-    has UInt15 $.TPQN is default(48) is rw;
-
-    constant $ENDIANNESS = BigEndian;
-
-    method !write_2-bytes(UInt16 $n) { Buf.write-uint16(0, $n, $ENDIANNESS) }
-    method !write_4-bytes(UInt32 $n) { Buf.write-uint32(0, $n, $ENDIANNESS) }
-
-    has $!buf = Buf.new;
-
-    method !write-header() {
-        $!buf.append: 'MThd'.ords;                  # header chunk ID
-        $!buf.append: self!write_4-bytes(6);        # number of bytes remaining
-        $!buf.append: self!write_2-bytes($!format); # format
-        $!buf.append: self!write_2-bytes(0);        # number of tracks
-        given $!time-division {                     # time division
-            when 'quarter-note' {
-                $!buf.append: self!write_2-bytes($!TPQN);
-            }
-            when 'frame' {
-                    # Floor FPS because 29.97 is stored as 29 in MIDI.
-                $!buf.append: 0x80 + $!FPS.floor;
-                $!buf.append: $!TPF;
-            }
-        }
-    }
-
-    method render() {
-        self!write-header;
-        return $!buf;
+    method !write-header(UInt $num-bytes) {
+        my $buf = Buf.new;
+        $buf.append: 'MTrk'.ords;
+        $buf.append: self.write_4-bytes($num-bytes);
+        return $buf;
     }
 }
 
