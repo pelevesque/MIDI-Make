@@ -1,5 +1,10 @@
 #!/usr/bin/env raku
 
+# Create the ♩PM operator.
+# Ex: say 60♩PM; # OUTPUT: «1000000␤»
+subset QNPM of Numeric where 0.22351741874 <= * <= 60000001;
+sub postfix:<♩PM>(QNPM $n) { (60000000 / $n).floor }
+
 # Create the \ operator for time signatures.
 # Ex: my $ts = 2\8;
 #     say $ts.MIDI-denominator; # OUTPUT: «3␤»
