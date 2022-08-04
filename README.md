@@ -1,6 +1,6 @@
 # MIDI-Make
 
-A program to make MIDI files.
+A Raku module to make MIDI files.
 
 ## Resources
 
