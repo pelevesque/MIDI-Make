@@ -1,0 +1,19 @@
+{
+    "raku": "6.*",
+    "name": "MIDImake",
+    "api": "0",
+    "auth": "github:pelevesque",
+    "version": "0.1.0",
+    "description": "A program to make MIDI files.",
+    "authors": [
+        "Pierre-Emmanuel Lévesque <pierre.e.levesque@gmail.com>"
+    ],
+    "license": "MIT",
+    "tags": [
+        "MIDI",
+        "music",
+        "sequencer",
+        "composition"
+    ],
+    "source-url": "git://github.com/pelevesque/MIDImake.git"
+  }
