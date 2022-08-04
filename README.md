@@ -1,4 +1,4 @@
-# MIDImake
+# MIDI-Make
 
 A program to make MIDI files.
 

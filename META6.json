@@ -1,6 +1,6 @@
 {
     "raku": "6.*",
-    "name": "MIDImake",
+    "name": "MIDI::Make",
     "api": "0",
     "auth": "github:pelevesque",
     "version": "0.1.0",
@@ -15,5 +15,5 @@
         "sequencer",
         "composition"
     ],
-    "source-url": "git://github.com/pelevesque/MIDImake.git"
+    "source-url": "git://github.com/pelevesque/MIDI-Make.git"
   }

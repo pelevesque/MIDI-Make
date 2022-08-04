@@ -29,7 +29,7 @@ sub infix:<\\> (UInt8 $numerator, UInt $denominator) {
     Time-Signature.new: :$numerator, :$denominator;
 }
 
-class MIDIbase {
+class MIDI-Base {
     constant $ENDIANNESS = BigEndian;
 
     method write_2-bytes (UInt16 $n) {
@@ -41,7 +41,7 @@ class MIDIbase {
     }
 }
 
-class MIDImake is MIDIbase {
+class MIDI-Make is MIDI-Base {
     subset format where * ~~ 0 | 1 | 2;
     subset time-division where * ~~ 'quarter note' | 'frame';
     subset FPS where * ~~ 24 | 25 | 29.97 | 30;
@@ -84,7 +84,7 @@ class MIDImake is MIDIbase {
     }
 }
 
-class track is MIDIbase {
+class Track is MIDI-Base {
     subset Str-ASCII of Str where 32 ≤ *.ords.all ≤ 126;
 
     my %bytes =
