@@ -24,7 +24,7 @@ sub infix:<\\> (UInt8 $numerator, UInt $denominator) is export {
         has UInt8 $.numerator;
         has UInt  $.denominator;
         method MIDI-numerator { $!numerator }
-        method MIDI-denominator { $!denominator.log(2) }
+        method MIDI-denominator { Int($!denominator.log(2)) }
     }
     Time-Signature.new: :$numerator, :$denominator;
 }
