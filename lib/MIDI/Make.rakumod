@@ -13,13 +13,13 @@ subset UInt32 of UInt where * ≤ 4294967295;
     # μsPQN = Microseconds per quarter note.
     # ➤ say 60♩PM; «1000000␤»
 subset QNPM of Numeric where 0.22351741874 ≤ * ≤ 60000001;
-sub postfix:<♩PM> (QNPM $QNPM) { (60000000 / $QNPM).floor }
+sub postfix:<♩PM> (QNPM $QNPM) is export { (60000000 / $QNPM).floor }
 
     # Operator: \
     # Helps to write human-like time signatures.
     # ➤ say (2\8).MIDI-nominator; «2␤»
     #   say (2\8).MIDI-denominator; «3␤»
-sub infix:<\\> (UInt8 $numerator, UInt $denominator) {
+sub infix:<\\> (UInt8 $numerator, UInt $denominator) is export {
     class Time-Signature {
         has UInt8 $.numerator;
         has UInt  $.denominator;
