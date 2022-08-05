@@ -111,6 +111,7 @@ class Track is MIDI-Base {
     ;
 
     has Str-ASCII $.name is rw;
+    has UInt28 $!delta-time = 0;
 
     has $!e = Buf.new; # Meta/Midi Events.
 
@@ -152,13 +153,16 @@ class Track is MIDI-Base {
         return $b;
     }
 
+    method dt (UInt28 $dt) {
+        $!delta-time = $dt;
+    }
+
     method time-signature (
-        UInt28 :$dt = 0,
         :$time-signature = 4\4,
         UInt8 :$PPMC = 24, # Pulses per metronome click.
         UInt8 :$_32PQ = 8, # 32nds per quarter note.
     ) {
-        $!e.append: self!VLQ-encode($dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'meta-event'};
         $!e.append: %bytes{'time-signature'};
         $!e.append: self!VLQ-encode(4);
@@ -169,10 +173,9 @@ class Track is MIDI-Base {
     }
 
     method tempo (
-        UInt28 :$dt = 0,
         UInt24 :$tempo = 500000, # Microseconds per quarter note.
     ) {
-        $!e.append: self!VLQ-encode($dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'meta-event'};
         $!e.append: %bytes{'tempo'};
         $!e.append: self!VLQ-encode(3);
@@ -180,24 +183,22 @@ class Track is MIDI-Base {
     }
 
     method note-on (
-        UInt28 :$dt = 0,
         UInt4  :$ch = 0,
         UInt7  :$note,
         UInt7  :$vol = 127,
     ) {
-        $!e.append: self!VLQ-encode($dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'note-on'} + $ch;
         $!e.append: $note;
         $!e.append: $vol;
     }
 
     method note-off (
-        UInt28 :$dt = 0,
         UInt4  :$ch = 0,
         UInt7  :$note,
         UInt7  :$vol = 0,
     ) {
-        $!e.append: self!VLQ-encode($dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'note-off'} + $ch;
         $!e.append: $note;
         $!e.append: $vol;
