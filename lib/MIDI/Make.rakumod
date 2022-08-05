@@ -154,13 +154,8 @@ class Track is MIDI-Base {
         return $b;
     }
 
-    method dt (UInt28 $dt) {
-        $!delta-time = $dt;
-    }
-
-    method ch (UInt4 $ch) {
-        $!channel = $ch;
-    }
+    method dt (UInt28 $dt) { $!delta-time = $dt }
+    method ch (UInt4 $ch) { $!channel = $ch }
 
     method time-signature (
         :$time-signature = 4\4,
