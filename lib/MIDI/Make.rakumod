@@ -159,9 +159,9 @@ class Track is MIDI-Base {
     method ch (UInt4 $ch) { $!channel = $ch }
 
     method time-signature (
-        :$time-signature = 4\4,
-        UInt8 :$PPMC = 24, # Pulses per metronome click.
-        UInt8 :$_32PQ = 8, # 32nds per quarter note.
+        $time-signature = 4\4,
+        UInt8 $PPMC = 24, # Pulses per metronome click.
+        UInt8 $_32PQ = 8, # 32nds per quarter note.
     ) {
         $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'meta-event'};
@@ -174,7 +174,7 @@ class Track is MIDI-Base {
     }
 
     method tempo (
-        UInt24 :$tempo = 500000, # Microseconds per quarter note.
+        UInt24 $tempo = 500000, # Microseconds per quarter note.
     ) {
         $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'meta-event'};
@@ -184,8 +184,8 @@ class Track is MIDI-Base {
     }
 
     method note-on (
-        UInt7  :$note,
-        UInt7  :$vol = 127,
+        UInt7 $note,
+        UInt7 $vol = 127,
     ) {
         $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'note-on'} + $!channel;
@@ -194,8 +194,8 @@ class Track is MIDI-Base {
     }
 
     method note-off (
-        UInt7  :$note,
-        UInt7  :$vol = 0,
+        UInt7 $note,
+        UInt7 $vol = 0,
     ) {
         $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'note-off'} + $!channel;
