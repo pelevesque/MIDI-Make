@@ -158,7 +158,7 @@ class Track is MIDI-Base {
     method dt (UInt28 $dt) { $!delta-time = $dt }
     method ch (UInt4 $ch) { $!channel = $ch }
 
-    method time-signature (
+    method time (
         $time-signature = 4\4,
         UInt8 $PPMC = 24, # Pulses per metronome click.
         UInt8 $_32PQ = 8, # 32nds per quarter note.
