@@ -7,13 +7,14 @@ subset UInt24 of UInt where * ≤ 16777215;
 subset UInt28 of UInt where * ≤ 268435455;
 subset UInt32 of UInt where * ≤ 4294967295;
 
-    # Operator: ♩PM
+    # Operator: ♩PM | QPM
     # Transforms QPM to μsPQ.
     # QPM = Quarter notes per minute.
     # μsPQ = Microseconds per quarter note.
     # ➤ say 60♩PM; «1000000␤»
 subset QPM of Numeric where 0.22351741874 ≤ * ≤ 60000001;
 sub postfix:<♩PM> (QPM $QPM) is export { (60000000 / $QPM).floor }
+sub postfix:<QPM> (QPM $QPM) is export { (60000000 / $QPM).floor }
 
     # Operator: \
     # Helps to write human-like time signatures.
