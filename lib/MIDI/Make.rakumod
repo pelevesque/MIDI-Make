@@ -110,7 +110,7 @@ class Track is MIDI-Base {
         'end-of-track'   => 0xF2,
     ;
 
-    has Str-ASCII $!track-name;
+    has Str-ASCII $!track-name = '';
     has UInt28 $!delta-time = 0;
     has UInt4 $!channel = 0;
 
