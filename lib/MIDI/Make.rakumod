@@ -8,12 +8,12 @@ subset UInt28 of UInt where * ≤ 268435455;
 subset UInt32 of UInt where * ≤ 4294967295;
 
     # Operator: ♩PM
-    # Transforms QNPM to μsPQN.
-    # QNPM = Quarter notes per minute.
-    # μsPQN = Microseconds per quarter note.
+    # Transforms QPM to μsPQ.
+    # QPM = Quarter notes per minute.
+    # μsPQ = Microseconds per quarter note.
     # ➤ say 60♩PM; «1000000␤»
-subset QNPM of Numeric where 0.22351741874 ≤ * ≤ 60000001;
-sub postfix:<♩PM> (QNPM $QNPM) is export { (60000000 / $QNPM).floor }
+subset QPM of Numeric where 0.22351741874 ≤ * ≤ 60000001;
+sub postfix:<♩PM> (QPM $QPM) is export { (60000000 / $QPM).floor }
 
     # Operator: \
     # Helps to write human-like time signatures.
@@ -43,14 +43,14 @@ class MIDI-Base {
 
 class MIDI-Make is MIDI-Base {
     subset format where * ~~ 0 | 1 | 2;
-    subset time-division where * ~~ 'quarter note' | 'frame';
+    subset time-division where * ~~ 'quarter' | 'frame';
     subset FPS where * ~~ 24 | 25 | 29.97 | 30;
 
     has format $.format is rw = 1;
-    has time-division $.time-division is rw = 'quarter note';
-    has FPS    $.FPS  is rw = 24; # Frames per second.
-    has UInt8  $.PPF  is rw = 4;  # Pulses per frame.
-    has UInt15 $.PPQN is rw = 48; # Pulses per quarter note.
+    has time-division $.time-division is rw = 'quarter';
+    has FPS    $.FPS is rw = 24; # Frames per second.
+    has UInt8  $.PPF is rw = 4;  # Pulses per frame.
+    has UInt15 $.PPQ is rw = 48; # Pulses per quarter note.
 
     has $!buf = Buf.new;
 
@@ -62,8 +62,8 @@ class MIDI-Make is MIDI-Base {
         $!buf.append: self.write_2-bytes($!format);
         $!buf.append: self.write_2-bytes($num-tracks);
         given $!time-division {
-            when 'quarter note' {
-                $!buf.append: self.write_2-bytes($!PPQN);
+            when 'quarter' {
+                $!buf.append: self.write_2-bytes($!PPQ);
             }
             when 'frame' {
                     # Floor FPS to store 29.97 as 29 for MIDI.
@@ -143,7 +143,7 @@ class Track is MIDI-Base {
         UInt28 :$dt = 0,
         :$time-signature = 4\4,
         UInt8 :$PPMC = 24, # Pulses per metronome click.
-        UInt8 :$_32PQN = 8, # 32nds per quarter note.
+        UInt8 :$_32PQ = 8, # 32nds per quarter note.
     ) {
         $!e.append: self!VLQ-encode($dt);
         $!e.append: %bytes{'meta-event'};
@@ -152,7 +152,7 @@ class Track is MIDI-Base {
         $!e.append: $time-signature.MIDI-numerator;
         $!e.append: $time-signature.MIDI-denominator;
         $!e.append: $PPMC;
-        $!e.append: $_32PQN;
+        $!e.append: $_32PQ;
     }
 
     method tempo (
