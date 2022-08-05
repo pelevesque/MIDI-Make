@@ -101,8 +101,8 @@ class Track is MIDI-Base {
     subset Str-ASCII of Str where 32 ≤ *.ords.all ≤ 126;
 
     my %bytes =
-        'note-on'        => 0x90,
         'note-off'       => 0x80,
+        'note-on'        => 0x90,
         'meta-event'     => 0xFF,
         'track-name'     => 0x03,
         'tempo'          => 0x51,
