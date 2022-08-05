@@ -110,9 +110,19 @@ class Track is MIDI-Base {
         'end-of-track'   => 0xF2,
     ;
 
-    has Str-ASCII $!track-name = '';
-    has UInt28 $!delta-time = 0;
-    has UInt4 $!channel = 0;
+    has Str-ASCII $.name = '';
+    has UInt28 $.dt = 0;
+    has UInt4  $.ch = 0;
+
+    # Getters.
+    multi method name { $!name }
+    multi method dt { $!dt }
+    multi method ch { $!ch }
+
+    # Setters.
+    multi method name ($name) { $!name = $name }
+    multi method dt ($dt) { $!dt = $dt }
+    multi method ch ($ch) { $!ch = $ch }
 
     has $!e = Buf.new; # Meta/Midi Events.
 
@@ -144,26 +154,22 @@ class Track is MIDI-Base {
         return $b;
     }
 
-    method !render-track-name {
+    method !render-name {
         my $b = Buf.new;
         $b.append: self!VLQ-encode(0);
         $b.append: %bytes{'meta-event'};
         $b.append: %bytes{'track-name'};
-        $b.append: self!VLQ-encode($!track-name.chars);
-        $b.append: $!track-name.ords;
+        $b.append: self!VLQ-encode($!name.chars);
+        $b.append: $!name.ords;
         return $b;
     }
-
-    method name (Str-ASCII $name) { $!track-name = $name }
-    method dt (UInt28 $dt) { $!delta-time = $dt }
-    method ch (UInt4 $ch) { $!channel = $ch }
 
     method time (
         $time-signature = 4\4,
         UInt8 $PPMC = 24, # Pulses per metronome click.
         UInt8 $_32PQ = 8, # 32nds per quarter note.
     ) {
-        $!e.append: self!VLQ-encode($!delta-time);
+        $!e.append: self!VLQ-encode($!dt);
         $!e.append: %bytes{'meta-event'};
         $!e.append: %bytes{'time-signature'};
         $!e.append: self!VLQ-encode(4);
@@ -176,7 +182,7 @@ class Track is MIDI-Base {
     method tempo (
         UInt24 $tempo = 500000, # Microseconds per quarter note.
     ) {
-        $!e.append: self!VLQ-encode($!delta-time);
+        $!e.append: self!VLQ-encode($!dt);
         $!e.append: %bytes{'meta-event'};
         $!e.append: %bytes{'tempo'};
         $!e.append: self!VLQ-encode(3);
@@ -187,8 +193,8 @@ class Track is MIDI-Base {
         UInt7 $note,
         UInt7 $vol = 127,
     ) {
-        $!e.append: self!VLQ-encode($!delta-time);
-        $!e.append: %bytes{'note-on'} + $!channel;
+        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: %bytes{'note-on'} + $!ch;
         $!e.append: $note;
         $!e.append: $vol;
     }
@@ -197,15 +203,15 @@ class Track is MIDI-Base {
         UInt7 $note,
         UInt7 $vol = 0,
     ) {
-        $!e.append: self!VLQ-encode($!delta-time);
-        $!e.append: %bytes{'note-off'} + $!channel;
+        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: %bytes{'note-off'} + $!ch;
         $!e.append: $note;
         $!e.append: $vol;
     }
 
     method render {
         my $b = Buf.new;
-        $b.append:  self!render-track-name if $!track-name.chars;
+        $b.append:  self!render-name if $!name.chars;
         $b.append:  $!e;
         $b.append:  self!end-of-track;
         $b.prepend: self!header($b.bytes);
