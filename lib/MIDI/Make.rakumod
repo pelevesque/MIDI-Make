@@ -112,6 +112,7 @@ class Track is MIDI-Base {
 
     has Str-ASCII $.name is rw;
     has UInt28 $!delta-time = 0;
+    has UInt4 $!channel = 0;
 
     has $!e = Buf.new; # Meta/Midi Events.
 
@@ -157,6 +158,10 @@ class Track is MIDI-Base {
         $!delta-time = $dt;
     }
 
+    method ch (UInt4 $ch) {
+        $!channel = $ch;
+    }
+
     method time-signature (
         :$time-signature = 4\4,
         UInt8 :$PPMC = 24, # Pulses per metronome click.
@@ -183,23 +188,21 @@ class Track is MIDI-Base {
     }
 
     method note-on (
-        UInt4  :$ch = 0,
         UInt7  :$note,
         UInt7  :$vol = 127,
     ) {
         $!e.append: self!VLQ-encode($!delta-time);
-        $!e.append: %bytes{'note-on'} + $ch;
+        $!e.append: %bytes{'note-on'} + $!channel;
         $!e.append: $note;
         $!e.append: $vol;
     }
 
     method note-off (
-        UInt4  :$ch = 0,
         UInt7  :$note,
         UInt7  :$vol = 0,
     ) {
         $!e.append: self!VLQ-encode($!delta-time);
-        $!e.append: %bytes{'note-off'} + $ch;
+        $!e.append: %bytes{'note-off'} + $!channel;
         $!e.append: $note;
         $!e.append: $vol;
     }
