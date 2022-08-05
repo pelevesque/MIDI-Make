@@ -110,7 +110,7 @@ class Track is MIDI-Base {
         'end-of-track'   => 0xF2,
     ;
 
-    has Str-ASCII $.name is rw;
+    has Str-ASCII $!track-name;
     has UInt28 $!delta-time = 0;
     has UInt4 $!channel = 0;
 
@@ -144,16 +144,17 @@ class Track is MIDI-Base {
         return $b;
     }
 
-    method !name {
+    method !render-track-name {
         my $b = Buf.new;
         $b.append: self!VLQ-encode(0);
         $b.append: %bytes{'meta-event'};
         $b.append: %bytes{'track-name'};
-        $b.append: self!VLQ-encode($!name.chars);
-        $b.append: $!name.ords;
+        $b.append: self!VLQ-encode($!track-name.chars);
+        $b.append: $!track-name.ords;
         return $b;
     }
 
+    method name (Str-ASCII $name) { $!track-name = $name }
     method dt (UInt28 $dt) { $!delta-time = $dt }
     method ch (UInt4 $ch) { $!channel = $ch }
 
@@ -204,7 +205,7 @@ class Track is MIDI-Base {
 
     method render {
         my $b = Buf.new;
-        $b.append:  self!name if $!name.chars;
+        $b.append:  self!render-track-name if $!track-name.chars;
         $b.append:  $!e;
         $b.append:  self!end-of-track;
         $b.prepend: self!header($b.bytes);
