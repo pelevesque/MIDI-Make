@@ -99,42 +99,44 @@ class Track is MIDI-Base {
 
     has Str-ASCII $.name is rw;
 
-    has $!buf = Buf.new;
+    has $!e = Buf.new; # Meta/Midi Events.
 
     method !VLQ-encode (UInt28 $n is copy) {
         my $byte = 0x7F +& $n;
-        my $buf = Buf.new($byte);
+        my $b = Buf.new($byte);
         $n +>= 7;
         while ($n) {
             $byte = 0x7F +& $n;
-            $buf.prepend: 0x80 +| $byte;
+            $b.prepend: 0x80 +| $byte;
             $n +>= 7;
         }
-        return $buf;
+        return $b;
     }
 
     method !header (UInt32 $num-bytes) {
-        my $buf = Buf.new;
-        $buf.append: 'MTrk'.ords;
-        $buf.append: self.write_4-bytes($num-bytes);
-        $!buf.prepend: $buf;
+        my $b = Buf.new;
+        $b.append: 'MTrk'.ords;
+        $b.append: self.write_4-bytes($num-bytes);
+        return $b;
     }
 
     method !end-of-track {
-        $!buf.append: self!VLQ-encode(0);
-        $!buf.append: %bytes{'meta-event'};
-        $!buf.append: %bytes{'end-of-track'};
-        $!buf.append: self!VLQ-encode(0);
+        my $b = Buf.new;
+        $b.append: self!VLQ-encode(0);
+        $b.append: %bytes{'meta-event'};
+        $b.append: %bytes{'end-of-track'};
+        $b.append: self!VLQ-encode(0);
+        return $b;
     }
 
     method !name {
-        my $buf = Buf.new;
-        $buf.append: self!VLQ-encode(0);
-        $buf.append: %bytes{'meta-event'};
-        $buf.append: %bytes{'track-name'};
-        $buf.append: self!VLQ-encode($!name.chars);
-        $buf.append: $!name.ords;
-        $!buf.prepend: $buf;
+        my $b = Buf.new;
+        $b.append: self!VLQ-encode(0);
+        $b.append: %bytes{'meta-event'};
+        $b.append: %bytes{'track-name'};
+        $b.append: self!VLQ-encode($!name.chars);
+        $b.append: $!name.ords;
+        return $b;
     }
 
     method time-signature (
@@ -143,25 +145,25 @@ class Track is MIDI-Base {
         UInt8 :$PPMC = 24, # Pulses per metronome click.
         UInt8 :$_32PQN = 8, # 32nds per quarter note.
     ) {
-        $!buf.append: self!VLQ-encode($dt);
-        $!buf.append: %bytes{'meta-event'};
-        $!buf.append: %bytes{'time-signature'};
-        $!buf.append: self!VLQ-encode(4);
-        $!buf.append: $time-signature.MIDI-numerator;
-        $!buf.append: $time-signature.MIDI-denominator;
-        $!buf.append: $PPMC;
-        $!buf.append: $_32PQN;
+        $!e.append: self!VLQ-encode($dt);
+        $!e.append: %bytes{'meta-event'};
+        $!e.append: %bytes{'time-signature'};
+        $!e.append: self!VLQ-encode(4);
+        $!e.append: $time-signature.MIDI-numerator;
+        $!e.append: $time-signature.MIDI-denominator;
+        $!e.append: $PPMC;
+        $!e.append: $_32PQN;
     }
 
     method tempo (
         UInt28 :$dt = 0,
         UInt24 :$tempo = 500000, # Microseconds per quarter note.
     ) {
-        $!buf.append: self!VLQ-encode($dt);
-        $!buf.append: %bytes{'meta-event'};
-        $!buf.append: %bytes{'tempo'};
-        $!buf.append: self!VLQ-encode(3);
-        $!buf.append: self.write_4-bytes($tempo).splice(1);
+        $!e.append: self!VLQ-encode($dt);
+        $!e.append: %bytes{'meta-event'};
+        $!e.append: %bytes{'tempo'};
+        $!e.append: self!VLQ-encode(3);
+        $!e.append: self.write_4-bytes($tempo).splice(1);
     }
 
     method note-on (
@@ -170,10 +172,10 @@ class Track is MIDI-Base {
         UInt7  :$note,
         UInt7  :$vol = 127,
     ) {
-        $!buf.append: self!VLQ-encode($dt);
-        $!buf.append: %bytes{'note-on'} + $ch;
-        $!buf.append: $note;
-        $!buf.append: $vol;
+        $!e.append: self!VLQ-encode($dt);
+        $!e.append: %bytes{'note-on'} + $ch;
+        $!e.append: $note;
+        $!e.append: $vol;
     }
 
     method note-off (
@@ -182,16 +184,18 @@ class Track is MIDI-Base {
         UInt7  :$note,
         UInt7  :$vol = 0,
     ) {
-        $!buf.append: self!VLQ-encode($dt);
-        $!buf.append: %bytes{'note-off'} + $ch;
-        $!buf.append: $note;
-        $!buf.append: $vol;
+        $!e.append: self!VLQ-encode($dt);
+        $!e.append: %bytes{'note-off'} + $ch;
+        $!e.append: $note;
+        $!e.append: $vol;
     }
 
     method render {
-        self!name if $!name.chars;
-        self!end-of-track;
-        self!header($!buf.bytes);
-        return $!buf;
+        my $b = Buf.new;
+        $b.append:  self!name if $!name.chars;
+        $b.append:  $!e;
+        $b.append:  self!end-of-track;
+        $b.prepend: self!header($b.bytes);
+        return $b;
     }
 }
