@@ -67,8 +67,18 @@ class MIDI-Make is MIDI-Base {
                 $!buf.append: self.write_2-bytes($!PPQ);
             }
             when 'frame' {
-                    # Floor FPS to store 29.97 as 29 for MIDI.
-                $!buf.append: 256 - $!FPS.floor; # Two's complement form.
+                    # The first byte of the frame variant of
+                    # time-division has the MSB set to 1 and the other
+                    # seven bits set to the two's complement form
+                    # of either one of the four negative FPS values:
+                    # -24, -25, -29, -30
+                    #
+                    # We use a hack to achieve this. Instead of
+                    # calculating the two's complement form, we
+                    # substract the positive FPS from 256 and this
+                    # gives the correct answer for all FPS variants.
+                    # FPS is floored to store 29.97 as 29.
+                $!buf.append: 256 - $!FPS.floor;
                 $!buf.append: $!PPF;
             }
         }
