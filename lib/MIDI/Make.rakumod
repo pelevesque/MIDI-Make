@@ -60,13 +60,14 @@ class MIDI-Make is MIDI-Base {
     my UInt16 $num-tracks = 0;
 
     method !write-header {
-        $!buf.append: 'MThd'.ords;
-        $!buf.append: self.write_4-bytes(6);
-        $!buf.append: self.write_2-bytes($!format);
-        $!buf.append: self.write_2-bytes($num-tracks);
+        my $b = Buf.new;
+        $b.append: 'MThd'.ords;
+        $b.append: self.write_4-bytes(6);
+        $b.append: self.write_2-bytes($!format);
+        $b.append: self.write_2-bytes($num-tracks);
         given $!time-division {
             when 'quarter' {
-                $!buf.append: self.write_2-bytes($!PPQ);
+                $b.append: self.write_2-bytes($!PPQ);
             }
             when 'frame' {
                     # The first byte of the frame variant of
@@ -80,10 +81,11 @@ class MIDI-Make is MIDI-Base {
                     # substract the positive FPS from 256 and this
                     # gives the correct answer for all FPS variants.
                     # FPS is floored to store 29.97 as 29.
-                $!buf.append: 256 - $!FPS.floor;
-                $!buf.append: $!PPF;
+                $b.append: 256 - $!FPS.floor;
+                $b.append: $!PPF;
             }
         }
+        return $b;
     }
 
     method add-track ($bytes) {
@@ -92,8 +94,10 @@ class MIDI-Make is MIDI-Base {
     }
 
     method render {
-        self!write-header;
-        return $!buf;
+        my $b = Buf.new;
+        $b.append: self!write-header;
+        $b.append: $!buf;
+        return $b;
     }
 }
 
