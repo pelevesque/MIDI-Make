@@ -1,3 +1,5 @@
+unit module MIDI::Make;
+
 subset UInt4  of UInt where * ≤ 15;
 subset UInt7  of UInt where * ≤ 127;
 subset UInt8  of UInt where * ≤ 255;
@@ -44,7 +46,7 @@ class Base {
     }
 }
 
-class File is Base {
+class File is Base is export {
     subset format where * ~~ 0 | 1 | 2;
     subset time-division where * ~~ 'quarter' | 'frame';
     subset FPS where * ~~ 24 | 25 | 29.97 | 30;
@@ -101,7 +103,7 @@ class File is Base {
     }
 }
 
-class Track is Base {
+class Track is Base is export {
     subset Str-ASCII of Str where 32 ≤ *.ords.all ≤ 126;
 
     my %bytes =
