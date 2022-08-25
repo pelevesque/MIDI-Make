@@ -112,16 +112,22 @@ class Track is Base is export {
     has Str-ASCII $.name = '';
     has UInt28 $.dt = 0;
     has UInt4  $.ch = 0;
+    has UInt7  $.vol_note-off = 0;
+    has UInt7  $.vol_note-on = 127;
 
     # Getters.
     multi method name { $!name }
     multi method dt { $!dt }
     multi method ch { $!ch }
+    multi method vol_note-off { $!vol_note-off }
+    multi method vol_note-on  { $!vol_note-on }
 
     # Setters.
     multi method name ($name) { $!name = $name }
     multi method dt ($dt) { $!dt = $dt }
     multi method ch ($ch) { $!ch = $ch }
+    multi method vol_note-off ($vol) { $!vol_note-off = $vol }
+    multi method vol_note-on  ($vol) { $!vol_note-on = $vol }
 
     has $!e = Buf.new; # Meta/Midi Events.
 
@@ -190,22 +196,24 @@ class Track is Base is export {
 
     method note-off (
         UInt7 $note,
-        UInt7 $vol = 0,
+        UInt7 $vol = $!vol_note-off,
     ) {
         $!e.append: self!VLQ-encode($!dt);
         $!e.append: %bytes{'note-off'} + $!ch;
         $!e.append: $note;
         $!e.append: $vol;
+        $!vol_note-off = $vol;
     }
 
     method note-on (
         UInt7 $note,
-        UInt7 $vol = 127,
+        UInt7 $vol = $!vol_note-on,
     ) {
         $!e.append: self!VLQ-encode($!dt);
         $!e.append: %bytes{'note-on'} + $!ch;
         $!e.append: $note;
         $!e.append: $vol;
+        $!vol_note-on = $vol;
     }
 
     method render {
