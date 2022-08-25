@@ -35,15 +35,8 @@ sub infix:<\\> (UInt8 $numerator, Pow2 $denominator) is export {
 }
 
 class Base {
-    constant $ENDIANNESS = BigEndian;
-
-    method write_2-bytes (UInt16 $n) {
-        Buf.write-uint16(0, $n, $ENDIANNESS);
-    }
-
-    method write_4-bytes (UInt32 $n) {
-        Buf.write-uint32(0, $n, $ENDIANNESS);
-    }
+    method write_2-bytes (UInt16 $n) { Buf.write-uint16(0, $n, BigEndian) }
+    method write_4-bytes (UInt32 $n) { Buf.write-uint32(0, $n, BigEndian) }
 }
 
 class File is Base is export {
