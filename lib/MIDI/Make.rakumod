@@ -177,6 +177,7 @@ class Track is Base is export {
         $!e.append: %bytes{'tempo'};
         $!e.append: self!VLQ-encode(3);
         $!e.append: self.write_4-bytes($tempo).splice(1);
+        $!dt = 0;
     }
 
     method time (
@@ -192,6 +193,7 @@ class Track is Base is export {
         $!e.append: $time-signature.MIDI-denominator;
         $!e.append: $PPMC;
         $!e.append: $_32PQ;
+        $!dt = 0;
     }
 
     method note-off (
@@ -203,6 +205,7 @@ class Track is Base is export {
         $!e.append: $note;
         $!e.append: $vol;
         $!vol_note-off = $vol;
+        $!dt = 0;
     }
 
     method note-on (
@@ -214,6 +217,7 @@ class Track is Base is export {
         $!e.append: $note;
         $!e.append: $vol;
         $!vol_note-on = $vol;
+        $!dt = 0;
     }
 
     method render {
