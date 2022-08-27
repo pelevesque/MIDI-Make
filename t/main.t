@@ -1,31 +1,30 @@
 use Test;
 use MIDI::Make;
 
-# --------------------------------------------------------------------
-sub maintest ($title, $renderable, $exp-bytes) {
+sub test ($title, $renderable, $exp-bytes) {
     is(
         $renderable.render,
         Buf.new($exp-bytes.words.map({"0x$_"})>>.Int),
         $title,
     );
-   # note $exp-bytes.words.map({"0x$_"});
 }
 
 # --------------------------------------------------------------------
-# Files.
-maintest(
+# Files
+
+test(
     'Empty file',
     File.new,
     '4D 54 68 64 00 00 00 06 00 01 00 00 00 30',
 );
 
-maintest(
+test(
     'Empty file, format 2',
     File.new(:format(2)),
     '4D 54 68 64 00 00 00 06 00 02 00 00 00 30',
 );
 
-maintest(
+test(
     'Time division',
     File.new(:time-division('frame')),
     '4D 54 68 64 00 00 00 06 00 01 00 00 E8 04',
@@ -34,14 +33,16 @@ maintest(
 # --------------------------------------------------------------------
 # Tracks
 
-maintest(
+test(
     'Empty Track',
     Track.new,
     '4D 54 72 6B 00 00 00 04 00 FF F2 00',
 );
 
 # --------------------------------------------------------------------
-maintest(
+# Files + Tracks
+
+test(
     'complic',
     do {
         my $t = Track.new;
@@ -57,8 +58,7 @@ maintest(
         $f.add-track($t.render);
         $f;
     },
-    '4D 54 68 64 00 00 00 06 00 01 00 01 00 30 4D 54 72 6B 00 00 00 1F 00
-    FF 03 05 70 69 61 6E 6F 00 90 3C 7F 81 00 80 3C 00 00 90 48 7F 81 00
-    80 48 00 00 FF F2 00',
+    '4D 54 68 64 00 00 00 06 00 01 00 01 00 30 4D 54 72 6B 00 00 00 1F
+    00 FF 03 05 70 69 61 6E 6F 00 90 3C 7F 81 00 80 3C 00 00 90 48 7F
+    81 00 80 48 00 00 FF F2 00',
 );
-
