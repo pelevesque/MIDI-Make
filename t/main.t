@@ -2,11 +2,11 @@ use Test;
 use MIDI::Make;
 
 # --------------------------------------------------------------------
-sub maintest ($wut, $renderable, $exp-bytes) {
+sub maintest ($title, $renderable, $exp-bytes) {
     is(
         $renderable.render,
         Buf.new($exp-bytes.words.map({"0x$_"})>>.Int),
-        $wut,
+        $title,
     );
    # note $exp-bytes.words.map({"0x$_"});
 }
