@@ -34,12 +34,10 @@ sub infix:<\\> (UInt8 $numerator, Pow2 $denominator) is export {
     Time-Signature.new: :$numerator, :$denominator;
 }
 
-class Base {
-    method write_2-bytes (UInt16 $n) { Buf.write-uint16(0, $n, BigEndian) }
-    method write_4-bytes (UInt32 $n) { Buf.write-uint32(0, $n, BigEndian) }
-}
+sub write_2-bytes (UInt16 $n) { Buf.write-uint16(0, $n, BigEndian) }
+sub write_4-bytes (UInt32 $n) { Buf.write-uint32(0, $n, BigEndian) }
 
-class File is Base is export {
+class File is export {
     subset format where * ~~ 0 | 1 | 2;
     subset time-division where * ~~ 'quarter' | 'frame';
     subset FPS where * ~~ 24 | 25 | 29.97 | 30;
@@ -57,12 +55,12 @@ class File is Base is export {
     method !write-header {
         my $b = Buf.new;
         $b.append: 'MThd'.ords;
-        $b.append: self.write_4-bytes(6);
-        $b.append: self.write_2-bytes($!format);
-        $b.append: self.write_2-bytes($num-tracks);
+        $b.append: write_4-bytes(6);
+        $b.append: write_2-bytes($!format);
+        $b.append: write_2-bytes($num-tracks);
         given $!time-division {
             when 'quarter' {
-                $b.append: self.write_2-bytes($!PPQ);
+                $b.append: write_2-bytes($!PPQ);
             }
             when 'frame' {
                     # The first byte of the frame variant of
@@ -96,7 +94,7 @@ class File is Base is export {
     }
 }
 
-class Track is Base is export {
+class Track is export {
     subset Str-ASCII of Str where 32 ≤ *.ords.all ≤ 126;
 
     my %bytes =
@@ -146,7 +144,7 @@ class Track is Base is export {
     method !render_header (UInt32 $num-bytes) {
         my $b = Buf.new;
         $b.append: 'MTrk'.ords;
-        $b.append: self.write_4-bytes($num-bytes);
+        $b.append: write_4-bytes($num-bytes);
         return $b;
     }
 
@@ -176,7 +174,7 @@ class Track is Base is export {
         $!e.append: %bytes{'meta-event'};
         $!e.append: %bytes{'tempo'};
         $!e.append: self!VLQ-encode(3);
-        $!e.append: self.write_4-bytes($tempo).splice(1);
+        $!e.append: write_4-bytes($tempo).splice(1);
         $!dt = 0;
     }
 
