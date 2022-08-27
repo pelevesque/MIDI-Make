@@ -4,7 +4,7 @@ use MIDI::Make;
 # --------------------------------------------------------------------
 sub maintest ($wut, $renderable, $exp-bytes) {
     is(
-        $renderable.render, 
+        $renderable.render,
         Buf.new($exp-bytes.words.map({"0x$_"})>>.Int),
         $wut,
     );
@@ -15,13 +15,13 @@ sub maintest ($wut, $renderable, $exp-bytes) {
 # Files.
 maintest(
     'Empty file',
-    File.new, 
+    File.new,
     '4D 54 68 64 00 00 00 06 00 01 00 00 00 30',
 );
 
 maintest(
     'Empty file, format 2',
-    File.new(:format(2)), 
+    File.new(:format(2)),
     '4D 54 68 64 00 00 00 06 00 02 00 00 00 30',
 );
 
