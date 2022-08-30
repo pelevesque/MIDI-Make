@@ -10,24 +10,66 @@ sub test ($title, $renderable, $exp-bytes) {
 }
 
 # --------------------------------------------------------------------
-# Files
+# Trackless Files
 
 test(
-    'Empty file',
+    'Trackless File',
     File.new,
     '4D 54 68 64 00 00 00 06 00 01 00 00 00 30',
 );
 
 test(
-    'Empty file, format 2',
-    File.new(:format(2)),
-    '4D 54 68 64 00 00 00 06 00 02 00 00 00 30',
+    'Trackless File: format => 0',
+    File.new(:format(0)),
+    '4D 54 68 64 00 00 00 06 00 00 00 00 00 30',
 );
 
 test(
-    'Time division',
+    'Trackless File: PPQ => 300',
+    File.new(:PPQ(300)),
+    '4D 54 68 64 00 00 00 06 00 01 00 00 01 2C',
+);
+
+test(
+    'Trackless File: time-division => "frame"',
     File.new(:time-division('frame')),
     '4D 54 68 64 00 00 00 06 00 01 00 00 E8 04',
+);
+
+test(
+    'Trackless File: FPS => 29.97',
+    File.new(:time-division('frame'), :FPS(29.97)),
+    '4D 54 68 64 00 00 00 06 00 01 00 00 E3 04',
+);
+
+test(
+    'Trackless File: PPF => 8',
+    File.new(:time-division('frame'), :PPF(24)),
+    '4D 54 68 64 00 00 00 06 00 01 00 00 E8 18',
+);
+
+test(
+    'Trackless File: Set params after instantiation 1',
+    do {
+        my $f = File.new;
+        $f.format = 2;
+        $f.PPQ = 425;
+        $f;
+    },
+    '4D 54 68 64 00 00 00 06 00 02 00 00 01 A9',
+);
+
+test(
+    'Trackless File: Set params after instantiation 2',
+    do {
+        my $f = File.new;
+        $f.format = 1;
+        $f.time-division = 'frame';
+        $f.FPS = 30;
+        $f.PPF = 48;
+        $f;
+    },
+    '4D 54 68 64 00 00 00 06 00 01 00 00 E2 30',
 );
 
 # --------------------------------------------------------------------
