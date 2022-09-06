@@ -52,8 +52,8 @@ test(
     'Trackless File: Set params after instantiation 1',
     do {
         my $f = File.new;
-        $f.format = 2;
-        $f.PPQ = 425;
+        $f.format: 2;
+        $f.PPQ: 425;
         $f;
     },
     '4D 54 68 64 00 00 00 06 00 02 00 00 01 A9',
@@ -63,10 +63,10 @@ test(
     'Trackless File: Set params after instantiation 2',
     do {
         my $f = File.new;
-        $f.format = 1;
-        $f.time-division = 'frame';
-        $f.FPS = 30;
-        $f.PPF = 48;
+        $f.format: 1;
+        $f.time-division: 'frame';
+        $f.FPS: 30;
+        $f.PPF: 48;
         $f;
     },
     '4D 54 68 64 00 00 00 06 00 01 00 00 E2 30',

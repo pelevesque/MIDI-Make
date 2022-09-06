@@ -42,11 +42,25 @@ class File is export {
     subset time-division where * ~~ 'quarter' | 'frame';
     subset FPS where * ~~ 24 | 25 | 29.97 | 30;
 
-    has format $.format is rw = 1;
-    has time-division $.time-division is rw = 'quarter';
-    has FPS    $.FPS is rw = 24; # Frames per second.
-    has UInt8  $.PPF is rw = 4;  # Pulses per frame.
-    has UInt15 $.PPQ is rw = 48; # Pulses per quarter note.
+    has format $.format = 1;
+    has time-division $.time-division = 'quarter';
+    has FPS    $.FPS = 24; # Frames per second.
+    has UInt8  $.PPF = 4;  # Pulses per frame.
+    has UInt15 $.PPQ = 48; # Pulses per quarter note.
+
+    # Getters.
+    multi method format { $!format }
+    multi method time-division { $!time-division }
+    multi method FPS { $!FPS }
+    multi method PPF { $!PPF }
+    multi method PPQ { $!PPQ }
+
+    # Setters.
+    multi method format ($format) { $!format = $format }
+    multi method time-division ($td) { $!time-division = $td }
+    multi method FPS ($FPS) { $!FPS = $FPS }
+    multi method PPF ($PPF) { $!PPF = $PPF }
+    multi method PPQ ($PPQ) { $!PPQ = $PPQ }
 
     has $!buf = Buf.new;
 
