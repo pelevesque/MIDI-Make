@@ -26,8 +26,8 @@ my constant @pow2 = 2 «**« ^256; # 2⁰ → 2²⁵⁵
 subset Pow2 of UInt where * ~~ any @pow2;
 sub infix:<\\> (UInt8 $numerator, Pow2 $denominator) is export {
     class Time-Signature {
-        has UInt8 $.numerator;
-        has Pow2  $.denominator;
+        has $.numerator;
+        has $.denominator;
         method MIDI-numerator { $!numerator }
         method MIDI-denominator { Int($!denominator.log(2)) }
     }
