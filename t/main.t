@@ -25,12 +25,6 @@ test(
 );
 
 test(
-    'Trackless File: PPQ => 300',
-    File.new(:PPQ(300)),
-    '4D 54 68 64 00 00 00 06 00 01 00 00 01 2C',
-);
-
-test(
     'Trackless File: time-division => "frame"',
     File.new(:time-division('frame')),
     '4D 54 68 64 00 00 00 06 00 01 00 00 E8 04',
@@ -46,6 +40,12 @@ test(
     'Trackless File: PPF => 8',
     File.new(:time-division('frame'), :PPF(24)),
     '4D 54 68 64 00 00 00 06 00 01 00 00 E8 18',
+);
+
+test(
+    'Trackless File: PPQ => 300',
+    File.new(:PPQ(300)),
+    '4D 54 68 64 00 00 00 06 00 01 00 00 01 2C',
 );
 
 test(
