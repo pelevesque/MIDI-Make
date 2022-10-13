@@ -80,7 +80,7 @@ class File is export {
                     # The first byte of the frame variant of
                     # time-division has the MSB set to 1 and the other
                     # seven bits set to the two's complement form
-                    # of either one of the four negative FPS values:
+                    # of either one of these four negative FPS values:
                     # -24, -25, -29, -30
                     #
                     # We use a hack to achieve this. Instead of
