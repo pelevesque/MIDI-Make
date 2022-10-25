@@ -190,6 +190,31 @@ test(
 );
 
 test(
+    'time bare',
+    do {
+        my $t = Track.new;
+	$t.time;
+	$t;
+    },
+    '4D 54 72 6B 00 00 00 0C
+     00 FF 58 04 04 02 18 08
+     00 FF F2 00'
+);
+
+test(
+    'time changed parameters',
+    do {
+        my $t = Track.new;
+	$t.dt: 100;
+	$t.time: 2\8, 32, 4;
+	$t;
+    },
+    '4D 54 72 6B 00 00 00 0C
+     64 FF 58 04 02 03 20 04
+     00 FF F2 00'
+);
+
+test(
     'note-on and note-off',
     do {
         my $t = Track.new;
