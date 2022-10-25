@@ -165,6 +165,31 @@ test(
 );
 
 test(
+    'tempo bare',
+    do {
+        my $t = Track.new;
+	$t.tempo;
+	$t;
+    },
+    '4D 54 72 6B 00 00 00 0B
+     00 FF 51 03 07 A1 20
+     00 FF F2 00'
+);
+
+test(
+    'tempo changed parameters',
+    do {
+        my $t = Track.new;
+	$t.dt: 100;
+	$t.tempo: 10250;
+	$t;
+    },
+    '4D 54 72 6B 00 00 00 0B
+     64 FF 51 03 00 28 0A
+     00 FF F2 00'
+);
+
+test(
     'note-on and note-off',
     do {
         my $t = Track.new;
