@@ -13,49 +13,49 @@ sub test ($title, $renderable, $exp-bytes) {
 # Trackless Files
 
 test(
-    'Trackless File',
+    'Trackless File Instantiation',
     File.new,
     '4D 54 68 64 00 00 00 06
      00 01 00 00 00 30',
 );
 
 test(
-    'Trackless File: format => 0',
+    'Trackless File Instantiation: format => 0',
     File.new(:format(0)),
     '4D 54 68 64 00 00 00 06
      00 00 00 00 00 30',
 );
 
 test(
-    'Trackless File: time-division => "frame"',
+    'Trackless File Instantiation: time-division => "frame"',
     File.new(:time-division('frame')),
     '4D 54 68 64 00 00 00 06
      00 01 00 00 E8 04',
 );
 
 test(
-    'Trackless File: FPS => 29.97',
+    'Trackless File Instantiation: FPS => 29.97',
     File.new(:time-division('frame'), :FPS(29.97)),
     '4D 54 68 64 00 00 00 06
      00 01 00 00 E3 04',
 );
 
 test(
-    'Trackless File: PPF => 8',
+    'Trackless File Instantiation: PPF => 8',
     File.new(:time-division('frame'), :PPF(24)),
     '4D 54 68 64 00 00 00 06
      00 01 00 00 E8 18',
 );
 
 test(
-    'Trackless File: PPQ => 300',
+    'Trackless File Instantiation: PPQ => 300',
     File.new(:PPQ(300)),
     '4D 54 68 64 00 00 00 06
      00 01 00 00 01 2C',
 );
 
 test(
-    'Trackless File: Set params after instantiation 1',
+    'Trackless File: Set params after instantiation A',
     do {
         my $f = File.new;
         $f.format: 2;
@@ -67,7 +67,7 @@ test(
 );
 
 test(
-    'Trackless File: Set params after instantiation 2',
+    'Trackless File: Set params after instantiation B',
     do {
         my $f = File.new;
         $f.format: 1;
@@ -84,14 +84,14 @@ test(
 # Tracks
 
 test(
-    'Empty Track',
+    'Track Instantiation',
     Track.new,
     '4D 54 72 6B 00 00 00 04
      00 FF F2 00',
 );
 
 test(
-    'Track name: name => "piano"',
+    'Track Instantiation: name => "piano"',
     Track.new(:name('piano')),
     '4D 54 72 6B 00 00 00 0D
      00 FF 03 05 70 69 61 6E 6F
@@ -99,7 +99,7 @@ test(
 );
 
 test(
-    'Track dt: dt => 100',
+    'Track Instantiation: dt => 100',
     do {
         my $t = Track.new(:dt(100));
         $t.note-on: 60;
@@ -111,7 +111,7 @@ test(
 );
 
 test(
-    'Track ch: ch => 1',
+    'Track Instantiation: ch => 1',
     do {
         my $t = Track.new(:ch(1));
         $t.note-on: 60;
@@ -123,7 +123,7 @@ test(
 );
 
 test(
-    'Track vol_note-off: vol_note-off => 10',
+    'Track Instantiation: vol_note-off => 10',
     do {
         my $t = Track.new(:vol_note-off(10));
         $t.note-off: 60;
@@ -135,7 +135,7 @@ test(
 );
 
 test(
-    'Track vol_note-on: vol_note-on => 100',
+    'Track Instantiation: vol_note-on => 100',
     do {
         my $t = Track.new(:vol_note-on(100));
         $t.note-on: 60;
@@ -147,7 +147,7 @@ test(
 );
 
 test(
-    'Track instantiation',
+    'Track: Change params after instantiation',
     do {
         my $t = Track.new;
         $t.dt: 100;
@@ -165,7 +165,7 @@ test(
 );
 
 test(
-    'tempo bare',
+    'Track: tempo with default params',
     do {
         my $t = Track.new;
 	$t.tempo;
@@ -177,7 +177,7 @@ test(
 );
 
 test(
-    'tempo changed parameters',
+    'Track: tempo with custom params',
     do {
         my $t = Track.new;
 	$t.dt: 100;
@@ -190,7 +190,7 @@ test(
 );
 
 test(
-    'time bare',
+    'Track: time with default params',
     do {
         my $t = Track.new;
 	$t.time;
@@ -202,7 +202,7 @@ test(
 );
 
 test(
-    'time changed parameters',
+    'Track: time with custom params',
     do {
         my $t = Track.new;
 	$t.dt: 100;
@@ -215,7 +215,7 @@ test(
 );
 
 test(
-    'note-on and note-off',
+    'Track: note-on and note-off',
     do {
         my $t = Track.new;
         $t.note-on: 60;
@@ -240,7 +240,7 @@ test(
 # Files + Tracks
 
 test(
-    'complic',
+    'Complex example',
     do {
         my $t = Track.new;
         $t.name:     "piano";
