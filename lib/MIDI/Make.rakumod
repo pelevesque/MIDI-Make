@@ -48,14 +48,14 @@ class File is export {
     has UInt8  $.PPF = 4;  # Pulses per frame.
     has UInt15 $.PPQ = 48; # Pulses per quarter note.
 
-    # Getters.
+        # Getters.
     multi method format { $!format }
     multi method time-division { $!time-division }
     multi method FPS { $!FPS }
     multi method PPF { $!PPF }
     multi method PPQ { $!PPQ }
 
-    # Setters.
+        # Setters.
     multi method format ($format) { $!format = $format }
     multi method time-division ($td) { $!time-division = $td }
     multi method FPS ($FPS) { $!FPS = $FPS }
@@ -127,14 +127,14 @@ class Track is export {
     has UInt7  $.vol_note-off = 0;
     has UInt7  $.vol_note-on = 127;
 
-    # Getters.
+        # Getters.
     multi method name { $!name }
     multi method dt { $!dt }
     multi method ch { $!ch }
     multi method vol_note-off { $!vol_note-off }
     multi method vol_note-on  { $!vol_note-on }
 
-    # Setters.
+        # Setters.
     multi method name ($name) { $!name = $name }
     multi method dt ($dt) { $!dt = $dt }
     multi method ch ($ch) { $!ch = $ch }
