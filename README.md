@@ -14,33 +14,6 @@ MIDI::Make works by creating a file class and then populating it with
 zero or more tracks created using the track class. The resulting MIDI
 information can be outputed using the render method.
 
-## Operators
-
-Importing MIDI::Make creates two operators that serve as helpers.
-
-### ♩PM or QPM
-
-The quarter-notes per minute operator transforms quarter-notes per
-minute to microseconds per quarter-note.
-
-This permits specifying tempo in a musical human-readable way.
-
-```raku
-    $t.tempo: 1000000; # Microseconds per quarter-note. Similar to 60♩PM.
-
-    $t.tempo: 60♩PM; # With unicode.
-    $t.tempo: 60QPM; # Without unicode.
-```
-
-### \
-
-The time signature operator is used to specify a time signature for
-the track class's time method.
-
-```raku
-    $t.time: 3\8;
-```
-
 ## The File Class
 
 The file class is used to store and modify MIDI information used to
@@ -184,6 +157,34 @@ The render method renders the MIDI file information.
 ```
 
 ----------------------------------------------------------------------
+
+## Operators
+
+Importing MIDI::Make creates two operators that serve as helpers.
+
+### ♩PM or QPM
+
+The quarter-notes per minute operator transforms quarter-notes per
+minute to microseconds per quarter-note.
+
+This permits specifying tempo in a musical human-readable way.
+
+```raku
+    $t.tempo: 1000000; # Microseconds per quarter-note. Similar to 60♩PM.
+
+    $t.tempo: 60♩PM; # With unicode.
+    $t.tempo: 60QPM; # Without unicode.
+```
+
+### \
+
+The time signature operator is used to specify a time signature for
+the track class's time method.
+
+```raku
+    $t.time: 3\8;
+```
+
 ----------------------------------------------------------------------
 
 ## The Track class
