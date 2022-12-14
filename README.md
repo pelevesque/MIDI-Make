@@ -28,7 +28,7 @@ information created up to that point.
 
 ### Parameters
 
-Paramters can be set on instantiation, or afterwards.
+Parameters can be set on instantiation, or afterwards.
 
 #### Format
 
@@ -127,6 +127,9 @@ The PPQ value is from 0 to 32767. The default is 48.
     my $f = File.new;
     $f.PPQ: 96;
 ```
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
 
 ### Methods
 
