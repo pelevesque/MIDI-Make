@@ -34,6 +34,13 @@ test(
 );
 
 test(
+    'Trackless File Instantiation: PPQ => 300',
+    File.new(:PPQ(300)),
+    '4D 54 68 64 00 00 00 06
+     00 01 00 00 01 2C',
+);
+
+test(
     'Trackless File Instantiation: FPS => 29.97',
     File.new(:time-division('frame'), :FPS(29.97)),
     '4D 54 68 64 00 00 00 06
@@ -45,13 +52,6 @@ test(
     File.new(:time-division('frame'), :PPF(24)),
     '4D 54 68 64 00 00 00 06
      00 01 00 00 E8 18',
-);
-
-test(
-    'Trackless File Instantiation: PPQ => 300',
-    File.new(:PPQ(300)),
-    '4D 54 68 64 00 00 00 06
-     00 01 00 00 01 2C',
 );
 
 test(

@@ -44,23 +44,23 @@ class File is export {
 
     has format $.format = 1;
     has time-division $.time-division = 'quarter';
+    has UInt15 $.PPQ = 48; # Pulses per quarter note.
     has FPS    $.FPS = 24; # Frames per second.
     has UInt8  $.PPF = 4;  # Pulses per frame.
-    has UInt15 $.PPQ = 48; # Pulses per quarter note.
 
         # Getters.
     multi method format { $!format }
     multi method time-division { $!time-division }
+    multi method PPQ { $!PPQ }
     multi method FPS { $!FPS }
     multi method PPF { $!PPF }
-    multi method PPQ { $!PPQ }
 
         # Setters.
     multi method format ($format) { $!format = $format }
     multi method time-division ($td) { $!time-division = $td }
+    multi method PPQ ($PPQ) { $!PPQ = $PPQ }
     multi method FPS ($FPS) { $!FPS = $FPS }
     multi method PPF ($PPF) { $!PPF = $PPF }
-    multi method PPQ ($PPQ) { $!PPQ = $PPQ }
 
     has $!buf = Buf.new;
 
