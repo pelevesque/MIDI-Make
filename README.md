@@ -12,7 +12,7 @@ use MIDI::Make;
 
 MIDI::Make works by creating a file class and then populating it with
 zero or more tracks created using the track class. The resulting MIDI
-information can be outputed using the render method.
+information can be outputed using the file class's render method.
 
 ## The File Class
 
@@ -33,7 +33,7 @@ Parameters can be set on instantiation, or afterwards.
 #### Format
 
 The format parameter specifies the type of MIDI file format to use.
-It is an integer, and can have three values: 1, 2, or 3. The default
+It is an integer, and can have three values: 0, 1, or 2. The default
 is 1.
 
 -  0 - All data is merged on a single track.
@@ -65,6 +65,26 @@ or to frame. The default is quarter.
     # Set after instantiation.
     my $f = File.new;
     $f.time-division: 'frame';
+```
+
+#### PPQ (pulses per quarter-note)
+
+The PPQ parameter sets the pulses per querter-note of the
+time-division parameter when set to quarter. If time-division is set
+to frame, PPQ is ignored.
+
+The PPQ value is from 0 to 32767. The default is 48.
+
+
+```raku
+    # Set on instantiation.
+    my $f = File.new(:PPQ(96));
+```
+
+```raku
+    # Set after instantiation.
+    my $f = File.new;
+    $f.PPQ: 96;
 ```
 
 #### FPS (frames per second)
@@ -108,29 +128,6 @@ The PPF value is from 0 to 255. The default is 4.
     $f.PPF: 8;
 ```
 
-#### PPQ (pulses per quarter-note)
-
-The PPQ parameter sets the pulses per querter-note of the
-time-division parameter when set to quarter. If time-division is set
-to frame, PPQ is ignored.
-
-The PPQ value is from 0 to 32767. The default is 48.
-
-
-```raku
-    # Set on instantiation.
-    my $f = File.new(:PPQ(96));
-```
-
-```raku
-    # Set after instantiation.
-    my $f = File.new;
-    $f.PPQ: 96;
-```
-
-----------------------------------------------------------------------
-----------------------------------------------------------------------
-
 ### Methods
 
 #### add-track
@@ -152,13 +149,16 @@ File class.
 
 #### render
 
-The render method renders the MIDI file information.
+The render method renders the MIDI file information gathered up to
+that point.
 
 ```raku
     my $f = File.new;
     say $f.render;
 ```
 
+----------------------------------------------------------------------
+----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
 ## Operators
