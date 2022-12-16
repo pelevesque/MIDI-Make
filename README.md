@@ -159,8 +159,8 @@ that point.
 
 ## Operators
 
-Importing MIDI::Make creates two operators that serve as helpers for
-the Track class described below.
+MIDI::Make creates two operators that serve as helpers for the Track
+class described below.
 
 ### ♩PM or QPM
 
