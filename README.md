@@ -10,13 +10,13 @@ use MIDI::Make;
 
 ## Usage
 
-MIDI::Make works by creating a file class and then populating it with
-zero or more tracks created using the track class. The resulting MIDI
-information can be outputed using the file class's render method.
+MIDI::Make works by creating a File class and then populating it with
+zero or more tracks created using the Track class. The resulting MIDI
+information can be outputed using the File class's render method.
 
 ## The File Class
 
-The file class is used to store and modify MIDI information used to
+The File class is used to store and modify MIDI information used to
 create a MIDI file. It has some optional parameters, the add-track
 method to add tracks, and the render method to output the MIDI
 information created up to that point.
@@ -157,13 +157,10 @@ that point.
     say $f.render;
 ```
 
-----------------------------------------------------------------------
-----------------------------------------------------------------------
-----------------------------------------------------------------------
-
 ## Operators
 
-Importing MIDI::Make creates two operators that serve as helpers.
+Importing MIDI::Make creates two operators that serve as helpers for
+the Track class described below.
 
 ### ♩PM or QPM
 
@@ -182,12 +179,15 @@ This permits specifying tempo in a musical human-readable way.
 ### \
 
 The time signature operator is used to specify a time signature for
-the track class's time method.
+the Track class's time method.
 
 ```raku
     $t.time: 3\8;
 ```
 
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
 ## The Track class
