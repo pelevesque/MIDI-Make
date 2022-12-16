@@ -30,7 +30,7 @@ information created up to that point.
 
 Parameters can be set on instantiation, or afterwards.
 
-#### Format
+#### format
 
 The format parameter specifies the type of MIDI file format to use.
 It is an integer, and can have three values: 0, 1, or 2. The default
@@ -51,7 +51,7 @@ is 1.
     $f.format: 0;
 ```
 
-#### Time-Division
+#### time-division
 
 The time-division parameter can be set to quarter for quarter-notes,
 or to frame. The default is quarter.
