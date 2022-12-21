@@ -110,8 +110,8 @@ FPS can have four values: 24, 25, 29.97, or 30. The default is 24.
 #### PPF (pulses per frame)
 
 The PPF parameter sets the pulses per frame of the time-division
-parameter when set to frame. If time-division is set to
-quarter, PPF is ignored.
+parameter when set to frame. If time-division is set to quarter,
+PPF is ignored.
 
 The PPF value is from 0 to 255. The default is 4.
 
