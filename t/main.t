@@ -168,8 +168,8 @@ test(
     'Track: tempo with default params',
     do {
         my $t = Track.new;
-	$t.tempo;
-	$t;
+	    $t.tempo;
+	    $t;
     },
     '4D 54 72 6B 00 00 00 0B
      00 FF 51 03 07 A1 20
@@ -180,9 +180,9 @@ test(
     'Track: tempo with custom params',
     do {
         my $t = Track.new;
-	$t.dt: 100;
-	$t.tempo: 10250;
-	$t;
+	    $t.dt: 100;
+	    $t.tempo: 10250;
+	    $t;
     },
     '4D 54 72 6B 00 00 00 0B
      64 FF 51 03 00 28 0A
@@ -193,8 +193,8 @@ test(
     'Track: time with default params',
     do {
         my $t = Track.new;
-	$t.time;
-	$t;
+	    $t.time;
+	    $t;
     },
     '4D 54 72 6B 00 00 00 0C
      00 FF 58 04 04 02 18 08
@@ -205,9 +205,9 @@ test(
     'Track: time with custom params',
     do {
         my $t = Track.new;
-	$t.dt: 100;
-	$t.time: 2\8, 32, 4;
-	$t;
+	    $t.dt: 100;
+	    $t.time: 2\8, 32, 4;
+	    $t;
     },
     '4D 54 72 6B 00 00 00 0C
      64 FF 58 04 02 03 20 04
