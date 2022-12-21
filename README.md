@@ -28,7 +28,7 @@ information created up to that point.
 
 ### Parameters
 
-Parameters can be set on instantiation, or afterwards.
+Parameters can be set on instantiation, or anytime afterwards.
 
 #### format
 
@@ -185,15 +185,10 @@ the Track class's time method.
     $t.time: 3\8;
 ```
 
-----------------------------------------------------------------------
-----------------------------------------------------------------------
-----------------------------------------------------------------------
-----------------------------------------------------------------------
-
 ## The Track class
 
-The Track class is used to create a MIDI track which can then be added
-to the File class.
+The Track class is used to create a MIDI track which can then be
+added to the File class.
 
 ```raku
     # Instantiating without parameters.
@@ -202,11 +197,12 @@ to the File class.
 
 ### Parameters
 
-Paramters can be set on instantiation, or afterwards.
+Parameters can be set on instantiation, or anytime afterwards.
 
-#### Name
+#### name
 
-With the name parameter, you can name the track using ASCII characters.
+With the name parameter, you can name the track using
+ASCII characters.
 
 ```raku
     # Set on instantiation.
@@ -221,8 +217,10 @@ With the name parameter, you can name the track using ASCII characters.
 
 #### dt
 
-Delta time (dt) sets the delta time.
-talk about how delta time is used...
+Delta time (dt) sets the time in MIDI pulses between MIDI events.
+Its value can be between O and 268435455. The default is 0. Although
+it's possible to instantiate dt to a value other than 0, usually you
+will start a MIDI file with a MIDI event, and not a period of time.
 
 ```raku
     # Set on instantiation.
@@ -232,27 +230,49 @@ talk about how delta time is used...
 ```raku
     # Set after instantiation.
     my $t = Track.new;
-    $t.dt: 'piano';
+    $t.dt: 100;
+```
+
+dt is automatically set to 0 after each of the MIDI events implemented
+in the Track class: tempo, time, note-off, note-on. This is done so
+that you can enter many MIDI events together before setting a new dt.
+
+```raku
+    my $t = Track.new;
+    $t.note-on: 60;
+    $t.dt: 100;         # Wait 100 MIDI pulses before next events.
+    $t.note-off: 60;
+    $t.note-on: 62;
+    $t.note-on: 64;
+    $t.dt: 200;         # Wait 200 MIDI pulses before next events.
+    $t.note-off: 62;
+    $t.note-off: 64;
 ```
 
 #### ch
 
-Channel (dt) sets the channel to use. talk about how channel is used...
+Channel (ch) sets the MIDI channel to use. It can be a value between
+0 and 15. The default is 0.
 
 ```raku
     # Set on instantiation.
-    my $t = Track.new(:ch(2));
+    my $t = Track.new(:ch(1));
 ```
 
 ```raku
     # Set after instantiation.
     my $t = Track.new;
-    $t.ch: 2;
+    $t.ch: 1;
 ```
 
 #### vol_note-off
 
-Volume note-off.
+vol_note-off sets the note-off volume. It can be a value between
+0 and 127. The default is 0.
+
+A volume for a note-off seems weird, but it cah change the sound on
+certain instruments like an organ where notes can be depressed at
+different speeds.
 
 ```raku
     # Set on instantiation.
@@ -267,7 +287,8 @@ Volume note-off.
 
 #### vol_note-on
 
-Volume note-on.
+vol_note-on sets the note-on volume. It can be a value between
+0 and 127. The default is 127.
 
 ```raku
     # Set on instantiation.
@@ -280,21 +301,18 @@ Volume note-on.
     $t.vol_note-on: 60;
 ```
 
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
 ### Methods
 
-The add-track method accepts a rendered track, and adds it to the
-File class.
+#### tempo
 
-```raku
-    # Create a track then add it to the File class.
-    my $t = Track.new;
-    $t.note-on: 60;
-    $t.dt: 100;
-    $t.note-off: 60;
+#### time
 
-    my $f = File.new;
-    $f.add-track($t.render);
-```
+#### note-off
+
+#### note-on
 
 ## Resources
 
