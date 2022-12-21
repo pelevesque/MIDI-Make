@@ -413,7 +413,6 @@ of MIDI::Make.
 
 ```
 ➤ raku t/main.t
-
 ```
 
 ## Resources
