@@ -301,25 +301,124 @@ vol_note-on sets the note-on volume. It can be a value between
     $t.vol_note-on: 60;
 ```
 
-----------------------------------------------------------------------
-----------------------------------------------------------------------
-
 ### Methods
 
 #### tempo
 
+The tempo method sets the MIDI tempo. It accepts one argument, the
+tempo in microseconds per quarter note. You can either set it with
+a value from 0 to 16777215, or use the quarter notes per minute
+operator defined earlier in this file. The default value is 500000,
+which is equivalent to a tempo of 120 quarter notes per minute.
+
+```raku
+    my $t = Track.new;
+    $t.tempo: 1000000; # Set the tempo to 60 quarter notes per minute.
+    $t.tempo: 120♩PM;  # Set the tempo to 120 quarter notes per minute.
+```
+
 #### time
+
+The time method sets the MIDI time-signature. It accepts three
+optional arguments.
+
+1. The time-signature set using the time-signature operator defined
+   earlier in this file. The default is 4\4.
+
+2. The pulses per metronome click (PPMC). This value can be from
+   0 to 255. The default is 24.
+
+3. 32nds per quarter note. This value can be from 0 to 255.
+   The default is 8.
+
+```raku
+    my $t = Track.new;
+    $t.time: 3/4;
+    $t.time: 4/4, 48;
+    $t.time: 2/8, 32, 12;
+```
 
 #### note-off
 
+The note-off method creates a note off. It accepts two arguments. The
+first one is required and the note number from 0 to 127. The second
+one is optional and the vol_note-off from 0 to 127. The default
+vol_note-off is the one set by the vol_note-off parameter. If
+vol_note-off is set by this method, it will also set the vol_note-off
+parameter of the Track class for the next note-off events.
+
+```raku
+    my $t = Track.new;
+    $t.note-off: 60;         # vol_note-off == 0
+    $t.note-off: 62, 120;    # vol_note-off == 120
+    $t.note-off: 64;         # vol_note-off == 120
+```
+
 #### note-on
+
+The note-on method creates a note on. It accepts two arguments. The
+first one is required and the note number from 0 to 127. The second
+one is optional and the vol_note-on from 0 to 127. The default
+vol_note-on is the one set by the vol_note-on parameter. If
+vol_note-on is set by this method, it will also set the vol_note-on
+parameter of the Track class for the next note-on events.
+
+```raku
+    my $t = Track.new;
+    $t.note-on: 60;         # vol_note-on == 127
+    $t.note-on: 62, 100;    # vol_note-on == 100
+    $t.note-on: 64;         # vol_note-on == 100
+```
+
+#### render
+
+The render method renders the MIDI file information gathered up to
+that point. It is used to pass the track MIDI data to the File class.
+
+```raku
+    my $t = Track.new;
+    $t.note-on:  60;
+    $t.dt:           128;
+    $t.note-off: 60;
+
+    my $f = File.new;
+    $f.add-track($t.render);
+```
+
+## Complex Example
+
+```raku
+    my $t = Track.new;
+    $t.name:     "piano";
+    $t.note-on:  60;
+    $t.dt:             128;
+    $t.time:     3\2;
+    $t.note-off: 60;
+    $t.note-on:  72;
+    $t.dt:             128;
+    $t.note-off: 72;
+
+    my $f = File.new;
+    $f.add-track($t.render);
+
+    say $f.render; # Print the MIDI contents.
+
+    spurt 'file.mid', $f.render; # Save a MIDI file.
+```
+
+## Running Tests
+
+To run tests, simply run the following terminal command in the root
+of MIDI::Make.
+
+```
+➤ raku t/main.t
+
+```
 
 ## Resources
 
 - [Official MIDI Specification](https://www.midi.org/specifications)
-- [Standard MIDI File Structure](https://ccrma.stanford.edu/~craig/14q/midifile/MidiFileFormat.html)
-- [Time Signature](http://midi.teragonaudio.com/tech/midifile/time.htm)
-- [Time Division](https://www.recordingblogs.com/wiki/time-division-of-a-midi-file)
+- [MIDI Files Specification](http://www.somascape.org/midi/tech/mfile.html)
 - [MIDI Beat Time Considerations](https://majicdesigns.github.io/MD_MIDIFile/page_timing.html)
 - [MIDI timting](https://paxstellar.fr/2020/09/11/midi-timing/)
-- [MIDI Files Specification](http://www.somascape.org/midi/tech/mfile.html)
