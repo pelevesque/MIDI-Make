@@ -159,8 +159,6 @@ that point.
     say $f.render;
 ```
 
-----------------------------------------------------------------------
-
 ## Operators
 
 MIDI::Make creates two operators that serve as helpers for the Track
@@ -174,8 +172,10 @@ minute to microseconds per quarter note.
 This permits specifying tempo in a musical human-readable way.
 
 ```raku
-    $t.tempo: 1000000; # Microseconds per quarter note. Similar to 60♩PM.
+        # 60 QPM using microseconds per quarter note.
+    $t.tempo: 1000000;
 
+        # 60 QPM using the MIDI::Make operator.
     $t.tempo: 60♩PM; # With unicode.
     $t.tempo: 60QPM; # Without unicode.
 ```
@@ -189,13 +189,15 @@ the Track class's time method.
     $t.time: 3\8;
 ```
 
+----------------------------------------------------------------------
+
 ## The Track class
 
 The Track class is used to create a MIDI track which can then be
 added to the File class.
 
 ```raku
-    # Instantiating without parameters.
+        # Instantiating without parameters.
     my $t = Track.new;
 ```
 
@@ -209,12 +211,12 @@ With the name parameter, you can name the track using
 ASCII characters.
 
 ```raku
-    # Set on instantiation.
+        # Set on instantiation.
     my $t = Track.new(:name('piano'));
 ```
 
 ```raku
-    # Set after instantiation.
+        # Set after instantiation.
     my $t = Track.new;
     $t.name: 'piano';
 ```
@@ -227,12 +229,12 @@ it's possible to instantiate dt to a value other than 0, usually you
 will start a MIDI file with a MIDI event, and not a period of time.
 
 ```raku
-    # Set on instantiation.
+        # Set on instantiation.
     my $t = Track.new(:dt(100));
 ```
 
 ```raku
-    # Set after instantiation.
+        # Set after instantiation.
     my $t = Track.new;
     $t.dt: 100;
 ```
@@ -259,12 +261,12 @@ Channel (ch) sets the MIDI channel to use. It can be a value between
 0 and 15. The default is 0.
 
 ```raku
-    # Set on instantiation.
+        # Set on instantiation.
     my $t = Track.new(:ch(1));
 ```
 
 ```raku
-    # Set after instantiation.
+        # Set after instantiation.
     my $t = Track.new;
     $t.ch: 1;
 ```
@@ -279,12 +281,12 @@ certain instruments like an organ where notes can be depressed at
 different speeds.
 
 ```raku
-    # Set on instantiation.
+        # Set on instantiation.
     my $t = Track.new(:vol_note-off(10));
 ```
 
 ```raku
-    # Set after instantiation.
+        # Set after instantiation.
     my $t = Track.new;
     $t.vol_note-off: 10;
 ```
@@ -295,12 +297,12 @@ vol_note-on sets the note-on volume. It can be a value between
 0 and 127. The default is 127.
 
 ```raku
-    # Set on instantiation.
+        # Set on instantiation.
     my $t = Track.new(:vol_note-on(60));
 ```
 
 ```raku
-    # Set after instantiation.
+        # Set after instantiation.
     my $t = Track.new;
     $t.vol_note-on: 60;
 ```
