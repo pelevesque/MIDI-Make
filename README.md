@@ -2,6 +2,14 @@
 
 A Raku module to make MIDI files.
 
+# Installation
+
+You can install MIDI::Make using [Zef](https://github.com/ugexe/zef).
+
+```
+➤ zef install MIDI::Make
+```
+
 ## Import
 
 ```raku
