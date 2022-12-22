@@ -385,7 +385,7 @@ that point. It is used to pass the track MIDI data to the File class.
     $f.add-track($t.render);
 ```
 
-## Complex Example
+## Example
 
 ```raku
     my $t = Track.new;
@@ -396,14 +396,17 @@ that point. It is used to pass the track MIDI data to the File class.
     $t.note-off: 60;
     $t.note-on:  72;
     $t.dt:             128;
+    $t.tempo:    80♩PM;
     $t.note-off: 72;
 
-    my $f = File.new;
+    my $f = File.new(:PPQ(96));
     $f.add-track($t.render);
 
-    say $f.render; # Print the MIDI contents.
+         # Print the MIDI contents.
+    say $f.render;
 
-    spurt 'file.mid', $f.render; # Save a MIDI file.
+         # Save the MIDI contents to file.
+    spurt 'file.mid', $f.render;
 ```
 
 ## Running Tests
@@ -411,7 +414,7 @@ that point. It is used to pass the track MIDI data to the File class.
 To run tests, simply run the following terminal command in the root
 of MIDI::Make.
 
-```bash
+```
 ➤ raku t/main.t
 ```
 
