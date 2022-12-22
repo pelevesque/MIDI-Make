@@ -53,7 +53,7 @@ is 1.
 
 #### time-division
 
-The time-division parameter can be set to quarter for quarter-notes,
+The time-division parameter can be set to quarter for quarter notes,
 or to frame. The default is quarter.
 
 ```raku
@@ -69,7 +69,7 @@ or to frame. The default is quarter.
 
 #### PPQ (pulses per quarter-note)
 
-The PPQ parameter sets the pulses per querter-note of the
+The PPQ parameter sets the pulses per querter note of the
 time-division parameter when set to quarter. If time-division is set
 to frame, PPQ is ignored.
 
