@@ -411,7 +411,7 @@ that point. It is used to pass the track MIDI data to the File class.
 To run tests, simply run the following terminal command in the root
 of MIDI::Make.
 
-```
+```bash
 ➤ raku t/main.t
 ```
 
