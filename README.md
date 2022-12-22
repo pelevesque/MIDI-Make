@@ -22,7 +22,7 @@ method to add tracks, and the render method to output the MIDI
 information created up to that point.
 
 ```raku
-    # Instantiating without parameters.
+        # Instantiating without parameters.
     my $f = File.new;
 ```
 
@@ -41,12 +41,12 @@ is 1.
 -  2 - Tracks are separated, and played one after the other.
 
 ```raku
-    # Set on instantiation.
+        # Set on instantiation.
     my $f = File.new(:format(0));
 ```
 
 ```raku
-    # Set after instantiation.
+        # Set after instantiation.
     my $f = File.new;
     $f.format: 0;
 ```
@@ -57,12 +57,12 @@ The time-division parameter can be set to quarter for quarter-notes,
 or to frame. The default is quarter.
 
 ```raku
-    # Set on instantiation.
+        # Set on instantiation.
     my $f = File.new(:time-division('frame'));
 ```
 
 ```raku
-    # Set after instantiation.
+        # Set after instantiation.
     my $f = File.new;
     $f.time-division: 'frame';
 ```
@@ -77,12 +77,12 @@ The PPQ value is from 0 to 32767. The default is 48.
 
 
 ```raku
-    # Set on instantiation.
+        # Set on instantiation.
     my $f = File.new(:PPQ(96));
 ```
 
 ```raku
-    # Set after instantiation.
+        # Set after instantiation.
     my $f = File.new;
     $f.PPQ: 96;
 ```
@@ -96,12 +96,12 @@ FPS is ignored.
 FPS can have four values: 24, 25, 29.97, or 30. The default is 24.
 
 ```raku
-    # Set on instantiation.
+        # Set on instantiation.
     my $f = File.new(:time-division('frame'), :FPS(30));
 ```
 
 ```raku
-    # Set after instantiation.
+        # Set after instantiation.
     my $f = File.new;
     $f.time-division: 'frame';
     $f.FPS: 30;
@@ -117,12 +117,12 @@ The PPF value is from 0 to 255. The default is 4.
 
 
 ```raku
-    # Set on instantiation.
+        # Set on instantiation.
     my $f = File.new(:time-division('frame'), :PPF(8));
 ```
 
 ```raku
-    # Set after instantiation.
+        # Set after instantiation.
     my $f = File.new;
     $f.time-division: 'frame';
     $f.PPF: 8;
@@ -136,13 +136,13 @@ The add-track method accepts a rendered track, and adds it to the
 File class.
 
 ```raku
-    # Create a track.
+        # Create a track.
     my $t = Track.new;
     $t.note-on: 60;
     $t.dt: 100;
     $t.note-off: 60;
 
-    # Add it to the File class.
+        # Add it to the File class.
     my $f = File.new;
     $f.add-track($t.render);
 ```
@@ -156,6 +156,8 @@ that point.
     my $f = File.new;
     say $f.render;
 ```
+
+----------------------------------------------------------------------
 
 ## Operators
 
