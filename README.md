@@ -33,8 +33,8 @@ Parameters can be set on instantiation, or anytime afterwards.
 #### format
 
 The format parameter specifies the type of MIDI file format to use.
-It is an integer, and can have three values: 0, 1, or 2. The default
-is 1.
+
+It can have three values: 0, 1, or 2. The default is 1.
 
 -  0 - All data is merged on a single track.
 -  1 - Tracks are separated, and played together.
@@ -53,8 +53,10 @@ is 1.
 
 #### time-division
 
-The time-division parameter can be set to quarter for quarter notes,
-or to frame. The default is quarter.
+The time-division parameter defines how the MIDI time will be divided.
+
+It can have two values: quarter for quarter notes, and frame. The
+default is quarter.
 
 ```raku
         # Set on instantiation.
@@ -67,7 +69,7 @@ or to frame. The default is quarter.
     $f.time-division: 'frame';
 ```
 
-#### PPQ (pulses per quarter-note)
+#### PPQ (pulses per quarter note)
 
 The PPQ parameter sets the pulses per querter note of the
 time-division parameter when set to quarter. If time-division is set
@@ -138,8 +140,8 @@ File class.
 ```raku
         # Create a track.
     my $t = Track.new;
-    $t.note-on: 60;
-    $t.dt: 100;
+    $t.note-on:  60;
+    $t.dt:           100;
     $t.note-off: 60;
 
         # Add it to the File class.
@@ -166,13 +168,13 @@ class described below.
 
 ### ♩PM or QPM
 
-The quarter-notes per minute operator transforms quarter-notes per
-minute to microseconds per quarter-note.
+The quarter notes per minute operator transforms quarter notes per
+minute to microseconds per quarter note.
 
 This permits specifying tempo in a musical human-readable way.
 
 ```raku
-    $t.tempo: 1000000; # Microseconds per quarter-note. Similar to 60♩PM.
+    $t.tempo: 1000000; # Microseconds per quarter note. Similar to 60♩PM.
 
     $t.tempo: 60♩PM; # With unicode.
     $t.tempo: 60QPM; # Without unicode.
