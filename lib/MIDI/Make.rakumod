@@ -85,7 +85,7 @@ class File is export {
                     #
                     # We use a hack to achieve this. Instead of
                     # calculating the two's complement form, we
-                    # substract the positive FPS from 256 and this
+                    # subtract the positive FPS from 256 and this
                     # gives the correct answer for all FPS variants.
                     # FPS is floored to store 29.97 as 29.
                 $b.append: 256 - $!FPS.floor;
