@@ -1,7 +1,7 @@
 {
     "raku": "6.*",
     "name": "MIDI::Make",
-    "api": "0",
+    "api": "1.0",
     "auth": "github:pelevesque",
     "version": "0.1.0",
     "description": "A Raku module to make MIDI files.",
