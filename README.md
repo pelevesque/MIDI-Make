@@ -16,6 +16,10 @@ You can install MIDI::Make using [Zef](https://github.com/ugexe/zef).
 use MIDI::Make;
 ```
 
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
 ## Usage
 
 MIDI::Make works by creating a File class and then populating it with
