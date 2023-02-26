@@ -20,7 +20,7 @@ sub prefix:<♩> (QPM $QPM) is export { (60000000 / $QPM).floor }
     # Operator: \
     # Helps to write human-like time signatures.
     # ➤ say (2\8).MIDI-nominator; «2␤»
-    #   say (2\8).MIDI-denominator; «3␤»
+    # ➤ say (2\8).MIDI-denominator; «3␤»
 my constant @pow2 = 2 «**« ^256; # 2⁰ → 2²⁵⁵
 subset Pow2 of UInt where * ~~ any @pow2;
 sub infix:<\\> (UInt8 $numerator, Pow2 $denominator) is export {
