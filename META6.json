@@ -1,19 +1,19 @@
 {
-    "raku": "6.*",
-    "name": "MIDI::Make",
     "api": "1.0",
     "auth": "github:pelevesque",
-    "version": "0.1.0",
-    "description": "A Raku module to make MIDI files.",
     "authors": [
         "Pierre-Emmanuel Lévesque <pierre.e.levesque@gmail.com>"
     ],
+    "description": "A Raku module to make MIDI files.",
     "license": "MIT",
+    "name": "MIDI::Make",
+    "raku": "6.*",
+    "source-url": "git://github.com/pelevesque/MIDI-Make.git",
     "tags": [
         "MIDI",
         "music",
         "sequencer",
         "composition"
     ],
-    "source-url": "git://github.com/pelevesque/MIDI-Make.git"
+    "version": "0.1.0"
 }
