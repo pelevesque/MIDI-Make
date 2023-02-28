@@ -22,7 +22,7 @@ MIDI::Make works by creating the File class and then populating it
 with zero or more tracks created using the Track class. The resulting
 MIDI information can be outputed using the File class's render method.
 
-## The File Class
+## The File class
 
 The File class is used to store and modify MIDI information in order
 to create a MIDI file. It has some optional parameters, the add-track
@@ -79,7 +79,7 @@ $f.time-division: 'frame';
 
 #### PPQ (pulses per quarter note)
 
-The PPQ parameter sets the pulses per querter note of the
+The PPQ parameter sets the pulses per quarter note of the
 time-division parameter when the latter is set to quarter. If
 time-division is set to frame, PPQ is ignored.
 
@@ -187,7 +187,7 @@ $t.tempo: ♩60;
 
 ### \
 
-The time signature operator is used to specify a time signature for
+The time-signature operator is used to specify a time-signature for
 the Track class's time method.
 
 ```raku
@@ -252,11 +252,11 @@ new dt.
 
 ```raku
 my $t = Track.new;
-$t.note-on: 60;
+$t.note-on:  60;
 $t.dt:          100; # Wait 100 MIDI pulses before subsequent events.
 $t.note-off: 60;
-$t.note-on: 62;
-$t.note-on: 64;
+$t.note-on:  62;
+$t.note-on:  64;
 $t.dt:          200; # Wait 200 MIDI pulses before subsequent events.
 $t.note-off: 62;
 $t.note-off: 64;
@@ -285,9 +285,9 @@ vol_note-off sets the note-off volume.
 
 The vol_note-off value is from 0 to 127. The default is 0.
 
-A volume for a note-off seems weird, but it can change the sound on
-certain instruments like an organ on which notes can be depressed at
-different speeds.
+Note: A volume for a note-off seems weird, but it can change the sound
+on certain instruments like an organ on which notes can be depressed
+at different speeds.
 
 ```raku
     # Set on instantiation.
@@ -321,10 +321,10 @@ $t.vol_note-on: 60;
 
 #### tempo
 
-The tempo method sets the MIDI tempo. It accepts one argument, the
+The tempo method sets the MIDI tempo. It accepts one argument: The
 tempo in microseconds per quarter note. You can either set it with a
 value from 0 to 16777215, or use the quarter notes per minute operator
-defined earlier in this file. The default value is 500000, which is
+defined earlier in this file. The default value is 500000 which is
 equivalent to a tempo of 120 quarter notes per minute.
 
 ```raku
@@ -356,12 +356,12 @@ $t.time: 2/8, 32, 12;
 
 #### note-off
 
-The note-off method creates a note off. It accepts two arguments. The
-first one is required and the note number from 0 to 127. The second
-one is optional and the vol_note-off from 0 to 127. The default
-vol_note-off is the one set by the vol_note-off parameter. If
-vol_note-off is set by this method, it will also set the vol_note-off
-parameter of the Track class for the next note-off events.
+The note-off method creates a note off. It accepts two arguments: The
+note number from 0 to 127 (required), and the vol_note-off from 0 to
+127 (optional). The default vol_note-off is the one set by the
+vol_note-off parameter. If vol_note-off is set by this note-off
+method, it will also set the vol_note-off parameter of the Track class
+for the next note-off events.
 
 ```raku
 my $t = Track.new;
@@ -372,12 +372,12 @@ $t.note-off: 64;      # vol_note-off == 120
 
 #### note-on
 
-The note-on method creates a note on. It accepts two arguments. The
-first one is required and the note number from 0 to 127. The second
-one is optional and the vol_note-on from 0 to 127. The default
-vol_note-on is the one set by the vol_note-on parameter. If
-vol_note-on is set by this method, it will also set the vol_note-on
-parameter of the Track class for the next note-on events.
+The note-on method creates a note on. It accepts two arguments: The
+note number from 0 to 127 (required), and the vol_note-on from 0 to
+127 (optional). The default vol_note-on is the one set by the
+vol_note-on parameter. If vol_note-on is set by this note-on method,
+it will also set the vol_note-on parameter of the Track class for the
+next note-on events.
 
 ```raku
 my $t = Track.new;
@@ -388,8 +388,9 @@ $t.note-on: 64;      # vol_note-on == 100
 
 #### render
 
-The render method renders the MIDI file information gathered up to
-that point. It is used to pass the track MIDI data to the File class.
+The render method renders the MIDI track information gathered up to
+that point. It is used to pass the track's MIDI data to the File
+class.
 
 ```raku
 my $t = Track.new;
