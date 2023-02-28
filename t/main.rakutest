@@ -240,7 +240,7 @@ test(
 # Usage example
 
 test(
-    'Complex example',
+    'Usage example',
     do {
         my $t = Track.new;
         $t.name:     "piano";
