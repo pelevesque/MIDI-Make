@@ -153,8 +153,8 @@ test(
         $t.dt: 100;
         $t.ch: 1;
         $t.vol_note-off: 10;
-        $t.vol_note-on: 100;
-        $t.note-on: 60;
+        $t.vol_note-on:  100;
+        $t.note-on:  60;
         $t.note-off: 60;
         $t;
     },
@@ -218,11 +218,11 @@ test(
     'Track: note-on and note-off',
     do {
         my $t = Track.new;
-        $t.note-on: 60;
+        $t.note-on:  60;
         $t.note-off: 60;
-        $t.note-on: 127, 100;
+        $t.note-on:  127, 100;
         $t.note-off: 127, 10;
-        $t.note-on: 60;
+        $t.note-on:  60;
         $t.note-off: 60;
         $t;
     },
@@ -245,10 +245,10 @@ test(
         my $t = Track.new;
         $t.name:     "piano";
         $t.note-on:  60;
-        $t.dt:       128;
+        $t.dt:           128;
         $t.note-off: 60;
         $t.note-on:  72;
-        $t.dt:       128;
+        $t.dt:           128;
         $t.note-off: 72;
 
         my $f = File.new;
