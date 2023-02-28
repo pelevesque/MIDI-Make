@@ -1,10 +1,10 @@
 use Test;
 use MIDI::Make;
 
-sub test ($title, $renderable, $exp-bytes) {
+sub test ($title, $renderable, $expected-bytes) {
     is(
         $renderable.render,
-        Buf.new($exp-bytes.words.map({"0x$_"})>>.Int),
+        Buf.new($expected-bytes.words.map({"0x$_"})>>.Int),
         $title,
     );
 }
