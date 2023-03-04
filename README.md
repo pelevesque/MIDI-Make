@@ -440,4 +440,4 @@ of MIDI::Make.
 - [Official MIDI Specification](https://www.midi.org/specifications)
 - [MIDI Files Specification](http://www.somascape.org/midi/tech/mfile.html)
 - [MIDI Beat Time Considerations](https://majicdesigns.github.io/MD_MIDIFile/page_timing.html)
-- [MIDI Timing](https://paxstellar.fr/2020/09/11/midi-timing/)
+- [MIDI Timing](https://paxstellar.fr/2020/09/11/midi-timing)
