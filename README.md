@@ -349,9 +349,9 @@ optional arguments:
 
 ```raku
 my $t = Track.new;
-$t.time: 3/4;
-$t.time: 4/4, 48;
-$t.time: 2/8, 32, 12;
+$t.time: 3\4;
+$t.time: 4\4, 48;
+$t.time: 2\8, 32, 12;
 ```
 
 #### note-off
