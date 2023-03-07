@@ -13,7 +13,10 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
-          - windows-latest
+            # Remove windows-latest testing until the following
+            # issue is solved:
+            # https://github.com/Raku/tap-harness6/issues/61
+          # - windows-latest
         raku-version:
           - 'latest'
     runs-on: ${{ matrix.os }}
