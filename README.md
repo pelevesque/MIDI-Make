@@ -1,3 +1,5 @@
+[![Actions Status](https://github.com/pelevesque/MIDI-Make/actions/workflows/test.yml/badge.svg)](https://github.com/pelevesque/MIDI-Make/actions)
+
 # MIDI::Make
 
 A Raku module to make MIDI files.
