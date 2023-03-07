@@ -432,7 +432,7 @@ To run tests, simply run the following terminal command in the root
 of MIDI::Make.
 
 ```
-➤ raku t/main.rakutest
+➤ raku t/all.rakutest
 ```
 
 ## Resources
