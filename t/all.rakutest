@@ -1,60 +1,63 @@
 use Test;
+use Test::Selector;
 use MIDI::Make :shortnames;
 
-sub test ($title, $renderable, $expected-bytes) {
-    is(
-        $renderable.render,
-        Buf.new($expected-bytes.words.map({"0x$_"})>>.Int),
-        $title,
-    );
+sub test ($label, $title, $renderable, $expected-bytes) {
+    t $label => {
+        is(
+            $renderable.render,
+            Buf.new($expected-bytes.words.map({"0x$_"})>>.Int),
+            $title,
+        );
+    }
 }
 
 # --------------------------------------------------------------------
 # File class
 
-test(
+test('f1',
     'Trackless File Instantiation',
     File.new,
     '4D 54 68 64 00 00 00 06
      00 01 00 00 00 30',
 );
 
-test(
+test('f2',
     'Trackless File Instantiation: format => 0',
     File.new(:format(0)),
     '4D 54 68 64 00 00 00 06
      00 00 00 00 00 30',
 );
 
-test(
+test('f3',
     'Trackless File Instantiation: time-division => "frame"',
     File.new(:time-division('frame')),
     '4D 54 68 64 00 00 00 06
      00 01 00 00 E8 04',
 );
 
-test(
+test('f4',
     'Trackless File Instantiation: PPQ => 300',
     File.new(:PPQ(300)),
     '4D 54 68 64 00 00 00 06
      00 01 00 00 01 2C',
 );
 
-test(
+test('f5',
     'Trackless File Instantiation: FPS => 29.97',
     File.new(:time-division('frame'), :FPS(29.97)),
     '4D 54 68 64 00 00 00 06
      00 01 00 00 E3 04',
 );
 
-test(
+test('f6',
     'Trackless File Instantiation: PPF => 8',
     File.new(:time-division('frame'), :PPF(24)),
     '4D 54 68 64 00 00 00 06
      00 01 00 00 E8 18',
 );
 
-test(
+test('f7',
     'Trackless File: Set params after instantiation A',
     do {
         my $f = File.new;
@@ -66,7 +69,7 @@ test(
      00 02 00 00 01 A9',
 );
 
-test(
+test('f8',
     'Trackless File: Set params after instantiation B',
     do {
         my $f = File.new;
@@ -83,14 +86,14 @@ test(
 # --------------------------------------------------------------------
 # Track class
 
-test(
+test('t1',
     'Track Instantiation',
     Track.new,
     '4D 54 72 6B 00 00 00 04
      00 FF F2 00',
 );
 
-test(
+test('t2',
     'Track Instantiation: name => "piano"',
     Track.new(:name('piano')),
     '4D 54 72 6B 00 00 00 0D
@@ -98,7 +101,7 @@ test(
      00 FF F2 00',
 );
 
-test(
+test('t3',
     'Track Instantiation: dt => 100',
     do {
         my $t = Track.new(:dt(100));
@@ -110,7 +113,7 @@ test(
      00 FF F2 00',
 );
 
-test(
+test('t4',
     'Track Instantiation: ch => 1',
     do {
         my $t = Track.new(:ch(1));
@@ -122,7 +125,7 @@ test(
      00 FF F2 00',
 );
 
-test(
+test('t5',
     'Track Instantiation: vol_note-off => 10',
     do {
         my $t = Track.new(:vol_note-off(10));
@@ -134,7 +137,7 @@ test(
      00 FF F2 00',
 );
 
-test(
+test('t6',
     'Track Instantiation: vol_note-on => 100',
     do {
         my $t = Track.new(:vol_note-on(100));
@@ -146,7 +149,7 @@ test(
      00 FF F2 00',
 );
 
-test(
+test('t7',
     'Track: Change params after instantiation',
     do {
         my $t = Track.new;
@@ -164,7 +167,7 @@ test(
      00 FF F2 00',
 );
 
-test(
+test('t8',
     'Track: tempo with default params',
     do {
         my $t = Track.new;
@@ -176,7 +179,7 @@ test(
      00 FF F2 00'
 );
 
-test(
+test('t9',
     'Track: tempo with custom params',
     do {
         my $t = Track.new;
@@ -189,7 +192,7 @@ test(
      00 FF F2 00'
 );
 
-test(
+test('t10',
     'Track: time with default params',
     do {
         my $t = Track.new;
@@ -201,7 +204,7 @@ test(
      00 FF F2 00'
 );
 
-test(
+test('t11',
     'Track: time with custom params',
     do {
         my $t = Track.new;
@@ -214,7 +217,7 @@ test(
      00 FF F2 00'
 );
 
-test(
+test('t12',
     'Track: note-on and note-off',
     do {
         my $t = Track.new;
@@ -239,7 +242,7 @@ test(
 # --------------------------------------------------------------------
 # Usage example
 
-test(
+test('e1',
     'Usage example',
     do {
         my $t = Track.new;

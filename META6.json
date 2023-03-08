@@ -23,6 +23,7 @@
         "composition"
     ],
     "test-depends": [
+        "Test::Selector"
     ],
     "version": "0.1.0"
 }
