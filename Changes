@@ -1,0 +1,21 @@
+Revision history for MIDI::Make
+
+0.2.0
+    - Fix typos in comments
+    - Fix zef tests
+    - Rename t/main.rakutest to t/all.rakutest
+    - Add Github Workflows
+    - Add the shortnames tag to classes
+    - Comment out windows-latest YAML test
+    - Update README.md: add version, update example
+    - Implement Test::Selector
+
+0.1.0
+    - Implement basic MIDI functionalities:
+        - Create a MIDI file
+        - Add tracks
+        - Modify the tempo
+        - Modify the time-signature
+        - Create a note-on
+        - Create a note-off
+        - Provide the ♩ and \ operators
