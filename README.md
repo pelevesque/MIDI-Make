@@ -4,6 +4,32 @@
 
 A Raku module to make MIDI files.
 
+## Example
+
+```raku
+use MIDI::Make :shortnames;
+
+my $t = Track.new;
+$t.name:     "piano";
+$t.note-on:  60;
+$t.dt:           128;
+$t.time:     3\2;
+$t.note-off: 60;
+$t.note-on:  72;
+$t.dt:           128;
+$t.tempo:    ♩80;
+$t.note-off: 72;
+
+my $f = File.new(:PPQ(96));
+$f.add-track($t.render);
+
+    # Print the MIDI contents.
+say $f.render;
+
+    # Save the MIDI contents to file.
+spurt 'file.mid', $f.render;
+```
+
 # Installation
 
 You can install MIDI::Make using [Zef](https://github.com/ugexe/zef).
@@ -420,30 +446,6 @@ $t.note-off: 60;
 
 my $f = File.new;
 $f.add-track($t.render);
-```
-
-## Example
-
-```raku
-my $t = Track.new;
-$t.name:     "piano";
-$t.note-on:  60;
-$t.dt:           128;
-$t.time:     3\2;
-$t.note-off: 60;
-$t.note-on:  72;
-$t.dt:           128;
-$t.tempo:    ♩80;
-$t.note-off: 72;
-
-my $f = File.new(:PPQ(96));
-$f.add-track($t.render);
-
-    # Print the MIDI contents.
-say $f.render;
-
-    # Save the MIDI contents to file.
-spurt 'file.mid', $f.render;
 ```
 
 ## Running Tests
