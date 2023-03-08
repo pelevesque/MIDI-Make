@@ -4,8 +4,10 @@
     "authors": [
         "Pierre-Emmanuel Lévesque <pierre.e.levesque@gmail.com>"
     ],
-    "build-depends": [],
-    "depends": [],
+    "build-depends": [
+    ],
+    "depends": [
+    ],
     "description": "A Raku module to make MIDI files.",
     "license": "MIT",
     "name": "MIDI::Make",
@@ -20,6 +22,7 @@
         "sequencer",
         "composition"
     ],
-    "test-depends": [],
+    "test-depends": [
+    ],
     "version": "0.1.0"
 }
