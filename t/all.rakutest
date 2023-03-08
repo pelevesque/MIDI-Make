@@ -1,5 +1,5 @@
 use Test;
-use MIDI::Make;
+use MIDI::Make :shortnames;
 
 sub test ($title, $renderable, $expected-bytes) {
     is(

@@ -15,7 +15,9 @@ subset UInt32 of UInt where * ≤ 4294967295;
     # μsPQ = Microseconds per quarter note.
     # ➤ say ♩60; «1000000␤»
 subset QPM of Numeric where 0.22351741874 ≤ * ≤ 60000001;
-sub prefix:<♩> (QPM $QPM) is export { (60000000 / $QPM).floor }
+sub prefix:<♩> (QPM $QPM) is export(:MANDATORY) {
+    (60000000 / $QPM).floor
+}
 
     # Operator: \
     # Helps to write human-like time signatures.
@@ -23,7 +25,10 @@ sub prefix:<♩> (QPM $QPM) is export { (60000000 / $QPM).floor }
     # ➤ say (2\8).MIDI-denominator; «3␤»
 my constant @pow2 = 2 «**« ^256; # 2⁰ → 2²⁵⁵
 subset Pow2 of UInt where * ~~ any @pow2;
-sub infix:<\\> (UInt8 $numerator, Pow2 $denominator) is export {
+sub infix:<\\> (
+    UInt8 $numerator,
+    Pow2 $denominator,
+) is export(:MANDATORY) {
     class Time-Signature {
         has $.numerator;
         has $.denominator;
@@ -36,7 +41,7 @@ sub infix:<\\> (UInt8 $numerator, Pow2 $denominator) is export {
 sub write_2-bytes (UInt16 $n) { Buf.write-uint16(0, $n, BigEndian) }
 sub write_4-bytes (UInt32 $n) { Buf.write-uint32(0, $n, BigEndian) }
 
-class File is export {
+class File is export(:shortnames) {
     subset format where * ~~ 0 | 1 | 2;
     subset time-division where * ~~ 'quarter' | 'frame';
     subset FPS where * ~~ 24 | 25 | 29.97 | 30;
@@ -107,7 +112,7 @@ class File is export {
     }
 }
 
-class Track is export {
+class Track is export(:shortnames) {
     subset Str-ASCII of Str where 32 ≤ *.ords.all ≤ 126;
 
     my %bytes =

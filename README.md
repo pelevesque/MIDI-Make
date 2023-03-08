@@ -14,8 +14,26 @@ You can install MIDI::Make using [Zef](https://github.com/ugexe/zef).
 
 ## Import
 
+There are two ways to import MIDI::Make; without or with the
+shortnames tag. Without the shortnames tag, the File and Track classes
+must be called with their respective FQN (Fully Qualified Name). By
+using the shortnames tag, it becomes possible to simply use File or
+Track.
+
 ```raku
 use MIDI::Make;
+
+    # Only the FQN is available for the File and Track classes.
+my $f = MIDI::Make::File.new;
+my $t = MIDI::Make::Track.new;
+```
+
+```raku
+use MIDI::Make :shortnames;
+
+    # FQN and Shortnames are available for the File and Track classes.
+my $f = File.new;
+my $t = Track.new;
 ```
 
 ## Usage
