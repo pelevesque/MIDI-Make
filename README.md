@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/pelevesque/MIDI-Make/actions/workflows/test.yml/badge.svg)](https://github.com/pelevesque/MIDI-Make/actions)
+![release v0.1.0](https://img.shields.io/github/v/release/pelevesque/MIDI-Make) [![Actions Status](https://github.com/pelevesque/MIDI-Make/actions/workflows/test.yml/badge.svg)](https://github.com/pelevesque/MIDI-Make/actions)
 
 # MIDI::Make
 
@@ -29,6 +29,10 @@ say $f.render;
     # Save the MIDI contents to file.
 spurt 'file.mid', $f.render;
 ```
+
+# Versioning
+
+MIDI::Make uses [Semantic Versioning](https://semver.org).
 
 # Installation
 
