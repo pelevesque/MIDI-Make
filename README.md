@@ -10,7 +10,7 @@ A Raku module to make MIDI files.
 use MIDI::Make :shortnames;
 
 my $t = Track.new;
-$t.name:     "piano";
+$t.name:     'piano';
 $t.note-on:  60;
 $t.dt:           128;
 $t.time:     3\2;
