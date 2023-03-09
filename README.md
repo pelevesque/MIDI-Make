@@ -10,18 +10,21 @@ A Raku module to make MIDI files.
 use MIDI::Make :shortnames;
 
 my $t = Track.new;
-$t.copyright:  'c 2023 anonymous';
-$t.name:       'melody';
-$t.instrument: 'piano';
-$t.marker:            'section I';
-$t.note-on:    60;
-$t.dt:             128;
-$t.tempo:      ♩80;
-$t.time:       3\2;
-$t.note-off:   60;
-$t.note-on:    72;
-$t.dt:             128;
-$t.note-off:   72;
+$t.copyright:   'c 2023 anonymous';
+$t.name:        'melody';
+$t.instrument:  'piano';
+$t.ch:           1;
+$t.marker:               'section I';
+$t.tempo:        ♩80;
+$t.time:         3\2;
+$t.note-on:      60;
+$t.dt:               128;
+$t.note-off:     60;
+$t.vol_note-on:  80;
+$t.vol_note-off: 10;
+$t.note-on:      72;
+$t.dt:           128;
+$t.note-off:     72;
 
 my $f = File.new(:PPQ(96));
 $f.add-track($t.render);
