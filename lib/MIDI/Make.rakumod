@@ -116,16 +116,18 @@ class Track is export(:shortnames) {
     subset Str-ASCII of Str where 32 ≤ *.ords.all ≤ 126;
 
     my %bytes =
-        'note-off'       => 0x80,
-        'note-on'        => 0x90,
-        'meta-event'     => 0xFF,
-        'track-name'     => 0x03,
-        'tempo'          => 0x51,
-        'time-signature' => 0x58,
-        'end-of-track'   => 0xF2,
+        'note-off'        => 0x80,
+        'note-on'         => 0x90,
+        'meta-event'      => 0xFF,
+        'track-name'      => 0x03,
+        'instrument-name' => 0x04,
+        'tempo'           => 0x51,
+        'time-signature'  => 0x58,
+        'end-of-track'    => 0xF2,
     ;
 
     has Str-ASCII $.name = '';
+    has Str-ASCII $.instrument = '';
     has UInt28 $.dt = 0;
     has UInt4  $.ch = 0;
     has UInt7  $.vol_note-off = 0;
@@ -133,6 +135,7 @@ class Track is export(:shortnames) {
 
         # Getters.
     multi method name { $!name }
+    multi method instrument { $!instrument }
     multi method dt { $!dt }
     multi method ch { $!ch }
     multi method vol_note-off { $!vol_note-off }
@@ -140,6 +143,7 @@ class Track is export(:shortnames) {
 
         # Setters.
     multi method name ($name) { $!name = $name }
+    multi method instrument ($instrument) { $!instrument = $instrument }
     multi method dt ($dt) { $!dt = $dt }
     multi method ch ($ch) { $!ch = $ch }
     multi method vol_note-off ($vol) { $!vol_note-off = $vol }
@@ -173,6 +177,16 @@ class Track is export(:shortnames) {
         $b.append: %bytes{'track-name'};
         $b.append: self!VLQ-encode($!name.chars);
         $b.append: $!name.ords;
+        return $b;
+    }
+
+    method !render_instrument {
+        my $b = Buf.new;
+        $b.append: self!VLQ-encode(0);
+        $b.append: %bytes{'meta-event'};
+        $b.append: %bytes{'instrument-name'};
+        $b.append: self!VLQ-encode($!instrument.chars);
+        $b.append: $!instrument.ords;
         return $b;
     }
 
@@ -239,6 +253,7 @@ class Track is export(:shortnames) {
     method render {
         my $b = Buf.new;
         $b.append:  self!render_name if $!name.chars;
+        $b.append:  self!render_instrument if $!instrument.chars;
         $b.append:  $!e;
         $b.append:  self!render_end-of-track;
         $b.prepend: self!render_header($b.bytes);

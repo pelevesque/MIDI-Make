@@ -94,14 +94,22 @@ test('t1',
 );
 
 test('t2',
-    'Track Instantiation: name => "piano"',
-    Track.new(:name('piano')),
-    '4D 54 72 6B 00 00 00 0D
-     00 FF 03 05 70 69 61 6E 6F
+    'Track Instantiation: name => "melody"',
+    Track.new(:name('melody')),
+    '4D 54 72 6B 00 00 00 0E
+     00 FF 03 06 6D 65 6C 6F 64 79
      00 FF F2 00',
 );
 
 test('t3',
+    'Track Instantiation: instrument => "piano"',
+    Track.new(:instrument('piano')),
+    '4D 54 72 6B 00 00 00 0D
+     00 FF 04 05 70 69 61 6E 6F
+     00 FF F2 00',
+);
+
+test('t4',
     'Track Instantiation: dt => 100',
     do {
         my $t = Track.new(:dt(100));
@@ -113,7 +121,7 @@ test('t3',
      00 FF F2 00',
 );
 
-test('t4',
+test('t5',
     'Track Instantiation: ch => 1',
     do {
         my $t = Track.new(:ch(1));
@@ -125,7 +133,7 @@ test('t4',
      00 FF F2 00',
 );
 
-test('t5',
+test('t6',
     'Track Instantiation: vol_note-off => 10',
     do {
         my $t = Track.new(:vol_note-off(10));
@@ -137,7 +145,7 @@ test('t5',
      00 FF F2 00',
 );
 
-test('t6',
+test('t7',
     'Track Instantiation: vol_note-on => 100',
     do {
         my $t = Track.new(:vol_note-on(100));
@@ -149,7 +157,7 @@ test('t6',
      00 FF F2 00',
 );
 
-test('t7',
+test('t8',
     'Track: Change params after instantiation',
     do {
         my $t = Track.new;
@@ -167,7 +175,7 @@ test('t7',
      00 FF F2 00',
 );
 
-test('t8',
+test('t9',
     'Track: tempo with default params',
     do {
         my $t = Track.new;
@@ -179,7 +187,7 @@ test('t8',
      00 FF F2 00'
 );
 
-test('t9',
+test('t10',
     'Track: tempo with custom params',
     do {
         my $t = Track.new;
@@ -192,7 +200,7 @@ test('t9',
      00 FF F2 00'
 );
 
-test('t10',
+test('t11',
     'Track: time with default params',
     do {
         my $t = Track.new;
@@ -204,7 +212,7 @@ test('t10',
      00 FF F2 00'
 );
 
-test('t11',
+test('t12',
     'Track: time with custom params',
     do {
         my $t = Track.new;
@@ -217,7 +225,7 @@ test('t11',
      00 FF F2 00'
 );
 
-test('t12',
+test('t13',
     'Track: note-on and note-off',
     do {
         my $t = Track.new;
@@ -246,13 +254,14 @@ test('e1',
     'Usage example',
     do {
         my $t = Track.new;
-        $t.name:     'piano';
-        $t.note-on:  60;
-        $t.dt:           128;
-        $t.note-off: 60;
-        $t.note-on:  72;
-        $t.dt:           128;
-        $t.note-off: 72;
+        $t.name:       'melody';
+        $t.instrument: 'piano';
+        $t.note-on:    60;
+        $t.dt:             128;
+        $t.note-off:   60;
+        $t.note-on:    72;
+        $t.dt:             128;
+        $t.note-off:   72;
 
         my $f = File.new;
         $f.add-track($t.render);
@@ -260,8 +269,9 @@ test('e1',
     },
     '4D 54 68 64 00 00 00 06
      00 01 00 01 00 30
-     4D 54 72 6B 00 00 00 1F
-     00 FF 03 05 70 69 61 6E 6F
+     4D 54 72 6B 00 00 00 29
+     00 FF 03 06 6D 65 6C 6F 64 79
+     00 FF 04 05 70 69 61 6E 6F
      00 90 3C 7F 81
      00 80 3C 00
      00 90 48 7F 81

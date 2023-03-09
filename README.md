@@ -10,15 +10,16 @@ A Raku module to make MIDI files.
 use MIDI::Make :shortnames;
 
 my $t = Track.new;
-$t.name:     'piano';
-$t.note-on:  60;
-$t.dt:           128;
-$t.tempo:    ♩80;
-$t.time:     3\2;
-$t.note-off: 60;
-$t.note-on:  72;
-$t.dt:           128;
-$t.note-off: 72;
+$t.name:       'melody';
+$t.instrument: 'piano';
+$t.note-on:    60;
+$t.dt:             128;
+$t.tempo:      ♩80;
+$t.time:       3\2;
+$t.note-off:   60;
+$t.note-on:    72;
+$t.dt:             128;
+$t.note-off:   72;
 
 my $f = File.new(:PPQ(96));
 $f.add-track($t.render);
@@ -265,13 +266,29 @@ ASCII characters.
 
 ```raku
     # Set on instantiation.
-my $t = Track.new(:name('piano'));
+my $t = Track.new(:name('melody'));
 ```
 
 ```raku
     # Set after instantiation.
 my $t = Track.new;
-$t.name: 'piano';
+$t.name: 'melody';
+```
+
+#### instrument
+
+The instrument parameter lets you set the track's instrument using
+ASCII characters.
+
+```raku
+    # Set on instantiation.
+my $t = Track.new(:instrument('piano'));
+```
+
+```raku
+    # Set after instantiation.
+my $t = Track.new;
+$t.instrument: 'piano';
 ```
 
 #### dt
