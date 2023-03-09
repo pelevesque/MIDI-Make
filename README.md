@@ -13,11 +13,11 @@ my $t = Track.new;
 $t.name:     'piano';
 $t.note-on:  60;
 $t.dt:           128;
+$t.tempo:    ♩80;
 $t.time:     3\2;
 $t.note-off: 60;
 $t.note-on:  72;
 $t.dt:           128;
-$t.tempo:    ♩80;
 $t.note-off: 72;
 
 my $f = File.new(:PPQ(96));
