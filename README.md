@@ -12,6 +12,7 @@ use MIDI::Make :shortnames;
 my $t = Track.new;
 $t.name:       'melody';
 $t.instrument: 'piano';
+$t.marker:            'section I';
 $t.note-on:    60;
 $t.dt:             128;
 $t.tempo:      ♩80;
@@ -385,6 +386,16 @@ $t.vol_note-on: 60;
 ```
 
 ### Methods
+
+#### marker
+
+The marker method allows you to mark the beginning of important
+sequences in a track. E.g. section I, section II, outro, etc.
+
+```raku
+my $t = Track.new;
+$t.marker: 'section I';
+```
 
 #### tempo
 

@@ -121,6 +121,7 @@ class Track is export(:shortnames) {
         'meta-event'      => 0xFF,
         'track-name'      => 0x03,
         'instrument-name' => 0x04,
+        'marker'          => 0x06,
         'tempo'           => 0x51,
         'time-signature'  => 0x58,
         'end-of-track'    => 0xF2,
@@ -197,6 +198,15 @@ class Track is export(:shortnames) {
         $b.append: %bytes{'end-of-track'};
         $b.append: self!VLQ-encode(0);
         return $b;
+    }
+
+    method marker (Str-ASCII $marker) {
+        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: %bytes{'meta-event'};
+        $!e.append: %bytes{'marker'};
+        $!e.append: self!VLQ-encode($marker.chars);
+        $!e.append: $marker.ords;
+        $!dt = 0;
     }
 
     method tempo (
