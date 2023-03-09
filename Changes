@@ -1,5 +1,13 @@
 Revision history for MIDI::Make
 
+0.3.0
+    - Add meta events:
+        - instrument name
+        - marker
+        - copyright
+    - Refactor ｢everything｣ test
+    - Update README.md example
+
 0.2.0
     - Fix typos in comments
     - Fix zef tests
