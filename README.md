@@ -10,6 +10,7 @@ A Raku module to make MIDI files.
 use MIDI::Make :shortnames;
 
 my $t = Track.new;
+$t.copyright:  'c 2023 anonymous';
 $t.name:       'melody';
 $t.instrument: 'piano';
 $t.marker:            'section I';
@@ -259,6 +260,25 @@ my $t = Track.new;
 ### Parameters
 
 Parameters can be set on instantiation, or anytime afterwards.
+
+#### copyright
+
+The copyright parameter lets you set the MIDI file's copyright using
+ASCII characters.
+
+Note: This copyright is usually placed at time 0 of the first track
+in the sequence.
+
+```raku
+    # Set on instantiation.
+my $t = Track.new(:copyright('c 2023 anonymous'));
+```
+
+```raku
+    # Set after instantiation.
+my $t = Track.new;
+$t.copyright: 'c 2023 anonymous';
+```
 
 #### name
 

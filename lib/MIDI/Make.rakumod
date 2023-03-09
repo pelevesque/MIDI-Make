@@ -119,6 +119,7 @@ class Track is export(:shortnames) {
         'note-off'        => 0x80,
         'note-on'         => 0x90,
         'meta-event'      => 0xFF,
+        'copyright'       => 0x02,
         'track-name'      => 0x03,
         'instrument-name' => 0x04,
         'marker'          => 0x06,
@@ -127,6 +128,7 @@ class Track is export(:shortnames) {
         'end-of-track'    => 0xF2,
     ;
 
+    has Str-ASCII $.copyright = '';
     has Str-ASCII $.name = '';
     has Str-ASCII $.instrument = '';
     has UInt28 $.dt = 0;
@@ -135,6 +137,7 @@ class Track is export(:shortnames) {
     has UInt7  $.vol_note-on = 127;
 
         # Getters.
+    multi method copyright { $!copyright }
     multi method name { $!name }
     multi method instrument { $!instrument }
     multi method dt { $!dt }
@@ -143,6 +146,7 @@ class Track is export(:shortnames) {
     multi method vol_note-on  { $!vol_note-on }
 
         # Setters.
+    multi method copyright ($copyright) { $!copyright = $copyright }
     multi method name ($name) { $!name = $name }
     multi method instrument ($instrument) { $!instrument = $instrument }
     multi method dt ($dt) { $!dt = $dt }
@@ -168,6 +172,16 @@ class Track is export(:shortnames) {
         my $b = Buf.new;
         $b.append: 'MTrk'.ords;
         $b.append: write_4-bytes($num-bytes);
+        return $b;
+    }
+
+    method !render_copyright {
+        my $b = Buf.new;
+        $b.append: self!VLQ-encode(0);
+        $b.append: %bytes{'meta-event'};
+        $b.append: %bytes{'copyright'};
+        $b.append: self!VLQ-encode($!copyright.chars);
+        $b.append: $!copyright.ords;
         return $b;
     }
 
@@ -262,6 +276,7 @@ class Track is export(:shortnames) {
 
     method render {
         my $b = Buf.new;
+        $b.append:  self!render_copyright if $!copyright.chars;
         $b.append:  self!render_name if $!name.chars;
         $b.append:  self!render_instrument if $!instrument.chars;
         $b.append:  $!e;

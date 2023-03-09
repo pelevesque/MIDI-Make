@@ -94,6 +94,14 @@ test('t1',
 );
 
 test('t2',
+    'Track Instantiation: copyright => "c 2023 anonymous"',
+    Track.new(:copyright('c 2023 anonymous')),
+    '4D 54 72 6B 00 00 00 18
+     00 FF 02 10 63 20 32 30 32 33 20 61 6E 6F 6E 79 6D 6F 75 73
+     00 FF F2 00',
+);
+
+test('t3',
     'Track Instantiation: name => "melody"',
     Track.new(:name('melody')),
     '4D 54 72 6B 00 00 00 0E
@@ -101,7 +109,7 @@ test('t2',
      00 FF F2 00',
 );
 
-test('t3',
+test('t4',
     'Track Instantiation: instrument => "piano"',
     Track.new(:instrument('piano')),
     '4D 54 72 6B 00 00 00 0D
@@ -109,7 +117,7 @@ test('t3',
      00 FF F2 00',
 );
 
-test('t4',
+test('t5',
     'Track Instantiation: dt => 100',
     do {
         my $t = Track.new(:dt(100));
@@ -121,7 +129,7 @@ test('t4',
      00 FF F2 00',
 );
 
-test('t5',
+test('t6',
     'Track Instantiation: ch => 1',
     do {
         my $t = Track.new(:ch(1));
@@ -133,7 +141,7 @@ test('t5',
      00 FF F2 00',
 );
 
-test('t6',
+test('t7',
     'Track Instantiation: vol_note-off => 10',
     do {
         my $t = Track.new(:vol_note-off(10));
@@ -145,7 +153,7 @@ test('t6',
      00 FF F2 00',
 );
 
-test('t7',
+test('t8',
     'Track Instantiation: vol_note-on => 100',
     do {
         my $t = Track.new(:vol_note-on(100));
@@ -157,7 +165,7 @@ test('t7',
      00 FF F2 00',
 );
 
-test('t8',
+test('t9',
     'Track: Change params after instantiation',
     do {
         my $t = Track.new;
@@ -175,7 +183,7 @@ test('t8',
      00 FF F2 00',
 );
 
-test('t9',
+test('t10',
     'Track: marker',
     do {
         my $t = Track.new;
@@ -187,7 +195,7 @@ test('t9',
      00 FF F2 00'
 );
 
-test('t10',
+test('t11',
     'Track: tempo with default params',
     do {
         my $t = Track.new;
@@ -199,7 +207,7 @@ test('t10',
      00 FF F2 00'
 );
 
-test('t11',
+test('t12',
     'Track: tempo with custom params',
     do {
         my $t = Track.new;
@@ -212,7 +220,7 @@ test('t11',
      00 FF F2 00'
 );
 
-test('t12',
+test('t13',
     'Track: time with default params',
     do {
         my $t = Track.new;
@@ -224,7 +232,7 @@ test('t12',
      00 FF F2 00'
 );
 
-test('t13',
+test('t14',
     'Track: time with custom params',
     do {
         my $t = Track.new;
@@ -237,7 +245,7 @@ test('t13',
      00 FF F2 00'
 );
 
-test('t14',
+test('t15',
     'Track: note-on and note-off',
     do {
         my $t = Track.new;
@@ -266,6 +274,7 @@ test('e1',
     'Usage example',
     do {
         my $t = Track.new;
+        $t.copyright:  'c 2023 anonymous';
         $t.name:       'melody';
         $t.instrument: 'piano';
         $t.marker:             'section I';
@@ -282,7 +291,8 @@ test('e1',
     },
     '4D 54 68 64 00 00 00 06
      00 01 00 01 00 30
-     4D 54 72 6B 00 00 00 36
+     4D 54 72 6B 00 00 00 4A
+     00 FF 02 10 63 20 32 30 32 33 20 61 6E 6F 6E 79 6D 6F 75 73
      00 FF 03 06 6D 65 6C 6F 64 79
      00 FF 04 05 70 69 61 6E 6F
      00 FF 06 09 73 65 63 74 69 6F 6E 20 49
