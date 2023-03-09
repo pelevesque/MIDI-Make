@@ -116,16 +116,16 @@ class Track is export(:shortnames) {
     subset Str-ASCII of Str where 32 ≤ *.ords.all ≤ 126;
 
     my %bytes =
-        'note-off'        => 0x80,
-        'note-on'         => 0x90,
-        'meta-event'      => 0xFF,
-        'copyright'       => 0x02,
-        'track-name'      => 0x03,
-        'instrument-name' => 0x04,
-        'marker'          => 0x06,
-        'tempo'           => 0x51,
-        'time-signature'  => 0x58,
-        'end-of-track'    => 0xF2,
+        'note-off'       => 0x80,
+        'note-on'        => 0x90,
+        'meta-event'     => 0xFF,
+        'copyright'      => 0x02,
+        'name'           => 0x03,
+        'instrument'     => 0x04,
+        'marker'         => 0x06,
+        'tempo'          => 0x51,
+        'time-signature' => 0x58,
+        'end-of-track'   => 0xF2,
     ;
 
     has Str-ASCII $.copyright = '';
@@ -175,33 +175,14 @@ class Track is export(:shortnames) {
         return $b;
     }
 
-    method !render_copyright {
+    method !render_text ($meta-event, Str-ASCII $str) {
+        return [] if ! $str.chars;
         my $b = Buf.new;
         $b.append: self!VLQ-encode(0);
         $b.append: %bytes{'meta-event'};
-        $b.append: %bytes{'copyright'};
-        $b.append: self!VLQ-encode($!copyright.chars);
-        $b.append: $!copyright.ords;
-        return $b;
-    }
-
-    method !render_name {
-        my $b = Buf.new;
-        $b.append: self!VLQ-encode(0);
-        $b.append: %bytes{'meta-event'};
-        $b.append: %bytes{'track-name'};
-        $b.append: self!VLQ-encode($!name.chars);
-        $b.append: $!name.ords;
-        return $b;
-    }
-
-    method !render_instrument {
-        my $b = Buf.new;
-        $b.append: self!VLQ-encode(0);
-        $b.append: %bytes{'meta-event'};
-        $b.append: %bytes{'instrument-name'};
-        $b.append: self!VLQ-encode($!instrument.chars);
-        $b.append: $!instrument.ords;
+        $b.append: %bytes{$meta-event};
+        $b.append: self!VLQ-encode($str.chars);
+        $b.append: $str.ords;
         return $b;
     }
 
@@ -276,9 +257,9 @@ class Track is export(:shortnames) {
 
     method render {
         my $b = Buf.new;
-        $b.append:  self!render_copyright if $!copyright.chars;
-        $b.append:  self!render_name if $!name.chars;
-        $b.append:  self!render_instrument if $!instrument.chars;
+        $b.append:  self!render_text('copyright', $!copyright);
+        $b.append:  self!render_text('name', $!name);
+        $b.append:  self!render_text('instrument', $!instrument);
         $b.append:  $!e;
         $b.append:  self!render_end-of-track;
         $b.prepend: self!render_header($b.bytes);
