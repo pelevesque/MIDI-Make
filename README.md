@@ -505,11 +505,21 @@ $f.add-track($t.render);
 
 ## Running Tests
 
-To run tests, simply run the following terminal command in the root
-of MIDI::Make.
+To run all tests, simply use the following command in the root of
+MIDI::Make.
 
 ```
 ➤ raku t/all.rakutest
+```
+
+Alternatively, you can use
+[Test::Selector](https://raku.land/zef:lucs/Test::Selector) to
+selectively run tests.
+
+```
+➤ tsel     :: Run all tests.
+➤ tsel f1  :: Run the f1 test.
+➤ tsel f\* :: Run all f tests.
 ```
 
 ## Resources
