@@ -4,7 +4,7 @@
 
 A Raku module to make MIDI files.
 
-## Example
+## Synopsis
 
 ```raku
 use MIDI::Make :shortnames;
