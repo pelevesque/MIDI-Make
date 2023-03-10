@@ -184,6 +184,19 @@ test('t9',
 );
 
 test('t10',
+    'Track: text',
+    do {
+        my $t = Track.new;
+	    $t.text: 'Lorem ipsum dolor sit amet.';
+	    $t;
+    },
+    '4D 54 72 6B 00 00 00 23
+     00 FF 01 1B 4C 6F 72 65 6D 20 69 70 73 75 6D 20 64 6F 6C 6F 72 20
+      73 69 74 20 61 6D 65 74 2E
+     00 FF F2 00'
+);
+
+test('t11',
     'Track: marker',
     do {
         my $t = Track.new;
@@ -195,7 +208,7 @@ test('t10',
      00 FF F2 00'
 );
 
-test('t11',
+test('t12',
     'Track: tempo with default params',
     do {
         my $t = Track.new;
@@ -207,7 +220,7 @@ test('t11',
      00 FF F2 00'
 );
 
-test('t12',
+test('t13',
     'Track: tempo with custom params',
     do {
         my $t = Track.new;
@@ -219,7 +232,7 @@ test('t12',
      00 FF F2 00'
 );
 
-test('t13',
+test('t14',
     'Track: time with default params',
     do {
         my $t = Track.new;
@@ -231,7 +244,7 @@ test('t13',
      00 FF F2 00'
 );
 
-test('t14',
+test('t15',
     'Track: time with custom params',
     do {
         my $t = Track.new;
@@ -243,7 +256,7 @@ test('t14',
      00 FF F2 00'
 );
 
-test('t15',
+test('t16',
     'Track: note-on and note-off',
     do {
         my $t = Track.new;
@@ -277,6 +290,7 @@ test('e1',
         $t.instrument:  'piano';
         $t.ch:           1;
         $t.marker:               'section I';
+        $t.text:         'Lorem ipsum dolor sit amet.';
         $t.tempo:        ♩80;
         $t.time:         3\2;
         $t.note-on:      60;
@@ -299,11 +313,13 @@ test('e1',
     },
     '4D 54 68 64 00 00 00 06
      00 02 00 01 E7 08
-     4D 54 72 6B 00 00 00 59
+     4D 54 72 6B 00 00 00 78
      00 FF 02 10 63 20 32 30 32 33 20 61 6E 6F 6E 79 6D 6F 75 73
      00 FF 03 06 6D 65 6C 6F 64 79
      00 FF 04 05 70 69 61 6E 6F
      00 FF 06 09 73 65 63 74 69 6F 6E 20 49
+     00 FF 01 1B 4C 6F 72 65 6D 20 69 70 73 75 6D 20 64 6F 6C 6F 72 20
+      73 69 74 20 61 6D 65 74 2E
      00 FF 51 03 0B 71 B0
      00 FF 58 04 03 01 18 08
      00 91 3C 7F 81

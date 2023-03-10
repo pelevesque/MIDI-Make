@@ -119,6 +119,7 @@ class Track is export(:shortnames) {
         'note-off'       => 0x80,
         'note-on'        => 0x90,
         'meta-event'     => 0xFF,
+        'text'           => 0x01,
         'copyright'      => 0x02,
         'name'           => 0x03,
         'instrument'     => 0x04,
@@ -193,6 +194,15 @@ class Track is export(:shortnames) {
         $b.append: %bytes{'end-of-track'};
         $b.append: self!VLQ-encode(0);
         return $b;
+    }
+
+    method text (Str-ASCII $text) {
+        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: %bytes{'meta-event'};
+        $!e.append: %bytes{'text'};
+        $!e.append: self!VLQ-encode($text.chars);
+        $!e.append: $text.ords;
+        $!dt = 0;
     }
 
     method marker (Str-ASCII $marker) {

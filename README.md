@@ -15,6 +15,7 @@ $t.name:        'melody';
 $t.instrument:  'piano';
 $t.ch:           1;
 $t.marker:               'section I';
+$t.text:         'Lorem ipsum dolor sit amet.';
 $t.tempo:        ♩80;
 $t.time:         3\2;
 $t.note-on:      60;
@@ -409,6 +410,15 @@ $t.vol_note-on: 60;
 ```
 
 ### Methods
+
+#### text
+
+The text method adds any type of text to a track.
+
+```raku
+my $t = Track.new;
+$t.text: 'Lorem ipsum dolor sit amet.';
+```
 
 #### marker
 
