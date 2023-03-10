@@ -1,4 +1,4 @@
-![release v0.1.0](https://img.shields.io/github/v/release/pelevesque/MIDI-Make) [![Actions Status](https://github.com/pelevesque/MIDI-Make/actions/workflows/test.yml/badge.svg)](https://github.com/pelevesque/MIDI-Make/actions)
+[![Actions Status](https://github.com/pelevesque/MIDI-Make/actions/workflows/test.yml/badge.svg)](https://github.com/pelevesque/MIDI-Make/actions)
 
 # MIDI::Make
 
