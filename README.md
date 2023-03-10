@@ -24,7 +24,7 @@ $t.note-off:     60;
 $t.vol_note-on:  80;
 $t.vol_note-off: 10;
 $t.note-on:      72;
-$t.dt:           128;
+$t.dt:               128;
 $t.note-off:     72;
 
 my $f = File.new(:PPQ(96));

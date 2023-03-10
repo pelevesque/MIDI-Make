@@ -179,11 +179,12 @@ class Track is export(:shortnames) {
     method !render_text ($meta-event, Str-ASCII $str) {
         return [] if ! $str.chars;
         my $b = Buf.new;
-        $b.append: self!VLQ-encode(0);
+        $b.append: self!VLQ-encode($!dt);
         $b.append: %bytes{'meta-event'};
         $b.append: %bytes{$meta-event};
         $b.append: self!VLQ-encode($str.chars);
         $b.append: $str.ords;
+        $!dt = 0;
         return $b;
     }
 
@@ -196,23 +197,13 @@ class Track is export(:shortnames) {
         return $b;
     }
 
-    method text (Str-ASCII $text) {
-        $!e.append: self!VLQ-encode($!dt);
-        $!e.append: %bytes{'meta-event'};
-        $!e.append: %bytes{'text'};
-        $!e.append: self!VLQ-encode($text.chars);
-        $!e.append: $text.ords;
+    method !render_text_method ($meta-event, Str-ASCII $str) {
+        $!e.append: self!render_text($meta-event, $str);
         $!dt = 0;
     }
 
-    method marker (Str-ASCII $marker) {
-        $!e.append: self!VLQ-encode($!dt);
-        $!e.append: %bytes{'meta-event'};
-        $!e.append: %bytes{'marker'};
-        $!e.append: self!VLQ-encode($marker.chars);
-        $!e.append: $marker.ords;
-        $!dt = 0;
-    }
+    method text   (Str-ASCII $str) { self!render_text_method('text',   $str) }
+    method marker (Str-ASCII $str) { self!render_text_method('marker', $str) }
 
     method tempo (
         UInt24 $tempo = 500000, # Microseconds per quarter note.
