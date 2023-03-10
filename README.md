@@ -10,7 +10,7 @@ A Raku module to make MIDI files.
 use MIDI::Make :shortnames;
 
 my $t = Track.new;
-$t.copyright:   'c 2023 anonymous';
+$t.copyright:   'c 2022 anonymous';
 $t.name:        'melody';
 $t.instrument:  'piano';
 $t.ch:           1;
@@ -275,13 +275,13 @@ in the sequence.
 
 ```raku
     # Set on instantiation.
-my $t = Track.new(:copyright('c 2023 anonymous'));
+my $t = Track.new(:copyright('c 2022 anonymous'));
 ```
 
 ```raku
     # Set after instantiation.
 my $t = Track.new;
-$t.copyright: 'c 2023 anonymous';
+$t.copyright: 'c 2022 anonymous';
 ```
 
 #### name
