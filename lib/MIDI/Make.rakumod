@@ -127,6 +127,7 @@ class Track is export(:shortnames) {
         'marker'         => 0x06,
         'cue'            => 0x07,
         'program'        => 0x08,
+        'port'           => 0x09,
         'tempo'          => 0x51,
         'time-signature' => 0x58,
         'end-of-track'   => 0xF2,
@@ -210,6 +211,7 @@ class Track is export(:shortnames) {
     method marker  (Str-ASCII $str) { self!render_text_method('marker',  $str) }
     method cue     (Str-ASCII $str) { self!render_text_method('cue',     $str) }
     method program (Str-ASCII $str) { self!render_text_method('program', $str) }
+    method port    (Str-ASCII $str) { self!render_text_method('port',    $str) }
 
     method tempo (
         UInt24 $tempo = 500000, # Microseconds per quarter note.

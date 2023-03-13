@@ -14,6 +14,7 @@ $t.copyright:   'c 2022 anonymous';
 $t.name:        'melody';
 $t.instrument:  'piano';
 $t.program:     'electric piano';
+$t.port:        'MIDI Out 1';
 $t.ch:           1;
 $t.marker:               'section I';
 $t.text:         'Lorem ipsum dolor sit amet.';
@@ -459,6 +460,15 @@ The program method adds a program name anywhere on the track.
 ```raku
 my $t = Track.new;
 $t.program: 'electric piano';
+```
+
+#### port
+
+The port method adds a MIDI port name anywhere on the track.
+
+```raku
+my $t = Track.new;
+$t.port: 'MIDI Out 1';
 ```
 
 #### tempo
