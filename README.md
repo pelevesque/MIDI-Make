@@ -13,6 +13,7 @@ my $t = Track.new;
 $t.copyright:   'c 2022 anonymous';
 $t.name:        'melody';
 $t.instrument:  'piano';
+$t.program:     'electric piano';
 $t.ch:           1;
 $t.marker:               'section I';
 $t.text:         'Lorem ipsum dolor sit amet.';
@@ -449,6 +450,15 @@ The cue method adds a cue anywhere on the track.
 ```raku
 my $t = Track.new;
 $t.cue: 'door slam';
+```
+
+#### program
+
+The program method adds a program name anywhere on the track.
+
+```raku
+my $t = Track.new;
+$t.program: 'electric piano';
 ```
 
 #### tempo
