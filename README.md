@@ -22,6 +22,7 @@ $t.note-on:      60;
 $t.lyric:        'one';
 $t.dt:               128;
 $t.note-off:     60;
+$t.cue:          'door slam';
 $t.vol_note-on:  80;
 $t.vol_note-off: 10;
 $t.note-on:      72;
@@ -439,6 +440,15 @@ sequences in a track. E.g. section I, section II, outro, etc.
 ```raku
 my $t = Track.new;
 $t.marker: 'section I';
+```
+
+#### cue
+
+The cue method adds a cue anywhere on the track.
+
+```raku
+my $t = Track.new;
+$t.cue: 'door slam';
 ```
 
 #### tempo
