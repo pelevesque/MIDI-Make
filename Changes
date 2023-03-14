@@ -1,5 +1,11 @@
 Revision history for MIDI::Make
 
+0.5.0
+    - Add License info to README.md
+    - Rename ｢File｣ class to ｢Song｣ class
+    - Add link to Raku's website
+    - Add resource in README.md
+
 0.4.0
     - Update LICENSE copyright year
     - Remove extraneous release badge
