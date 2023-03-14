@@ -201,17 +201,17 @@ class Track is export(:shortnames) {
         return $b;
     }
 
-    method !render_text_method ($meta-event, Str-ASCII $str) {
-        $!e.append: self!render_text($meta-event, $str);
+    method !render_text_method ($meta-event, Str-ASCII $s) {
+        $!e.append: self!render_text($meta-event, $s);
         $!dt = 0;
     }
 
-    method text    (Str-ASCII $str) { self!render_text_method('text',    $str) }
-    method lyric   (Str-ASCII $str) { self!render_text_method('lyric',   $str) }
-    method marker  (Str-ASCII $str) { self!render_text_method('marker',  $str) }
-    method cue     (Str-ASCII $str) { self!render_text_method('cue',     $str) }
-    method program (Str-ASCII $str) { self!render_text_method('program', $str) }
-    method port    (Str-ASCII $str) { self!render_text_method('port',    $str) }
+    method text    (Str-ASCII $s) { self!render_text_method('text',    $s) }
+    method lyric   (Str-ASCII $s) { self!render_text_method('lyric',   $s) }
+    method marker  (Str-ASCII $s) { self!render_text_method('marker',  $s) }
+    method cue     (Str-ASCII $s) { self!render_text_method('cue',     $s) }
+    method program (Str-ASCII $s) { self!render_text_method('program', $s) }
+    method port    (Str-ASCII $s) { self!render_text_method('port',    $s) }
 
     method tempo (
         UInt24 $tempo = 500000, # Microseconds per quarter note.
