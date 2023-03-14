@@ -1,6 +1,6 @@
 use Test;
 use Test::Selector;
-use MIDI::Make :shortnames;
+use MIDI::Make;
 
 sub test ($label, $title, $renderable, $expected-bytes) {
     t $label => {
@@ -13,71 +13,71 @@ sub test ($label, $title, $renderable, $expected-bytes) {
 }
 
 # --------------------------------------------------------------------
-# File class
+# Song class
 
-test('f1',
-    'Trackless File Instantiation',
-    File.new,
+test('s1',
+    'Trackless Song Instantiation',
+    Song.new,
     '4D 54 68 64 00 00 00 06
      00 01 00 00 00 30',
 );
 
-test('f2',
-    'Trackless File Instantiation: format => 0',
-    File.new(:format(0)),
+test('s2',
+    'Trackless Song Instantiation: format => 0',
+    Song.new(:format(0)),
     '4D 54 68 64 00 00 00 06
      00 00 00 00 00 30',
 );
 
-test('f3',
-    'Trackless File Instantiation: time-division => "frame"',
-    File.new(:time-division('frame')),
+test('s3',
+    'Trackless Song Instantiation: time-division => "frame"',
+    Song.new(:time-division('frame')),
     '4D 54 68 64 00 00 00 06
      00 01 00 00 E8 04',
 );
 
-test('f4',
-    'Trackless File Instantiation: PPQ => 300',
-    File.new(:PPQ(300)),
+test('s4',
+    'Trackless Song Instantiation: PPQ => 300',
+    Song.new(:PPQ(300)),
     '4D 54 68 64 00 00 00 06
      00 01 00 00 01 2C',
 );
 
-test('f5',
-    'Trackless File Instantiation: FPS => 29.97',
-    File.new(:time-division('frame'), :FPS(29.97)),
+test('s5',
+    'Trackless Song Instantiation: FPS => 29.97',
+    Song.new(:time-division('frame'), :FPS(29.97)),
     '4D 54 68 64 00 00 00 06
      00 01 00 00 E3 04',
 );
 
-test('f6',
-    'Trackless File Instantiation: PPF => 8',
-    File.new(:time-division('frame'), :PPF(24)),
+test('s6',
+    'Trackless Song Instantiation: PPF => 8',
+    Song.new(:time-division('frame'), :PPF(24)),
     '4D 54 68 64 00 00 00 06
      00 01 00 00 E8 18',
 );
 
-test('f7',
-    'Trackless File: Set params after instantiation A',
+test('s7',
+    'Trackless Song: Set params after instantiation A',
     do {
-        my $f = File.new;
-        $f.format: 2;
-        $f.PPQ: 425;
-        $f;
+        my $s = Song.new;
+        $s.format: 2;
+        $s.PPQ: 425;
+        $s;
     },
     '4D 54 68 64 00 00 00 06
      00 02 00 00 01 A9',
 );
 
-test('f8',
-    'Trackless File: Set params after instantiation B',
+test('s8',
+    'Trackless Song: Set params after instantiation B',
     do {
-        my $f = File.new;
-        $f.format: 1;
-        $f.time-division: 'frame';
-        $f.FPS: 30;
-        $f.PPF: 48;
-        $f;
+        my $s = Song.new;
+        $s.format: 1;
+        $s.time-division: 'frame';
+        $s.FPS: 30;
+        $s.PPF: 48;
+        $s;
     },
     '4D 54 68 64 00 00 00 06
      00 01 00 00 E2 30',
@@ -355,14 +355,14 @@ test('e1',
         $t.dt:               128;
         $t.note-off:     72;
 
-        my $f = File.new;
-        $f.format: 2;
-        $f.time-division: 'frame';
-        $f.PPQ: 96; # Should be ignored with time-division == frame.
-        $f.FPS: 25;
-        $f.PPF: 8;
-        $f.add-track($t.render);
-        $f;
+        my $s = Song.new;
+        $s.format: 2;
+        $s.time-division: 'frame';
+        $s.PPQ: 96; # Should be ignored with time-division == frame.
+        $s.FPS: 25;
+        $s.PPF: 8;
+        $s.add-track($t.render);
+        $s;
     },
     '4D 54 68 64 00 00 00 06
      00 02 00 01 E7 08

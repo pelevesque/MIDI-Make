@@ -32,14 +32,14 @@ $t.lyric:        'two';
 $t.dt:               128;
 $t.note-off:     72;
 
-my $f = File.new(:PPQ(96));
-$f.add-track($t.render);
+my $s = Song.new(:PPQ(96));
+$s.add-track($t.render);
 
     # Print the MIDI contents.
-say $f.render;
+say $s.render;
 
     # Save the MIDI contents to file.
-spurt 'file.mid', $f.render;
+spurt 'file.mid', $s.render;
 ```
 
 # Versioning
@@ -56,44 +56,26 @@ You can install MIDI::Make using [Zef](https://github.com/ugexe/zef).
 
 ## Import
 
-There are two ways to import MIDI::Make; without or with the
-shortnames tag. Without the shortnames tag, the File and Track classes
-must be called with their respective FQN (Fully Qualified Name). By
-using the shortnames tag, it becomes possible to simply use File or
-Track.
-
 ```raku
 use MIDI::Make;
-
-    # Only the FQN is available for the File and Track classes.
-my $f = MIDI::Make::File.new;
-my $t = MIDI::Make::Track.new;
-```
-
-```raku
-use MIDI::Make :shortnames;
-
-    # FQN and Shortnames are available for the File and Track classes.
-my $f = File.new;
-my $t = Track.new;
 ```
 
 ## Usage
 
-MIDI::Make works by creating the File class and then populating it
+MIDI::Make works by creating the Song class and then populating it
 with zero or more tracks created using the Track class. The resulting
-MIDI information can be outputed using the File class's render method.
+MIDI information can be outputed using the Song class's render method.
 
-## The File class
+## The Song class
 
-The File class is used to store and modify MIDI information in order
+The Song class is used to store and modify MIDI information in order
 to create a MIDI file. It has some optional parameters, the add-track
 method to add tracks, and the render method to output the MIDI
 information created up to that point.
 
 ```raku
     # Instantiating without parameters.
-my $f = File.new;
+my $f = Song.new;
 ```
 
 ### Parameters
@@ -112,12 +94,12 @@ It can have three values: 0, 1, or 2. The default is 1.
 
 ```raku
     # Set on instantiation.
-my $f = File.new(:format(0));
+my $f = Song.new(:format(0));
 ```
 
 ```raku
     # Set after instantiation.
-my $f = File.new;
+my $f = Song.new;
 $f.format: 0;
 ```
 
@@ -130,12 +112,12 @@ default is quarter.
 
 ```raku
     # Set on instantiation.
-my $f = File.new(:time-division('frame'));
+my $f = Song.new(:time-division('frame'));
 ```
 
 ```raku
     # Set after instantiation.
-my $f = File.new;
+my $f = Song.new;
 $f.time-division: 'frame';
 ```
 
@@ -149,12 +131,12 @@ The PPQ value is from 0 to 32767. The default is 48.
 
 ```raku
     # Set on instantiation.
-my $f = File.new(:PPQ(96));
+my $f = Song.new(:PPQ(96));
 ```
 
 ```raku
     # Set after instantiation.
-my $f = File.new;
+my $f = Song.new;
 $f.PPQ: 96;
 ```
 
@@ -168,12 +150,12 @@ FPS can have four values: 24, 25, 29.97, or 30. The default is 24.
 
 ```raku
     # Set on instantiation.
-my $f = File.new(:time-division('frame'), :FPS(30));
+my $f = Song.new(:time-division('frame'), :FPS(30));
 ```
 
 ```raku
     # Set after instantiation.
-my $f = File.new;
+my $f = Song.new;
 $f.time-division: 'frame';
 $f.FPS: 30;
 ```
@@ -188,12 +170,12 @@ The PPF value is from 0 to 255. The default is 4.
 
 ```raku
     # Set on instantiation.
-my $f = File.new(:time-division('frame'), :PPF(8));
+my $f = Song.new(:time-division('frame'), :PPF(8));
 ```
 
 ```raku
     # Set after instantiation.
-my $f = File.new;
+my $f = Song.new;
 $f.time-division: 'frame';
 $f.PPF: 8;
 ```
@@ -202,7 +184,7 @@ $f.PPF: 8;
 
 #### add-track
 
-The add-track method accepts a rendered track, and adds it to the File
+The add-track method accepts a rendered track, and adds it to the Song
 class.
 
 ```raku
@@ -212,8 +194,8 @@ $t.note-on:  60;
 $t.dt:           100;
 $t.note-off: 60;
 
-    # Add it to the File class.
-my $f = File.new;
+    # Add it to the Song class.
+my $f = Song.new;
 $f.add-track($t.render);
 ```
 
@@ -223,7 +205,7 @@ The render method renders the MIDI file information gathered up to
 that point.
 
 ```raku
-my $f = File.new;
+my $f = Song.new;
 say $f.render;
 ```
 
@@ -259,7 +241,7 @@ $t.time: 3\8;
 ## The Track class
 
 The Track class is used to create a MIDI track which can then be added
-to the File class.
+to the Song class.
 
 ```raku
     # Instantiating without parameters.
@@ -541,7 +523,7 @@ $t.note-on: 64;      # vol_note-on == 100
 #### render
 
 The render method renders the MIDI track information gathered up to
-that point. It is used to pass the track's MIDI data to the File
+that point. It is used to pass the track's MIDI data to the Song
 class.
 
 ```raku
@@ -550,7 +532,7 @@ $t.note-on:  60;
 $t.dt:           128;
 $t.note-off: 60;
 
-my $f = File.new;
+my $f = Song.new;
 $f.add-track($t.render);
 ```
 
