@@ -2,7 +2,7 @@
 
 # MIDI::Make
 
-A Raku module to make MIDI files.
+A [Raku](https://www.raku.org) module to make MIDI files.
 
 ## Synopsis
 
