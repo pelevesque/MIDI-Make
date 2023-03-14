@@ -123,6 +123,7 @@ class Track is export(:shortnames) {
         'copyright'      => 0x02,
         'name'           => 0x03,
         'instrument'     => 0x04,
+        'lyric'          => 0x05,
         'marker'         => 0x06,
         'tempo'          => 0x51,
         'time-signature' => 0x58,
@@ -203,6 +204,7 @@ class Track is export(:shortnames) {
     }
 
     method text   (Str-ASCII $str) { self!render_text_method('text',   $str) }
+    method lyric  (Str-ASCII $str) { self!render_text_method('lyric',  $str) }
     method marker (Str-ASCII $str) { self!render_text_method('marker', $str) }
 
     method tempo (

@@ -19,11 +19,13 @@ $t.text:         'Lorem ipsum dolor sit amet.';
 $t.tempo:        ♩80;
 $t.time:         3\2;
 $t.note-on:      60;
+$t.lyric:        'one';
 $t.dt:               128;
 $t.note-off:     60;
 $t.vol_note-on:  80;
 $t.vol_note-off: 10;
 $t.note-on:      72;
+$t.lyric:        'two';
 $t.dt:               128;
 $t.note-off:     72;
 
@@ -418,6 +420,15 @@ The text method adds any type of text to a track.
 ```raku
 my $t = Track.new;
 $t.text: 'Lorem ipsum dolor sit amet.';
+```
+
+#### lyric
+
+The lyric method adds a lyric anywhere on the track.
+
+```raku
+my $t = Track.new;
+$t.lyric: 'one';
 ```
 
 #### marker
