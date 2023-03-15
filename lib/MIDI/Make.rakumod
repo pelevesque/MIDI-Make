@@ -177,14 +177,14 @@ class Track is export {
         return $b;
     }
 
-    method !text ($meta-event, ASCII $str) {
-        return [] if ! $str.chars;
+    method !text ($meta-event, ASCII $s) {
+        return [] if ! $s.chars;
         my $b = Buf.new;
         $b.append: self!VLQ-encode($!dt);
         $b.append: %bytes{'meta-event'};
         $b.append: %bytes{$meta-event};
-        $b.append: self!VLQ-encode($str.chars);
-        $b.append: $str.ords;
+        $b.append: self!VLQ-encode($s.chars);
+        $b.append: $s.ords;
         $!dt = 0;
         return $b;
     }
