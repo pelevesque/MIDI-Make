@@ -110,7 +110,7 @@ class Song is export {
 }
 
 class Track is export {
-    subset Str-ASCII of Str where 32 ≤ *.ords.all ≤ 126;
+    subset ASCII of Str where 32 ≤ *.ords.all ≤ 126;
 
     my %bytes =
         'note-off'       => 0x80,
@@ -130,9 +130,9 @@ class Track is export {
         'end-of-track'   => 0xF2,
     ;
 
-    has Str-ASCII $.copyright = '';
-    has Str-ASCII $.name = '';
-    has Str-ASCII $.instrument = '';
+    has ASCII  $.copyright = '';
+    has ASCII  $.name = '';
+    has ASCII  $.instrument = '';
     has UInt28 $.dt = 0;
     has UInt4  $.ch = 0;
     has UInt7  $.vol_note-off = 0;
@@ -177,7 +177,7 @@ class Track is export {
         return $b;
     }
 
-    method !render_text ($meta-event, Str-ASCII $str) {
+    method !render_text ($meta-event, ASCII $str) {
         return [] if ! $str.chars;
         my $b = Buf.new;
         $b.append: self!VLQ-encode($!dt);
@@ -198,12 +198,12 @@ class Track is export {
         return $b;
     }
 
-    method text    (Str-ASCII $s) { $!e.append: self!render_text('text',    $s) }
-    method lyric   (Str-ASCII $s) { $!e.append: self!render_text('lyric',   $s) }
-    method marker  (Str-ASCII $s) { $!e.append: self!render_text('marker',  $s) }
-    method cue     (Str-ASCII $s) { $!e.append: self!render_text('cue',     $s) }
-    method program (Str-ASCII $s) { $!e.append: self!render_text('program', $s) }
-    method port    (Str-ASCII $s) { $!e.append: self!render_text('port',    $s) }
+    method text    (ASCII $s) { $!e.append: self!render_text('text',    $s) }
+    method lyric   (ASCII $s) { $!e.append: self!render_text('lyric',   $s) }
+    method marker  (ASCII $s) { $!e.append: self!render_text('marker',  $s) }
+    method cue     (ASCII $s) { $!e.append: self!render_text('cue',     $s) }
+    method program (ASCII $s) { $!e.append: self!render_text('program', $s) }
+    method port    (ASCII $s) { $!e.append: self!render_text('port',    $s) }
 
     method tempo (
         UInt24 $tempo = 500000, # Microseconds per quarter note.
