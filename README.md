@@ -551,8 +551,8 @@ selectively run tests.
 
 ```
 ➤ tsel     :: Run all tests.
-➤ tsel f1  :: Run the f1 test.
-➤ tsel f\* :: Run all f tests.
+➤ tsel s1  :: Run the s1 test.
+➤ tsel s\* :: Run all s tests.
 ```
 
 ## Resources
