@@ -170,14 +170,14 @@ class Track is export {
         return $b;
     }
 
-    method !render_header (UInt32 $num-bytes) {
+    method !header (UInt32 $num-bytes) {
         my $b = Buf.new;
         $b.append: 'MTrk'.ords;
         $b.append: write_4-bytes($num-bytes);
         return $b;
     }
 
-    method !render_text ($meta-event, ASCII $str) {
+    method !text ($meta-event, ASCII $str) {
         return [] if ! $str.chars;
         my $b = Buf.new;
         $b.append: self!VLQ-encode($!dt);
@@ -189,7 +189,7 @@ class Track is export {
         return $b;
     }
 
-    method !render_end-of-track {
+    method !end-of-track {
         my $b = Buf.new;
         $b.append: self!VLQ-encode(0);
         $b.append: %bytes{'meta-event'};
@@ -198,12 +198,12 @@ class Track is export {
         return $b;
     }
 
-    method text    (ASCII $s) { $!e.append: self!render_text('text',    $s) }
-    method lyric   (ASCII $s) { $!e.append: self!render_text('lyric',   $s) }
-    method marker  (ASCII $s) { $!e.append: self!render_text('marker',  $s) }
-    method cue     (ASCII $s) { $!e.append: self!render_text('cue',     $s) }
-    method program (ASCII $s) { $!e.append: self!render_text('program', $s) }
-    method port    (ASCII $s) { $!e.append: self!render_text('port',    $s) }
+    method text    (ASCII $s) { $!e.append: self!text('text',    $s) }
+    method lyric   (ASCII $s) { $!e.append: self!text('lyric',   $s) }
+    method marker  (ASCII $s) { $!e.append: self!text('marker',  $s) }
+    method cue     (ASCII $s) { $!e.append: self!text('cue',     $s) }
+    method program (ASCII $s) { $!e.append: self!text('program', $s) }
+    method port    (ASCII $s) { $!e.append: self!text('port',    $s) }
 
     method tempo (
         UInt24 $tempo = 500000, # Microseconds per quarter note.
@@ -258,12 +258,12 @@ class Track is export {
 
     method render {
         my $b = Buf.new;
-        $b.append:  self!render_text('copyright', $!copyright);
-        $b.append:  self!render_text('name', $!name);
-        $b.append:  self!render_text('instrument', $!instrument);
+        $b.append:  self!text('copyright', $!copyright);
+        $b.append:  self!text('name', $!name);
+        $b.append:  self!text('instrument', $!instrument);
         $b.append:  $!e;
-        $b.append:  self!render_end-of-track;
-        $b.prepend: self!render_header($b.bytes);
+        $b.append:  self!end-of-track;
+        $b.prepend: self!header($b.bytes);
         return $b;
     }
 }
