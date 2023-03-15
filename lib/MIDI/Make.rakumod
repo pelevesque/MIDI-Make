@@ -198,17 +198,12 @@ class Track is export {
         return $b;
     }
 
-    method !render_text_method ($meta-event, Str-ASCII $s) {
-        $!e.append: self!render_text($meta-event, $s);
-        $!dt = 0;
-    }
-
-    method text    (Str-ASCII $s) { self!render_text_method('text',    $s) }
-    method lyric   (Str-ASCII $s) { self!render_text_method('lyric',   $s) }
-    method marker  (Str-ASCII $s) { self!render_text_method('marker',  $s) }
-    method cue     (Str-ASCII $s) { self!render_text_method('cue',     $s) }
-    method program (Str-ASCII $s) { self!render_text_method('program', $s) }
-    method port    (Str-ASCII $s) { self!render_text_method('port',    $s) }
+    method text    (Str-ASCII $s) { $!e.append: self!render_text('text',    $s) }
+    method lyric   (Str-ASCII $s) { $!e.append: self!render_text('lyric',   $s) }
+    method marker  (Str-ASCII $s) { $!e.append: self!render_text('marker',  $s) }
+    method cue     (Str-ASCII $s) { $!e.append: self!render_text('cue',     $s) }
+    method program (Str-ASCII $s) { $!e.append: self!render_text('program', $s) }
+    method port    (Str-ASCII $s) { $!e.append: self!render_text('port',    $s) }
 
     method tempo (
         UInt24 $tempo = 500000, # Microseconds per quarter note.
