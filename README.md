@@ -42,11 +42,11 @@ say $s.render;
 spurt 'file.mid', $s.render;
 ```
 
-# Versioning
+## Versioning
 
 MIDI::Make uses [Semantic Versioning](https://semver.org).
 
-# Installation
+## Installation
 
 You can install MIDI::Make using [Zef](https://github.com/ugexe/zef).
 
