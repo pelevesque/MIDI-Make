@@ -191,10 +191,10 @@ class Track is export {
 
     method !end-of-track {
         my $b = Buf.new;
-        $b.append: self!VLQ-encode(0);
+        $b.append: self!VLQ-encode($!dt);
         $b.append: %bytes{'meta-event'};
         $b.append: %bytes{'end-of-track'};
-        $b.append: self!VLQ-encode(0);
+        $b.append: 0;
         return $b;
     }
 
