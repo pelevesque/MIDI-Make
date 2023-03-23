@@ -1,5 +1,11 @@
 Revision history for MIDI::Make
 
+0.5.1
+    - Refactor and fix issues in main.rakumod
+    - Fix bad test labelling in README.md
+    - Fix headers with bad hierarchy in README.md
+    - Add missing trailing commas in t/all.rakutest
+
 0.5.0
     - Add License info to README.md
     - Rename ｢File｣ class to ｢Song｣ class
