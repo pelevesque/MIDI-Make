@@ -13,6 +13,7 @@ my $t = Track.new;
 $t.copyright:   'c 2022 anonymous';
 $t.name:        'melody';
 $t.instrument:  'piano';
+$t.ctl:         8, 100;
 $t.program:     'electric piano';
 $t.port:        'MIDI Out 1';
 $t.ch:           1;
@@ -518,6 +519,18 @@ my $t = Track.new;
 $t.note-on: 60;      # vol_note-on == 127
 $t.note-on: 62, 100; # vol_note-on == 100
 $t.note-on: 64;      # vol_note-on == 100
+```
+
+#### ctl
+
+The ctl method is used to set a controller MIDI event.
+
+The first argument is the controller number from 0 to 127. The second
+argument is the controller value also from 0 to 127.
+
+```raku
+my $t = Track.new;
+$t.ctl: 8, 100; # Balance of 100;
 ```
 
 #### render

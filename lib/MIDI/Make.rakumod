@@ -115,6 +115,7 @@ class Track is export {
     my %bytes =
         'note-off'       => 0x80,
         'note-on'        => 0x90,
+        'controller'     => 0xB0,
         'meta-event'     => 0xFF,
         'text'           => 0x01,
         'copyright'      => 0x02,
@@ -272,6 +273,17 @@ class Track is export {
         $!e.append: $note;
         $!e.append: $vol;
         $!vol_note-on = $vol;
+        $!dt = 0;
+    }
+
+    method ctl (
+        UInt7 $controller,
+        UInt7 $val,
+    ) {
+        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: %bytes{'controller'} + $!ch;
+        $!e.append: $controller;
+        $!e.append: $val;
         $!dt = 0;
     }
 
