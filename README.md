@@ -14,6 +14,7 @@ $t.copyright:   'c 2022 anonymous';
 $t.name:        'melody';
 $t.instrument:  'piano';
 $t.ctl:         8, 100;
+$t.pan:         20;
 $t.program:     'electric piano';
 $t.port:        'MIDI Out 1';
 $t.ch:           1;
@@ -531,6 +532,18 @@ argument is the controller value also from 0 to 127.
 ```raku
 my $t = Track.new;
 $t.ctl: 8, 100; # Balance of 100;
+```
+
+#### pan
+
+The pan method pans a track. It takes a value from 0 to 127: 0 being
+hard left, 64 being center, and 127 being hard right.
+
+Note: Pan is a wrapper for ctl with a controller value of 10.
+
+```raku
+my $t = Track.new;
+$t.pan: 20; # Left pan.
 ```
 
 #### render

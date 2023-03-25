@@ -287,6 +287,8 @@ class Track is export {
         $!dt = 0;
     }
 
+    method pan (UInt7 $val) { self.ctl(10, $val) }
+
     method render {
         my $b = Buf.new;
         $b.append:  self!copyright;
