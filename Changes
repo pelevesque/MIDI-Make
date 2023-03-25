@@ -26,7 +26,7 @@ Revision history for MIDI::Make
     - Add documentation for Test::Selector
     - Change text ｢Example｣ to ｢Synopsis｣ in README.md
     - Change anonymous copyright date from 2023 to 2022
-    - Refactor meta-events: test, marker
+    - Refactor meta events: test, marker
     - Add meta events:
         - text
         - lyric
