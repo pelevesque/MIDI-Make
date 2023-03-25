@@ -177,17 +177,36 @@ class Track is export {
         return $b;
     }
 
+        # Text that must be placed at a track's beginning.
+        #
+        # Note: Unlike the other methods, dt is not automatically
+        # reset to 0 at the end of this method. This is so it remains
+        # unchanged for !end-of-track and future renders.
+    method !lead-text ($meta-event, ASCII $s) {
+        self!text-buffer($meta-event, $s, 0);
+    }
+
+        # Text that may be placed anywhere.
     method !text ($meta-event, ASCII $s) {
+        my $b = self!text-buffer($meta-event, $s, $!dt);
+        $!dt = 0;
+        return $b;
+    }
+
+    method !text-buffer ($meta-event, ASCII $s, UInt28 $dt) {
         return [] if ! $s.chars;
         my $b = Buf.new;
-        $b.append: self!VLQ-encode($!dt);
+        $b.append: self!VLQ-encode($dt);
         $b.append: %bytes{'meta-event'};
         $b.append: %bytes{$meta-event};
         $b.append: self!VLQ-encode($s.chars);
         $b.append: $s.ords;
-        $!dt = 0;
         return $b;
     }
+
+    method !copyright  { self!lead-text('copyright',  $!copyright ) }
+    method !name       { self!lead-text('name',       $!name      ) }
+    method !instrument { self!lead-text('instrument', $!instrument) }
 
     method !end-of-track {
         my $b = Buf.new;
@@ -258,9 +277,9 @@ class Track is export {
 
     method render {
         my $b = Buf.new;
-        $b.append:  self!text('copyright', $!copyright);
-        $b.append:  self!text('name', $!name);
-        $b.append:  self!text('instrument', $!instrument);
+        $b.append:  self!copyright;
+        $b.append:  self!name;
+        $b.append:  self!instrument;
         $b.append:  $!e;
         $b.append:  self!end-of-track;
         $b.prepend: self!header($b.bytes);

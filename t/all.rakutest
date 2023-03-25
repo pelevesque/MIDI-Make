@@ -184,6 +184,81 @@ test('t9',
 );
 
 test('t10',
+    'Track: copyright',
+    do {
+        my $t = Track.new;
+	    $t.copyright: 'c 2022 anonymous';
+	    $t;
+    },
+    '4D 54 72 6B 00 00 00 18
+     00 FF 02 10 63 20 32 30 32 32 20 61 6E 6F 6E 79 6D 6F 75 73
+     00 FF F2 00',
+);
+
+test('t11',
+    'Track: copyright with ignored dt',
+    do {
+        my $t = Track.new;
+        $t.dt: 100; # Ignored.
+	    $t.copyright: 'c 2022 anonymous';
+	    $t;
+    },
+    '4D 54 72 6B 00 00 00 18
+     00 FF 02 10 63 20 32 30 32 32 20 61 6E 6F 6E 79 6D 6F 75 73
+     64 FF F2 00',
+);
+
+test('t12',
+    'Track: name',
+    do {
+        my $t = Track.new;
+	    $t.name: 'melody';
+	    $t;
+    },
+    '4D 54 72 6B 00 00 00 0E
+     00 FF 03 06 6D 65 6C 6F 64 79
+     00 FF F2 00',
+);
+
+test('t13',
+    'Track: name with ignored dt',
+    do {
+        my $t = Track.new;
+        $t.dt: 100; # Ignored.
+	    $t.name: 'melody';
+	    $t;
+    },
+    '4D 54 72 6B 00 00 00 0E
+     00 FF 03 06 6D 65 6C 6F 64 79
+     64 FF F2 00',
+);
+
+test('t14',
+    'Track: instrument',
+    do {
+        my $t = Track.new;
+	    $t.instrument: 'piano';
+	    $t;
+    },
+    '4D 54 72 6B 00 00 00 0D
+     00 FF 04 05 70 69 61 6E 6F
+     00 FF F2 00',
+);
+
+test('t15',
+    'Track: instrument with ignored dt',
+    do {
+        my $t = Track.new;
+        $t.dt: 100; # Ignored.
+	    $t.instrument: 'piano';
+	    $t;
+    },
+    '4D 54 72 6B 00 00 00 0D
+     00 FF 04 05 70 69 61 6E 6F
+     64 FF F2 00',
+);
+
+test('t16',
     'Track: text',
     do {
         my $t = Track.new;
@@ -196,7 +271,7 @@ test('t10',
      00 FF F2 00',
 );
 
-test('t11',
+test('t17',
     'Track: lyric',
     do {
         my $t = Track.new;
@@ -208,7 +283,7 @@ test('t11',
      00 FF F2 00',
 );
 
-test('t12',
+test('t18',
     'Track: marker',
     do {
         my $t = Track.new;
@@ -220,7 +295,7 @@ test('t12',
      00 FF F2 00',
 );
 
-test('t13',
+test('t19',
     'Track: cue',
     do {
         my $t = Track.new;
@@ -232,7 +307,7 @@ test('t13',
      00 FF F2 00',
 );
 
-test('t14',
+test('t20',
     'Track: program',
     do {
         my $t = Track.new;
@@ -244,7 +319,7 @@ test('t14',
      00 FF F2 00',
 );
 
-test('t15',
+test('t21',
     'Track: port',
     do {
         my $t = Track.new;
@@ -256,7 +331,7 @@ test('t15',
      00 FF F2 00',
 );
 
-test('t16',
+test('t22',
     'Track: tempo with default params',
     do {
         my $t = Track.new;
@@ -268,7 +343,7 @@ test('t16',
      00 FF F2 00',
 );
 
-test('t17',
+test('t23',
     'Track: tempo with custom params',
     do {
         my $t = Track.new;
@@ -280,7 +355,7 @@ test('t17',
      00 FF F2 00',
 );
 
-test('t18',
+test('t24',
     'Track: time with default params',
     do {
         my $t = Track.new;
@@ -292,7 +367,7 @@ test('t18',
      00 FF F2 00',
 );
 
-test('t19',
+test('t25',
     'Track: time with custom params',
     do {
         my $t = Track.new;
@@ -304,7 +379,7 @@ test('t19',
      00 FF F2 00',
 );
 
-test('t20',
+test('t26',
     'Track: note-on and note-off',
     do {
         my $t = Track.new;
@@ -325,6 +400,22 @@ test('t20',
      00 80 3C 0A
      00 FF F2 00',
 );
+
+t 't27' => {
+    is(
+        do {
+            my $t = Track.new;
+            $t.dt: 100;
+            $t.copyright: 'c 2022 anonymous';
+            $t.name: 'melody';
+            $t.instrument: 'piano';
+            $t.render;
+            $t.dt;
+        },
+        100,
+        'Track: dt remains intact after render'
+    );
+}
 
 # --------------------------------------------------------------------
 # Everything
