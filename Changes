@@ -1,5 +1,8 @@
 Revision history for MIDI::Make
 
+0.5.2
+    - Fix dt bug related to text meta-events
+
 0.5.1
     - Refactor and fix issues in main.rakumod
     - Fix bad test labelling in README.md
