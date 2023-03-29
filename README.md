@@ -13,7 +13,7 @@ my $t = Track.new;
 $t.copyright:   'c 2022 anonymous';
 $t.name:        'melody';
 $t.instrument:  'piano';
-$t.ctl:         8, 100;
+$t.controller:  8, 100;
 $t.pan:         20;
 $t.program:     'electric piano';
 $t.port:        'MIDI Out 1';
@@ -523,16 +523,16 @@ $t.note-on: 62, 100; # vol_note-on == 100
 $t.note-on: 64;      # vol_note-on == 100
 ```
 
-#### ctl
+#### controller
 
-The ctl method is used to set a controller MIDI event.
+The controller method is used to set a controller MIDI event.
 
 The first argument is the controller number from 0 to 127. The second
 argument is the controller value also from 0 to 127.
 
 ```raku
 my $t = Track.new;
-$t.ctl: 8, 100; # Balance of 100;
+$t.controller: 8, 100; # Balance of 100;
 ```
 
 #### pan
@@ -540,7 +540,8 @@ $t.ctl: 8, 100; # Balance of 100;
 The pan method pans a channel. It takes a value from 0 to 127: 0 being
 hard left, 64 being center, and 127 being hard right.
 
-Pan is a wrapper for the ctl method with a controller value of 10.
+Pan is a wrapper for the controller method with a controller value of
+10.
 
 Note: If you wish to pan various tracks in different ways to create
 a stereophonic image, each track must be on a different channel since

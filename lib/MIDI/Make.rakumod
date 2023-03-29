@@ -278,7 +278,7 @@ class Track is export {
         $!dt = 0;
     }
 
-    method ctl (
+    method controller (
         UInt7 $controller,
         UInt7 $val,
     ) {
@@ -289,7 +289,7 @@ class Track is export {
         $!dt = 0;
     }
 
-    method pan (UInt7 $val) { self.ctl(10, $val) }
+    method pan (UInt7 $val) { self.controller(10, $val) }
 
     method pitch-bend (
         UInt14 $pitch-bend = 8192, # Defaults to no pitch-bend.

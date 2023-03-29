@@ -402,10 +402,10 @@ test('t26',
 );
 
 test('t27',
-    'Track: ctl',
+    'Track: controller',
     do {
         my $t = Track.new;
-        $t.ctl: 8, 100;
+        $t.controller: 8, 100;
         $t;
     },
     '4D 54 72 6B 00 00 00 08
@@ -512,7 +512,7 @@ test('e1',
         $t.copyright:   'c 2022 anonymous';
         $t.name:        'melody';
         $t.instrument:  'piano';
-        $t.ctl:         8, 100;
+        $t.controller:  8, 100;
         $t.pan:         20;
         $t.program:     'electric piano';
         $t.port:        'MIDI Out 1';
