@@ -1,5 +1,8 @@
 Revision history for MIDI::Make
 
+0.6.1
+    - Clarify pan documentation
+
 0.6.0
     - Add MIDI events:
         - ctl
