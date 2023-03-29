@@ -24,7 +24,7 @@ sub prefix:<♩> (QPM $QPM) is export {
     # Helps to write human-like time signatures.
     # ➤ say (2\8).MIDI-nominator; «2␤»
     # ➤ say (2\8).MIDI-denominator; «3␤»
-my constant @pow2 = 2 «**« ^256; # 2⁰ → 2²⁵⁵
+my constant @pow2 = ^256 »**» 2; # 2⁰ → 2²⁵⁵
 subset Pow2 of UInt where * ~~ any @pow2;
 sub infix:<\\> (UInt8 $numerator, Pow2 $denominator) is export {
     class Time-Signature {
