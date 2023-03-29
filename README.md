@@ -536,10 +536,14 @@ $t.ctl: 8, 100; # Balance of 100;
 
 #### pan
 
-The pan method pans a track. It takes a value from 0 to 127: 0 being
+The pan method pans a channel. It takes a value from 0 to 127: 0 being
 hard left, 64 being center, and 127 being hard right.
 
-Note: Pan is a wrapper for ctl with a controller value of 10.
+Pan is a wrapper for the ctl method with a controller value of 10.
+
+Note: If you wish to pan various tracks in different ways to create
+a stereophonic image, each track must be on a different channel since
+the pan methods is a controller and acts on a channel, not on a track.
 
 ```raku
 my $t = Track.new;
