@@ -18,6 +18,7 @@ $t.pan:         20;
 $t.program:     'electric piano';
 $t.port:        'MIDI Out 1';
 $t.ch:           1;
+$t.pitch-bend:   0;
 $t.marker:               'section I';
 $t.text:         'Lorem ipsum dolor sit amet.';
 $t.tempo:        ♩80;
@@ -548,6 +549,21 @@ the pan methods is a controller and acts on a channel, not on a track.
 ```raku
 my $t = Track.new;
 $t.pan: 20; # Left pan.
+```
+
+#### pitch-bend
+
+The pitch-bend method applies a pitch bend to the current channel. It
+takes an optional argument from 0 to 16383. Values below 8192 bend the
+pitch downwards, and values above 8192 bend the pitch upwards. If no
+argument is given, the pitch bend returns to its default value of 8192
+which is no pitch bend. The pitch range may vary from instrument to
+instrument, but is usually +/- 2 semitones.
+
+```raku
+my $t = Track.new;
+$t.pitch-bend: 0; # Bends the pitch as low as possible.
+$t.pitch-bend;    # Removes pitch bend by return to the default: 8192.
 ```
 
 #### render

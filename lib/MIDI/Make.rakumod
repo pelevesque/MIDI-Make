@@ -3,6 +3,7 @@ unit module MIDI::Make;
 subset UInt4  of UInt where * ≤ 15;
 subset UInt7  of UInt where * ≤ 127;
 subset UInt8  of UInt where * ≤ 255;
+subset UInt14 of UInt where * ≤ 16383;
 subset UInt15 of UInt where * ≤ 32767;
 subset UInt16 of UInt where * ≤ 65535;
 subset UInt24 of UInt where * ≤ 16777215;
@@ -116,6 +117,7 @@ class Track is export {
         'note-off'       => 0x80,
         'note-on'        => 0x90,
         'controller'     => 0xB0,
+        'pitch-bend'     => 0xE0,
         'meta-event'     => 0xFF,
         'text'           => 0x01,
         'copyright'      => 0x02,
@@ -288,6 +290,16 @@ class Track is export {
     }
 
     method pan (UInt7 $val) { self.ctl(10, $val) }
+
+    method pitch-bend (
+        UInt14 $pitch-bend = 8192, # Defaults to no pitch-bend.
+    ) {
+        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: %bytes{'pitch-bend'} + $!ch;
+        $!e.append: 0x7F +& $pitch-bend; # LSB
+        $!e.append: $pitch-bend +> 7;    # MSB
+        $!dt = 0;
+    }
 
     method render {
         my $b = Buf.new;
