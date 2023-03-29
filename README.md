@@ -532,7 +532,7 @@ argument is the controller value also from 0 to 127.
 
 ```raku
 my $t = Track.new;
-$t.controller: 8, 100; # Balance of 100;
+$t.controller: 8, 100; # Balance of 100.
 ```
 
 #### pan
