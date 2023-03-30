@@ -1,5 +1,12 @@
 Revision history for MIDI::Make
 
+0.7.0
+    - Add MIDI events:
+        - pitch-bend
+        - aftertouch
+    - Rename ｢ctl｣ method to ｢controller｣
+    - Tiny refactors in Make.rakumod
+
 0.6.1
     - Clarify pan documentation
 
