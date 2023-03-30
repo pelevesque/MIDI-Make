@@ -10,31 +10,31 @@ A [Raku](https://www.raku.org) module to make MIDI files.
 use MIDI::Make;
 
 my $t = Track.new;
-$t.copyright:   'c 2022 anonymous';
-$t.name:        'melody';
-$t.instrument:  'piano';
-$t.controller:  8, 100;
-$t.pan:         20;
-$t.program:     'electric piano';
-$t.port:        'MIDI Out 1';
-$t.ch:           1;
-$t.pitch-bend:   0;
-$t.marker:               'section I';
-$t.text:         'Lorem ipsum dolor sit amet.';
-$t.tempo:        ♩80;
-$t.time:         3\2;
-$t.aftertouch:   60, 100;
-$t.note-on:      60;
-$t.lyric:        'one';
-$t.dt:               128;
-$t.note-off:     60;
-$t.cue:          'door slam';
-$t.vol_note-on:  80;
-$t.vol_note-off: 10;
-$t.note-on:      72;
-$t.lyric:        'two';
-$t.dt:               128;
-$t.note-off:     72;
+$t.copyright:      'c 2022 anonymous';
+$t.name:           'melody';
+$t.instrument:     'piano';
+$t.controller:     8, 100;
+$t.pan:            20;
+$t.program:        'electric piano';
+$t.port:           'MIDI Out 1';
+$t.ch:             1;
+$t.pitch-bend:     0;
+$t.marker:                 'section I';
+$t.text:           'Lorem ipsum dolor sit amet.';
+$t.tempo:          ♩80;
+$t.time-signature: 3\2;
+$t.aftertouch:     60, 100;
+$t.note-on:        60;
+$t.lyric:          'one';
+$t.dt:                 128;
+$t.note-off:       60;
+$t.cue:            'door slam';
+$t.vol_note-on:    80;
+$t.vol_note-off:   10;
+$t.note-on:        72;
+$t.lyric:          'two';
+$t.dt:                 128;
+$t.note-off:       72;
 
 my $s = Song.new(:PPQ(96));
 $s.add-track($t.render);
@@ -236,10 +236,10 @@ $t.tempo: ♩60;
 ### \
 
 The time-signature operator is used to specify a time-signature for
-the Track class's time method.
+the Track class's time-signature method.
 
 ```raku
-$t.time: 3\8;
+$t.time-signature: 3\8;
 ```
 
 ## The Track class
@@ -471,10 +471,10 @@ $t.tempo: 1000000; # Set the tempo to 60 quarter notes per minute.
 $t.tempo: ♩120;    # Set the tempo to 120 quarter notes per minute.
 ```
 
-#### time
+#### time-signature
 
-The time method sets the MIDI time-signature. It accepts three
-optional arguments:
+The time-signature method sets the MIDI time-signature. It accepts
+three optional arguments:
 
 1. The time-signature set using the time-signature operator defined
    earlier in this file. The default is 4\4.
@@ -487,9 +487,9 @@ optional arguments:
 
 ```raku
 my $t = Track.new;
-$t.time: 3\4;
-$t.time: 4\4, 48;
-$t.time: 2\8, 32, 12;
+$t.time-signature: 3\4;
+$t.time-signature: 4\4, 48;
+$t.time-signature: 2\8, 32, 12;
 ```
 
 #### note-off

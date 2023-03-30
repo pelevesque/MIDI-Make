@@ -356,10 +356,10 @@ test('t23',
 );
 
 test('t24',
-    'Track: time with default params',
+    'Track: time-signature with default params',
     do {
         my $t = Track.new;
-	    $t.time;
+	    $t.time-signature;
 	    $t;
     },
     '4D 54 72 6B 00 00 00 0C
@@ -368,10 +368,10 @@ test('t24',
 );
 
 test('t25',
-    'Track: time with custom params',
+    'Track: time-signature with custom params',
     do {
         my $t = Track.new;
-	    $t.time: 2\8, 32, 4;
+	    $t.time-signature: 2\8, 32, 4;
 	    $t;
     },
     '4D 54 72 6B 00 00 00 0C
@@ -521,31 +521,31 @@ test('e1',
     'Everything',
     do {
         my $t = Track.new;
-        $t.copyright:   'c 2022 anonymous';
-        $t.name:        'melody';
-        $t.instrument:  'piano';
-        $t.controller:  8, 100;
-        $t.pan:         20;
-        $t.program:     'electric piano';
-        $t.port:        'MIDI Out 1';
-        $t.ch:           1;
-        $t.pitch-bend:   0;
-        $t.marker:               'section I';
-        $t.text:         'Lorem ipsum dolor sit amet.';
-        $t.tempo:        ♩80;
-        $t.time:         3\2;
-        $t.aftertouch:   60, 100;
-        $t.note-on:      60;
-        $t.lyric:        'one';
-        $t.dt:               128;
-        $t.note-off:     60;
-        $t.cue:          'door slam';
-        $t.vol_note-on:  80;
-        $t.vol_note-off: 10;
-        $t.note-on:      72;
-        $t.lyric:        'two';
-        $t.dt:               128;
-        $t.note-off:     72;
+        $t.copyright:      'c 2022 anonymous';
+        $t.name:           'melody';
+        $t.instrument:     'piano';
+        $t.controller:     8, 100;
+        $t.pan:            20;
+        $t.program:        'electric piano';
+        $t.port:           'MIDI Out 1';
+        $t.ch:             1;
+        $t.pitch-bend:     0;
+        $t.marker:                 'section I';
+        $t.text:           'Lorem ipsum dolor sit amet.';
+        $t.tempo:          ♩80;
+        $t.time-signature: 3\2;
+        $t.aftertouch:     60, 100;
+        $t.note-on:        60;
+        $t.lyric:          'one';
+        $t.dt:                 128;
+        $t.note-off:       60;
+        $t.cue:            'door slam';
+        $t.vol_note-on:    80;
+        $t.vol_note-off:   10;
+        $t.note-on:        72;
+        $t.lyric:          'two';
+        $t.dt:                 128;
+        $t.note-off:       72;
 
         my $s = Song.new;
         $s.format: 2;

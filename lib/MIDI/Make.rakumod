@@ -239,7 +239,7 @@ class Track is export {
         $!dt = 0;
     }
 
-    method time (
+    method time-signature (
         $time-signature = 4\4,
         UInt8 $PPMC = 24, # Pulses per metronome click.
         UInt8 $_32PQ = 8, # 32nds per quarter note.
