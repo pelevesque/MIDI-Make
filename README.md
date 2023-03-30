@@ -23,6 +23,7 @@ $t.marker:               'section I';
 $t.text:         'Lorem ipsum dolor sit amet.';
 $t.tempo:        ♩80;
 $t.time:         3\2;
+$t.aftertouch:   60, 100;
 $t.note-on:      60;
 $t.lyric:        'one';
 $t.dt:               128;
@@ -521,6 +522,18 @@ my $t = Track.new;
 $t.note-on: 60;      # vol_note-on == 127
 $t.note-on: 62, 100; # vol_note-on == 100
 $t.note-on: 64;      # vol_note-on == 100
+```
+
+#### aftertouch
+
+The aftertouch method adds aftertouch to a given note.
+
+The first argument is the note number from 0 to 127. The second
+argument is the aftertouch amount from 0 to 127.
+
+```raku
+my $t = Track.new;
+$t.aftertouch: 60, 100;
 ```
 
 #### controller

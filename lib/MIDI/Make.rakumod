@@ -117,6 +117,7 @@ class Track is export {
         'note-off'       => 0x80,
         'note-on'        => 0x90,
         'controller'     => 0xB0,
+        'aftertouch'     => 0xA0,
         'pitch-bend'     => 0xE0,
         'meta-event'     => 0xFF,
         'text'           => 0x01,
@@ -275,6 +276,17 @@ class Track is export {
         $!e.append: $note;
         $!e.append: $vol;
         $!vol_note-on = $vol;
+        $!dt = 0;
+    }
+
+    method aftertouch (
+        UInt7 $note,
+        UInt7 $amount,
+    ) {
+        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: %bytes{'aftertouch'} + $!ch;
+        $!e.append: $note;
+        $!e.append: $amount;
         $!dt = 0;
     }
 
