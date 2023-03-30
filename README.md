@@ -329,9 +329,8 @@ $t.dt: 100;
 ```
 
 dt is automatically set to 0 after each of the MIDI events implemented
-in the Track class: tempo, time, note-off, and note-on. This is done
-so that you can enter many MIDI events consecutively before setting a
-new dt.
+in the Track class. This is done so that you can enter many MIDI
+events consecutively before setting a new dt.
 
 ```raku
 my $t = Track.new;
