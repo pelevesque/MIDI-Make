@@ -118,6 +118,7 @@ class Track is export {
         'note-on'        => 0x90,
         'controller'     => 0xB0,
         'aftertouch'     => 0xA0,
+        'program-change' => 0xC0,
         'pitch-bend'     => 0xE0,
         'meta-event'     => 0xFF,
         'text'           => 0x01,
@@ -287,6 +288,15 @@ class Track is export {
         $!e.append: %bytes{'aftertouch'} + $!ch;
         $!e.append: $note;
         $!e.append: $amount;
+        $!dt = 0;
+    }
+
+    method program-change (
+        UInt7 $program-number,
+    ) {
+        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: %bytes{'program-change'} + $!ch;
+        $!e.append: $program-number;
         $!dt = 0;
     }
 

@@ -414,6 +414,18 @@ test('t27',
 );
 
 test('t28',
+    'Track: program-change',
+    do {
+        my $t = Track.new;
+        $t.program-change: 100;
+        $t;
+    },
+    '4D 54 72 6B 00 00 00 07
+     00 C0 64
+     00 FF F2 00',
+);
+
+test('t29',
     'Track: controller',
     do {
         my $t = Track.new;
@@ -425,7 +437,7 @@ test('t28',
      00 FF F2 00',
 );
 
-test('t29',
+test('t30',
     'Track: pan',
     do {
         my $t = Track.new;
@@ -437,7 +449,7 @@ test('t29',
      00 FF F2 00',
 );
 
-test('t30',
+test('t31',
     'Track: pitch-bend with default param, on channel 1',
     do {
         my $t = Track.new;
@@ -450,7 +462,7 @@ test('t30',
      00 FF F2 00',
 );
 
-test('t31',
+test('t32',
     'Track: pitch-bend => none',
     do {
         my $t = Track.new;
@@ -462,7 +474,7 @@ test('t31',
      00 FF F2 00',
 );
 
-test('t32',
+test('t33',
     'Track: pitch-bend => lowest',
     do {
         my $t = Track.new;
@@ -474,7 +486,7 @@ test('t32',
      00 FF F2 00',
 );
 
-test('t33',
+test('t34',
     'Track: pitch-bend => highest',
     do {
         my $t = Track.new;
@@ -486,7 +498,7 @@ test('t33',
      00 FF F2 00',
 );
 
-test('t34',
+test('t35',
     'Track: pitch-bend => 10000',
     do {
         my $t = Track.new;
@@ -498,7 +510,7 @@ test('t34',
      00 FF F2 00',
 );
 
-t 't35' => {
+t 't36' => {
     is(
         do {
             my $t = Track.new;
@@ -529,6 +541,7 @@ test('e1',
         $t.program:        'electric piano';
         $t.port:           'MIDI Out 1';
         $t.ch:             1;
+        $t.program-change: 100;
         $t.pitch-bend:     0;
         $t.marker:                 'section I';
         $t.text:           'Lorem ipsum dolor sit amet.';
@@ -558,7 +571,7 @@ test('e1',
     },
     '4D 54 68 64 00 00 00 06
      00 02 00 01 E7 08
-     4D 54 72 6B 00 00 00 C3
+     4D 54 72 6B 00 00 00 C6
      00 FF 02 10 63 20 32 30 32 32 20 61 6E 6F 6E 79 6D 6F 75 73
      00 FF 03 06 6D 65 6C 6F 64 79
      00 FF 04 05 70 69 61 6E 6F
@@ -566,6 +579,7 @@ test('e1',
      00 B0 0A 14
      00 FF 08 0E 65 6C 65 63 74 72 69 63 20 70 69 61 6E 6F
      00 FF 09 0A 4D 49 44 49 20 4F 75 74 20 31
+     00 C1 64
      00 E1 00 00
      00 FF 06 09 73 65 63 74 69 6F 6E 20 49
      00 FF 01 1B 4C 6F 72 65 6D 20 69 70 73 75 6D 20 64 6F 6C 6F 72 20

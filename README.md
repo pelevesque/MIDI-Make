@@ -18,6 +18,7 @@ $t.pan:            20;
 $t.program:        'electric piano';
 $t.port:           'MIDI Out 1';
 $t.ch:             1;
+$t.program-change: 100;
 $t.pitch-bend:     0;
 $t.marker:                 'section I';
 $t.text:           'Lorem ipsum dolor sit amet.';
@@ -533,6 +534,17 @@ argument is the aftertouch amount from 0 to 127.
 ```raku
 my $t = Track.new;
 $t.aftertouch: 60, 100;
+```
+
+#### program-change
+
+Changes the program of the current channel.
+
+It has one argument, the program number from 0 to 127.
+
+```raku
+my $t = Track.new;
+$t.program-change: 100; # FX 5 in General MIDI.
 ```
 
 #### controller
