@@ -7,7 +7,7 @@ A [Raku](https://www.raku.org) module to make MIDI files.
 ## Synopsis
 
 ```raku
-use MIDI::Make :shortnames;
+use MIDI::Make;
 
 my $t = Track.new;
 $t.copyright:   'c 2022 anonymous';
