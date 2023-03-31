@@ -613,7 +613,7 @@ To run all tests, simply use the following command in the root of
 MIDI::Make.
 
 ```
-➤ raku t/all.rakutest
+➤ raku -Ilib t/all.rakutest
 ```
 
 Alternatively, you can use
