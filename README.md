@@ -536,17 +536,6 @@ my $t = Track.new;
 $t.aftertouch: 60, 100;
 ```
 
-#### program-change
-
-Changes the program of the current channel.
-
-It has one argument, the program number from 0 to 127.
-
-```raku
-my $t = Track.new;
-$t.program-change: 100; # FX 5 in General MIDI.
-```
-
 #### controller
 
 The controller method is used to set a controller MIDI event.
@@ -574,6 +563,17 @@ the pan methods is a controller and acts on a channel, not on a track.
 ```raku
 my $t = Track.new;
 $t.pan: 20; # Left pan.
+```
+
+#### program-change
+
+Changes the program of the current channel.
+
+It has one argument, the program number from 0 to 127.
+
+```raku
+my $t = Track.new;
+$t.program-change: 100; # FX 5 in General MIDI.
 ```
 
 #### pitch-bend

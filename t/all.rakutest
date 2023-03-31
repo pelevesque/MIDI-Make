@@ -414,18 +414,6 @@ test('t27',
 );
 
 test('t28',
-    'Track: program-change',
-    {
-        my $t = Track.new;
-        $t.program-change: 100;
-        $t;
-    },
-    '4D 54 72 6B 00 00 00 07
-     00 C0 64
-     00 FF F2 00',
-);
-
-test('t29',
     'Track: controller',
     {
         my $t = Track.new;
@@ -437,7 +425,7 @@ test('t29',
      00 FF F2 00',
 );
 
-test('t30',
+test('t29',
     'Track: pan',
     {
         my $t = Track.new;
@@ -446,6 +434,18 @@ test('t30',
     },
     '4D 54 72 6B 00 00 00 08
      00 B0 0A 14
+     00 FF F2 00',
+);
+
+test('t30',
+    'Track: program-change',
+    {
+        my $t = Track.new;
+        $t.program-change: 100;
+        $t;
+    },
+    '4D 54 72 6B 00 00 00 07
+     00 C0 64
      00 FF F2 00',
 );
 

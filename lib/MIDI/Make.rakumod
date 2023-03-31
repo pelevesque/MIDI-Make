@@ -116,8 +116,8 @@ class Track is export {
     my %bytes =
         'note-off'       => 0x80,
         'note-on'        => 0x90,
-        'controller'     => 0xB0,
         'aftertouch'     => 0xA0,
+        'controller'     => 0xB0,
         'program-change' => 0xC0,
         'pitch-bend'     => 0xE0,
         'meta-event'     => 0xFF,
@@ -291,15 +291,6 @@ class Track is export {
         $!dt = 0;
     }
 
-    method program-change (
-        UInt7 $program-number,
-    ) {
-        $!e.append: self!VLQ-encode($!dt);
-        $!e.append: %bytes{'program-change'} + $!ch;
-        $!e.append: $program-number;
-        $!dt = 0;
-    }
-
     method controller (
         UInt7 $controller,
         UInt7 $val,
@@ -312,6 +303,15 @@ class Track is export {
     }
 
     method pan (UInt7 $pan) { self.controller(10, $pan) }
+
+    method program-change (
+        UInt7 $program-number,
+    ) {
+        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: %bytes{'program-change'} + $!ch;
+        $!e.append: $program-number;
+        $!dt = 0;
+    }
 
     method pitch-bend (
         UInt14 $pitch-bend = 8192, # Defaults to no pitch-bend.
