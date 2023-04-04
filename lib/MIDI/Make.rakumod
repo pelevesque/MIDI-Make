@@ -16,9 +16,7 @@ subset UInt32 of UInt where * ≤ 4294967295;
     # μsPQ = Microseconds per quarter note.
     # ➤ say ♩60; «1000000␤»
 subset QPM of Numeric where 0.22351741874 ≤ * ≤ 60000001;
-sub prefix:<♩> (QPM $QPM) is export {
-    (60000000 / $QPM).floor
-}
+sub prefix:<♩> (QPM $QPM) is export { (60000000 / $QPM).floor }
 
     # Operator: \
     # Helps to write human-like time signatures.
