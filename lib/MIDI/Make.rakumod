@@ -161,6 +161,9 @@ class Track is export {
 
     has $!e = Buf.new; # Meta/Midi Events.
 
+    method !MSB (UInt14 $n) { $n +> 7 }
+    method !LSB (UInt14 $n) { 0x7F +& $n }
+
     method !VLQ-encode (UInt28 $n is copy) {
         my $byte = 0x7F +& $n;
         my $b = Buf.new($byte);
@@ -399,8 +402,8 @@ class Track is export {
     ) {
         $!e.append: self!VLQ-encode($!dt);
         $!e.append: %bytes{'pitch-bend'} + $!ch;
-        $!e.append: 0x7F +& $pitch-bend; # LSB
-        $!e.append: $pitch-bend +> 7;    # MSB
+        $!e.append: self!LSB($pitch-bend);
+        $!e.append: self!MSB($pitch-bend);
         $!dt = 0;
     }
 
