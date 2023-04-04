@@ -593,6 +593,67 @@ test('t29',
 );
 
 test('t30',
+    'Track: controller shortcuts (combined)',
+    {
+        my $t = Track.new;
+        $t.bank-select:      32;
+        $t.modulation:      133;
+        $t.breath:          234;
+            # 3 is undefined.
+        $t.foot-pedal:      436;
+        $t.portamento-time: 537;
+        $t.data-entry:      638;
+        $t.channel-volume:  739;
+        $t.balance:         840;
+            # 9 is undefined.
+        $t.pan:            1042;
+        $t.expression:     1143;
+        $t.fx-control_1:   1244;
+        $t.fx-control_2:   1345;
+            # 14-15 are undefined.
+        $t.gen-control_1:  1648;
+        $t.gen-control_2:  1749;
+        $t.gen-control_3:  1850;
+        $t.gen-control_4:  1951;
+        $t;
+    },
+    '4D 54 72 6B 00 00 00 84
+     00 B0 00 00
+     00 B0 20 20
+     00 B0 01 01
+     00 B0 21 05
+     00 B0 02 01
+     00 B0 22 6A
+     00 B0 04 03
+     00 B0 24 34
+     00 B0 05 04
+     00 B0 25 19
+     00 B0 06 04
+     00 B0 26 7E
+     00 B0 07 05
+     00 B0 27 63
+     00 B0 08 06
+     00 B0 28 48
+     00 B0 0A 08
+     00 B0 2A 12
+     00 B0 0B 08
+     00 B0 2B 77
+     00 B0 0C 09
+     00 B0 2C 5C
+     00 B0 0D 0A
+     00 B0 2D 41
+     00 B0 10 0C
+     00 B0 30 70
+     00 B0 11 0D
+     00 B0 31 55
+     00 B0 12 0E
+     00 B0 32 3A
+     00 B0 13 0F
+     00 B0 33 1F
+     00 FF F2 00',
+);
+
+test('t31',
     'Track: program-change',
     {
         my $t = Track.new;
@@ -604,7 +665,7 @@ test('t30',
      00 FF F2 00',
 );
 
-test('t31',
+test('t32',
     'Track: pitch-bend with default param, on channel 1',
     {
         my $t = Track.new;
@@ -617,7 +678,7 @@ test('t31',
      00 FF F2 00',
 );
 
-test('t32',
+test('t33',
     'Track: pitch-bend => none',
     {
         my $t = Track.new;
@@ -629,7 +690,7 @@ test('t32',
      00 FF F2 00',
 );
 
-test('t33',
+test('t34',
     'Track: pitch-bend => lowest',
     {
         my $t = Track.new;
@@ -641,7 +702,7 @@ test('t33',
      00 FF F2 00',
 );
 
-test('t34',
+test('t35',
     'Track: pitch-bend => highest',
     {
         my $t = Track.new;
@@ -653,7 +714,7 @@ test('t34',
      00 FF F2 00',
 );
 
-test('t35',
+test('t36',
     'Track: pitch-bend => 10000',
     {
         my $t = Track.new;
@@ -665,7 +726,7 @@ test('t35',
      00 FF F2 00',
 );
 
-t 't36' => {
+t 't37' => {
     is(
         do {
             my $t = Track.new;

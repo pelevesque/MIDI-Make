@@ -494,33 +494,33 @@ $t.time-signature: 2\8, 32, 12;
 #### note-off
 
 The note-off method creates a note off. It accepts two arguments: The
-note number from 0 to 127 (required), and the vol_note-off from 0 to
-127 (optional). The default vol_note-off is the one set by the
-vol_note-off parameter. If vol_note-off is set by this note-off
-method, it will also set the vol_note-off parameter of the Track class
+note number from 0 to 127 (required), and the vel_note-off from 0 to
+127 (optional). The default vel_note-off is the one set by the
+vel_note-off parameter. If vel_note-off is set by this note-off
+method, it will also set the vel_note-off parameter of the Track class
 for the next note-off events.
 
 ```raku
 my $t = Track.new;
-$t.note-off: 60;      # vol_note-off == 0
-$t.note-off: 62, 120; # vol_note-off == 120
-$t.note-off: 64;      # vol_note-off == 120
+$t.note-off: 60;      # vel_note-off == 0
+$t.note-off: 62, 120; # vel_note-off == 120
+$t.note-off: 64;      # vel_note-off == 120
 ```
 
 #### note-on
 
 The note-on method creates a note on. It accepts two arguments: The
-note number from 0 to 127 (required), and the vol_note-on from 0 to
-127 (optional). The default vol_note-on is the one set by the
-vol_note-on parameter. If vol_note-on is set by this note-on method,
-it will also set the vol_note-on parameter of the Track class for the
+note number from 0 to 127 (required), and the vel_note-on from 0 to
+127 (optional). The default vel_note-on is the one set by the
+vel_note-on parameter. If vel_note-on is set by this note-on method,
+it will also set the vel_note-on parameter of the Track class for the
 next note-on events.
 
 ```raku
 my $t = Track.new;
-$t.note-on: 60;      # vol_note-on == 127
-$t.note-on: 62, 100; # vol_note-on == 100
-$t.note-on: 64;      # vol_note-on == 100
+$t.note-on: 60;      # vel_note-on == 127
+$t.note-on: 62, 100; # vel_note-on == 100
+$t.note-on: 64;      # vel_note-on == 100
 ```
 
 #### aftertouch
@@ -641,6 +641,36 @@ Ex:
 ```raku
 my $t = Track.new;
 $t.pan_MSB: 64;
+```
+
+It's also possible to call the MSB and LSB counterparts (controllers
+in the range of 0-63) with one function. This permits specifying a
+value between 0 and 16383 in one go.
+
+| method          | value   | definition                             |
+|:----------------|:--------|:---------------------------------------|
+| bank-select     | 0-16383 | Change patch banks.                    |
+| modulation      | 0-16383 | Create a vibrato effect.               |
+| breath          | 0-16383 | Breath controller.                     |
+| foot-pedal      | 0-16383 | Foot pedal data.                       |
+| portamento-time | 0-16383 | Control portamento rate.               |
+| data-entry      | 0-16383 | Control value for NRPN/RPN parameters. |
+| channel-volume  | 0-16383 | Control the channel volume.            |
+| balance         | 0-16383 | Control left/right balance for stereo. |
+| pan             | 0-16383 | Control left/right balance for mono.   |
+| expression      | 0-16383 | Expression is a percentage of volume.  |
+| fx-control_1    | 0-16383 | Control an effect parameter.           |
+| fx-control_2    | 0-16383 | Control an effect parameter.           |
+| gen-control_1   | 0-16383 | General purpose controller.            |
+| gen-control_2   | 0-16383 | General purpose controller.            |
+| gen-control_3   | 0-16383 | General purpose controller.            |
+| gen-control_4   | 0-16383 | General purpose controller.            |
+
+Ex:
+
+```raku
+my $t = Track.new;
+$t.pan: 3489;
 ```
 
 #### program-change

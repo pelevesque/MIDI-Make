@@ -388,6 +388,71 @@ class Track is export {
     method mono-mode           (UInt7 $v) { self.controller(126, $v) }
     method poly-mode           (UInt7 $v) { self.controller(127, $v) }
 
+    method bank-select (UInt14 $v) {
+        self.bank-select_MSB(self!MSB($v));
+        self.bank-select_LSB(self!LSB($v));
+    }
+    method modulation (UInt14 $v) {
+        self.modulation_MSB(self!MSB($v));
+        self.modulation_LSB(self!LSB($v));
+    }
+    method breath (UInt14 $v) {
+        self.breath_MSB(self!MSB($v));
+        self.breath_LSB(self!LSB($v));
+    }
+    method foot-pedal (UInt14 $v) {
+        self.foot-pedal_MSB(self!MSB($v));
+        self.foot-pedal_LSB(self!LSB($v));
+    }
+    method portamento-time (UInt14 $v) {
+        self.portamento-time_MSB(self!MSB($v));
+        self.portamento-time_LSB(self!LSB($v));
+    }
+    method data-entry (UInt14 $v) {
+        self.data-entry_MSB(self!MSB($v));
+        self.data-entry_LSB(self!LSB($v));
+    }
+    method channel-volume (UInt14 $v) {
+        self.channel-volume_MSB(self!MSB($v));
+        self.channel-volume_LSB(self!LSB($v));
+    }
+    method balance (UInt14 $v) {
+        self.balance_MSB(self!MSB($v));
+        self.balance_LSB(self!LSB($v));
+    }
+    method pan (UInt14 $v) {
+        self.pan_MSB(self!MSB($v));
+        self.pan_LSB(self!LSB($v));
+    }
+    method expression (UInt14 $v) {
+        self.expression_MSB(self!MSB($v));
+        self.expression_LSB(self!LSB($v));
+    }
+    method fx-control_1 (UInt14 $v) {
+        self.fx-control_1_MSB(self!MSB($v));
+        self.fx-control_1_LSB(self!LSB($v));
+    }
+    method fx-control_2 (UInt14 $v) {
+        self.fx-control_2_MSB(self!MSB($v));
+        self.fx-control_2_LSB(self!LSB($v));
+    }
+    method gen-control_1 (UInt14 $v) {
+        self.gen-control_1_MSB(self!MSB($v));
+        self.gen-control_1_LSB(self!LSB($v));
+    }
+    method gen-control_2 (UInt14 $v) {
+        self.gen-control_2_MSB(self!MSB($v));
+        self.gen-control_2_LSB(self!LSB($v));
+    }
+    method gen-control_3 (UInt14 $v) {
+        self.gen-control_3_MSB(self!MSB($v));
+        self.gen-control_3_LSB(self!LSB($v));
+    }
+    method gen-control_4 (UInt14 $v) {
+        self.gen-control_4_MSB(self!MSB($v));
+        self.gen-control_4_LSB(self!LSB($v));
+    }
+
     method program-change (
         UInt7 $program-number,
     ) {
