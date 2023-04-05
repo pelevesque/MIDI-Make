@@ -14,7 +14,7 @@
     "provides": {
         "MIDI::Make": "lib/MIDI/Make.rakumod"
     },
-    "raku": "6.*",
+    "raku": "6.d",
     "source-url": "git://github.com/pelevesque/MIDI-Make.git",
     "tags": [
         "MIDI",
