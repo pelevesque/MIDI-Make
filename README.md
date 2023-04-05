@@ -29,8 +29,8 @@ $t.lyric:          'one';
 $t.dt:                 128;
 $t.note-off:       60;
 $t.cue:            'door slam';
-$t.vol_note-on:    80;
-$t.vol_note-off:   10;
+$t.vel_note-on:    80;
+$t.vel_note-off:   10;
 $t.note-on:        72;
 $t.lyric:          'two';
 $t.dt:                 128;
@@ -361,42 +361,42 @@ my $t = Track.new;
 $t.ch: 1;
 ```
 
-#### vol_note-off
+#### vel_note-off
 
-vol_note-off sets the note-off volume.
+vel_note-off sets the note-off velocity.
 
-The vol_note-off value is from 0 to 127. The default is 0.
+The vel_note-off value is from 0 to 127. The default is 0.
 
-Note: A volume for a note-off seems weird, but it can change the sound
-on certain instruments like an organ on which notes can be depressed
-at different speeds.
+Note: A velocity for a note-off seems weird, but it can change the
+sound on certain instruments like an organ on which notes can be
+depressed at different speeds.
 
 ```raku
     # Set on instantiation.
-my $t = Track.new(:vol_note-off(10));
+my $t = Track.new(:vel_note-off(10));
 ```
 
 ```raku
     # Set after instantiation.
 my $t = Track.new;
-$t.vol_note-off: 10;
+$t.vel_note-off: 10;
 ```
 
-#### vol_note-on
+#### vel_note-on
 
-vol_note-on sets the note-on volume.
+vel_note-on sets the note-on velocity.
 
-The vol_note-on value is from 0 to 127. The default is 0.
+The vel_note-on value is from 0 to 127. The default is 0.
 
 ```raku
     # Set on instantiation.
-my $t = Track.new(:vol_note-on(60));
+my $t = Track.new(:vel_note-on(60));
 ```
 
 ```raku
     # Set after instantiation.
 my $t = Track.new;
-$t.vol_note-on: 60;
+$t.vel_note-on: 60;
 ```
 
 ### Methods

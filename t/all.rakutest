@@ -142,9 +142,9 @@ test('t6',
 );
 
 test('t7',
-    'Track Instantiation: vol_note-off => 10',
+    'Track Instantiation: vel_note-off => 10',
     {
-        my $t = Track.new(:vol_note-off(10));
+        my $t = Track.new(:vel_note-off(10));
         $t.note-off: 60;
         $t;
     },
@@ -154,9 +154,9 @@ test('t7',
 );
 
 test('t8',
-    'Track Instantiation: vol_note-on => 100',
+    'Track Instantiation: vel_note-on => 100',
     {
-        my $t = Track.new(:vol_note-on(100));
+        my $t = Track.new(:vel_note-on(100));
         $t.note-on: 60;
         $t;
     },
@@ -171,8 +171,8 @@ test('t9',
         my $t = Track.new;
         $t.dt: 100;
         $t.ch: 1;
-        $t.vol_note-off: 10;
-        $t.vol_note-on:  100;
+        $t.vel_note-off: 10;
+        $t.vel_note-on:  100;
         $t.note-on:  60;
         $t.note-off: 60;
         $t;
@@ -768,8 +768,8 @@ test('e1',
         $t.dt:                 128;
         $t.note-off:       60;
         $t.cue:            'door slam';
-        $t.vol_note-on:    80;
-        $t.vol_note-off:   10;
+        $t.vel_note-on:    80;
+        $t.vel_note-off:   10;
         $t.note-on:        72;
         $t.lyric:          'two';
         $t.dt:                 128;

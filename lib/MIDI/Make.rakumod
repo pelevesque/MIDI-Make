@@ -138,8 +138,8 @@ class Track is export {
     has ASCII  $.instrument = '';
     has UInt28 $.dt = 0;
     has UInt4  $.ch = 0;
-    has UInt7  $.vol_note-off = 0;
-    has UInt7  $.vol_note-on = 127;
+    has UInt7  $.vel_note-off = 0;
+    has UInt7  $.vel_note-on = 127;
 
         # Getters.
     multi method copyright { $!copyright }
@@ -147,8 +147,8 @@ class Track is export {
     multi method instrument { $!instrument }
     multi method dt { $!dt }
     multi method ch { $!ch }
-    multi method vol_note-off { $!vol_note-off }
-    multi method vol_note-on  { $!vol_note-on }
+    multi method vel_note-off { $!vel_note-off }
+    multi method vel_note-on  { $!vel_note-on }
 
         # Setters.
     multi method copyright ($copyright) { $!copyright = $copyright }
@@ -156,8 +156,8 @@ class Track is export {
     multi method instrument ($instrument) { $!instrument = $instrument }
     multi method dt ($dt) { $!dt = $dt }
     multi method ch ($ch) { $!ch = $ch }
-    multi method vol_note-off ($vol) { $!vol_note-off = $vol }
-    multi method vol_note-on  ($vol) { $!vol_note-on = $vol }
+    multi method vel_note-off ($vel) { $!vel_note-off = $vel }
+    multi method vel_note-on  ($vel) { $!vel_note-on = $vel }
 
     has $!e = Buf.new; # Meta/Midi Events.
 
@@ -259,25 +259,25 @@ class Track is export {
 
     method note-off (
         UInt7 $note,
-        UInt7 $vol = $!vol_note-off,
+        UInt7 $vel = $!vel_note-off,
     ) {
         $!e.append: self!VLQ-encode($!dt);
         $!e.append: %bytes{'note-off'} + $!ch;
         $!e.append: $note;
-        $!e.append: $vol;
-        $!vol_note-off = $vol;
+        $!e.append: $vel;
+        $!vel_note-off = $vel;
         $!dt = 0;
     }
 
     method note-on (
         UInt7 $note,
-        UInt7 $vol = $!vol_note-on,
+        UInt7 $vel = $!vel_note-on,
     ) {
         $!e.append: self!VLQ-encode($!dt);
         $!e.append: %bytes{'note-on'} + $!ch;
         $!e.append: $note;
-        $!e.append: $vol;
-        $!vol_note-on = $vol;
+        $!e.append: $vel;
+        $!vel_note-on = $vel;
         $!dt = 0;
     }
 
