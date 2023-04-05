@@ -183,6 +183,17 @@ class Track is export {
         return $b;
     }
 
+    method !text-buffer ($meta-event, ASCII $s, UInt28 $dt) {
+        return [] if ! $s.chars;
+        my $b = Buf.new;
+        $b.append: self!VLQ-encode($dt);
+        $b.append: %bytes{'meta-event'};
+        $b.append: %bytes{$meta-event};
+        $b.append: self!VLQ-encode($s.chars);
+        $b.append: $s.ords;
+        return $b;
+    }
+
         # Text that must be placed at a track's beginning.
         #
         # Note: Unlike the other methods, dt is not automatically
@@ -196,17 +207,6 @@ class Track is export {
     method !text ($meta-event, ASCII $s) {
         my $b = self!text-buffer($meta-event, $s, $!dt);
         $!dt = 0;
-        return $b;
-    }
-
-    method !text-buffer ($meta-event, ASCII $s, UInt28 $dt) {
-        return [] if ! $s.chars;
-        my $b = Buf.new;
-        $b.append: self!VLQ-encode($dt);
-        $b.append: %bytes{'meta-event'};
-        $b.append: %bytes{$meta-event};
-        $b.append: self!VLQ-encode($s.chars);
-        $b.append: $s.ords;
         return $b;
     }
 
