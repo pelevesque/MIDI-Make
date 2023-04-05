@@ -38,12 +38,12 @@ sub write_2-bytes (UInt16 $n) { Buf.write-uint16(0, $n, BigEndian) }
 sub write_4-bytes (UInt32 $n) { Buf.write-uint32(0, $n, BigEndian) }
 
 class Song is export {
-    subset format where * ~~ 0 | 1 | 2;
-    subset time-division where * ~~ 'quarter' | 'frame';
+    subset Format where * ~~ 0 | 1 | 2;
+    subset TimeDivision where * ~~ 'quarter' | 'frame';
     subset FPS where * ~~ 24 | 25 | 29.97 | 30;
 
-    has format $.format = 1;
-    has time-division $.time-division = 'quarter';
+    has Format $.format = 1;
+    has TimeDivision $.time-division = 'quarter';
     has UInt15 $.PPQ = 48; # Pulses per quarter note.
     has FPS    $.FPS = 24; # Frames per second.
     has UInt8  $.PPF = 4;  # Pulses per frame.
