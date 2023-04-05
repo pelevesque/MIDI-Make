@@ -1,5 +1,14 @@
 Revision history for MIDI::Make
 
+0.8.0
+    - Various clean up
+    - Rename ｢time｣ method to ｢time-signature｣
+    - Add MIDI events:
+        - program-change
+        - controllers
+    - Rename ｢volume｣ to ｢velocity｣ for notes
+    - Add TODO file
+
 0.7.0
     - Add MIDI events:
         - pitch-bend
