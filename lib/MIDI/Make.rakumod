@@ -110,6 +110,17 @@ class Song is export {
 
 class Track is export {
     subset ASCII of Str where 32 ≤ *.ords.all ≤ 126;
+    subset TextMetaEvent where * ~~
+        | 'text'
+        | 'copyright'
+        | 'name'
+        | 'instrument'
+        | 'lyric'
+        | 'marker'
+        | 'cue'
+        | 'program'
+        | 'port'
+    ;
 
     my %bytes =
         'note-off'       => 0x80,
@@ -183,7 +194,11 @@ class Track is export {
         return $b;
     }
 
-    method !text-buffer ($meta-event, ASCII $s, UInt28 $dt) {
+    method !text-buffer (
+        TextMetaEvent $meta-event,
+        ASCII $s,
+        UInt28 $dt,
+    ) {
         return [] if ! $s.chars;
         my $b = Buf.new;
         $b.append: self!VLQ-encode($dt);
@@ -199,12 +214,12 @@ class Track is export {
         # Note: Unlike the other methods, dt is not automatically
         # reset to 0 at the end of this method. This is so it remains
         # unchanged for !end-of-track and future renders.
-    method !lead-text ($meta-event, ASCII $s) {
+    method !lead-text (TextMetaEvent $meta-event, ASCII $s) {
         self!text-buffer($meta-event, $s, 0);
     }
 
         # Text that may be placed anywhere.
-    method !text ($meta-event, ASCII $s) {
+    method !text (TextMetaEvent $meta-event, ASCII $s) {
         my $b = self!text-buffer($meta-event, $s, $!dt);
         $!dt = 0;
         return $b;
