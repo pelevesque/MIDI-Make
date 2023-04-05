@@ -315,8 +315,8 @@ class Track is export {
         # 9 is undefined.
     method pan_MSB             (UInt7 $v) { self.controller( 10, $v) }
     method expression_MSB      (UInt7 $v) { self.controller( 11, $v) }
-    method fx-control_1_MSB    (UInt7 $v) { self.controller( 12, $v) }
-    method fx-control_2_MSB    (UInt7 $v) { self.controller( 13, $v) }
+    method FX-control_1_MSB    (UInt7 $v) { self.controller( 12, $v) }
+    method FX-control_2_MSB    (UInt7 $v) { self.controller( 13, $v) }
         # 14-15 are undefined.
     method gen-control_1_MSB   (UInt7 $v) { self.controller( 16, $v) }
     method gen-control_2_MSB   (UInt7 $v) { self.controller( 17, $v) }
@@ -335,8 +335,8 @@ class Track is export {
         # 41 is undefined.
     method pan_LSB             (UInt7 $v) { self.controller( 42, $v) }
     method expression_LSB      (UInt7 $v) { self.controller( 43, $v) }
-    method fx-control_1_LSB    (UInt7 $v) { self.controller( 44, $v) }
-    method fx-control_2_LSB    (UInt7 $v) { self.controller( 45, $v) }
+    method FX-control_1_LSB    (UInt7 $v) { self.controller( 44, $v) }
+    method FX-control_2_LSB    (UInt7 $v) { self.controller( 45, $v) }
         # 46-47 are undefined.
     method gen-control_1_LSB   (UInt7 $v) { self.controller( 48, $v) }
     method gen-control_2_LSB   (UInt7 $v) { self.controller( 49, $v) }
@@ -367,11 +367,11 @@ class Track is export {
         # 85-87 are undefined.
     method hi-res-vel-prefix   (UInt7 $v) { self.controller( 88, $v) }
         # 89-90 are undefined.
-    method fx_1-depth          (UInt7 $v) { self.controller( 91, $v) }
-    method fx_2-depth          (UInt7 $v) { self.controller( 92, $v) }
-    method fx_3-depth          (UInt7 $v) { self.controller( 93, $v) }
-    method fx_4-depth          (UInt7 $v) { self.controller( 94, $v) }
-    method fx_5-depth          (UInt7 $v) { self.controller( 95, $v) }
+    method FX_1-depth          (UInt7 $v) { self.controller( 91, $v) }
+    method FX_2-depth          (UInt7 $v) { self.controller( 92, $v) }
+    method FX_3-depth          (UInt7 $v) { self.controller( 93, $v) }
+    method FX_4-depth          (UInt7 $v) { self.controller( 94, $v) }
+    method FX_5-depth          (UInt7 $v) { self.controller( 95, $v) }
     method data-increment      (UInt7 $v) { self.controller( 96, $v) }
     method data-decrement      (UInt7 $v) { self.controller( 97, $v) }
     method NRPN_LSB            (UInt7 $v) { self.controller( 98, $v) }
@@ -428,13 +428,13 @@ class Track is export {
         self.expression_MSB(self!MSB($v));
         self.expression_LSB(self!LSB($v));
     }
-    method fx-control_1 (UInt14 $v) {
-        self.fx-control_1_MSB(self!MSB($v));
-        self.fx-control_1_LSB(self!LSB($v));
+    method FX-control_1 (UInt14 $v) {
+        self.FX-control_1_MSB(self!MSB($v));
+        self.FX-control_1_LSB(self!LSB($v));
     }
-    method fx-control_2 (UInt14 $v) {
-        self.fx-control_2_MSB(self!MSB($v));
-        self.fx-control_2_LSB(self!LSB($v));
+    method FX-control_2 (UInt14 $v) {
+        self.FX-control_2_MSB(self!MSB($v));
+        self.FX-control_2_LSB(self!LSB($v));
     }
     method gen-control_1 (UInt14 $v) {
         self.gen-control_1_MSB(self!MSB($v));

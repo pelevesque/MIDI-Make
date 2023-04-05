@@ -441,8 +441,8 @@ test('t29',
             # 9 is undefined.
         $t.pan_MSB:             10;
         $t.expression_MSB:      11;
-        $t.fx-control_1_MSB:    12;
-        $t.fx-control_2_MSB:    13;
+        $t.FX-control_1_MSB:    12;
+        $t.FX-control_2_MSB:    13;
             # 14-15 are undefined.
         $t.gen-control_1_MSB:   16;
         $t.gen-control_2_MSB:   17;
@@ -461,8 +461,8 @@ test('t29',
             # 41 is undefined.
         $t.pan_LSB:             42;
         $t.expression_LSB:      43;
-        $t.fx-control_1_LSB:    44;
-        $t.fx-control_2_LSB:    45;
+        $t.FX-control_1_LSB:    44;
+        $t.FX-control_2_LSB:    45;
             # 46-47 are undefined.
         $t.gen-control_1_LSB:   48;
         $t.gen-control_2_LSB:   49;
@@ -493,11 +493,11 @@ test('t29',
             # 85-87 are undefined.
         $t.hi-res-vel-prefix:   88;
             # 89-90 are undefined.
-        $t.fx_1-depth:          91;
-        $t.fx_2-depth:          92;
-        $t.fx_3-depth:          93;
-        $t.fx_4-depth:          94;
-        $t.fx_5-depth:          95;
+        $t.FX_1-depth:          91;
+        $t.FX_2-depth:          92;
+        $t.FX_3-depth:          93;
+        $t.FX_4-depth:          94;
+        $t.FX_5-depth:          95;
         $t.data-increment:      96;
         $t.data-decrement:      97;
         $t.NRPN_LSB:            98;
@@ -608,8 +608,8 @@ test('t30',
             # 9 is undefined.
         $t.pan:            1042;
         $t.expression:     1143;
-        $t.fx-control_1:   1244;
-        $t.fx-control_2:   1345;
+        $t.FX-control_1:   1244;
+        $t.FX-control_2:   1345;
             # 14-15 are undefined.
         $t.gen-control_1:  1648;
         $t.gen-control_2:  1749;

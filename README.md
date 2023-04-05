@@ -563,8 +563,8 @@ You can also call specific controllers using the following methods:
 | 9       | -                   | -       | -      | -                                      |
 | 10      | pan_MSB             | 0-127   | MSB    | Control left/right balance for mono.   |
 | 11      | expression_MSB      | 0-127   | MSB    | Expression is a percentage of volume.  |
-| 12      | fx-control_1_MSB    | 0-127   | MSB    | Control an effect parameter.           |
-| 13      | fx-control_2_MSB    | 0-127   | MSB    | Control an effect parameter.           |
+| 12      | FX-control_1_MSB    | 0-127   | MSB    | Control an effect parameter.           |
+| 13      | FX-control_2_MSB    | 0-127   | MSB    | Control an effect parameter.           |
 | 14-15   | -                   | -       | -      | -                                      |
 | 16      | gen-control_1_MSB   | 0-127   | MSB    | General purpose controller.            |
 | 17      | gen-control_2_MSB   | 0-127   | MSB    | General purpose controller.            |
@@ -583,8 +583,8 @@ You can also call specific controllers using the following methods:
 | 41      | -                   | -       | -      | -                                      |
 | 42      | pan_LSB             | 0-127   | LSB    | Control left/right balance for mono.   |
 | 43      | expression_LSB      | 0-127   | LSB    | Expression is a percentage of volume.  |
-| 44      | fx-control_1_LSB    | 0-127   | LSB    | Control an effect parameter.           |
-| 45      | fx-control_2_LSB    | 0-127   | LSB    | Control an effect parameter.           |
+| 44      | FX-control_1_LSB    | 0-127   | LSB    | Control an effect parameter.           |
+| 45      | FX-control_2_LSB    | 0-127   | LSB    | Control an effect parameter.           |
 | 46-47   | -                   | -       | -      | -                                      |
 | 48      | gen-control_1_LSB   | 0-127   | LSB    | General purpose controller.            |
 | 49      | gen-control_2_LSB   | 0-127   | LSB    | General purpose controller.            |
@@ -615,11 +615,11 @@ You can also call specific controllers using the following methods:
 | 85-87   | -                   | -       | -      | -                                      |
 | 88      | hi-res-vel-prefix   | 0-127   | MSB    | Extend the range of velocities.        |
 | 89-90   | -                   | -       | -      | -                                      |
-| 91      | fx_1-depth          | 0-127   | LSB    | Effect control. (reverb)               |
-| 92      | fx_2-depth          | 0-127   | LSB    | Effect control. (tremolo)              |
-| 93      | fx_3-depth          | 0-127   | LSB    | Effect control. (chorus)               |
-| 94      | fx_4-depth          | 0-127   | LSB    | Effect control. (detune)               |
-| 95      | fx_5-depth          | 0-127   | LSB    | Effect control. (phaser)               |
+| 91      | FX_1-depth          | 0-127   | LSB    | Effect control. (reverb)               |
+| 92      | FX_2-depth          | 0-127   | LSB    | Effect control. (tremolo)              |
+| 93      | FX_3-depth          | 0-127   | LSB    | Effect control. (chorus)               |
+| 94      | FX_4-depth          | 0-127   | LSB    | Effect control. (detune)               |
+| 95      | FX_5-depth          | 0-127   | LSB    | Effect control. (phaser)               |
 | 96      | data-increment      | N/A     | N/A    | Increment data for NRPN/RPN messages.  |
 | 97      | data-decrement      | N/A     | N/A    | Decrement data for NRPN/RPN messages.  |
 | 98      | NRPN_LSB            | 0-127   | LSB    | NRPN for controllers: 6, 38, 96, 97    |
@@ -659,8 +659,8 @@ value between 0 and 16383 in one go.
 | balance         | 0-16383 | Control left/right balance for stereo. |
 | pan             | 0-16383 | Control left/right balance for mono.   |
 | expression      | 0-16383 | Expression is a percentage of volume.  |
-| fx-control_1    | 0-16383 | Control an effect parameter.           |
-| fx-control_2    | 0-16383 | Control an effect parameter.           |
+| FX-control_1    | 0-16383 | Control an effect parameter.           |
+| FX-control_2    | 0-16383 | Control an effect parameter.           |
 | gen-control_1   | 0-16383 | General purpose controller.            |
 | gen-control_2   | 0-16383 | General purpose controller.            |
 | gen-control_3   | 0-16383 | General purpose controller.            |
