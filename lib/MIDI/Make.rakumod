@@ -38,9 +38,9 @@ sub write_2-bytes (UInt16 $n) { Buf.write-uint16(0, $n, BigEndian) }
 sub write_4-bytes (UInt32 $n) { Buf.write-uint32(0, $n, BigEndian) }
 
 class Song is export {
-    subset Format where * ~~ 0 | 1 | 2;
-    subset TimeDivision where * ~~ 'quarter' | 'frame';
-    subset FPS where * ~~ 24 | 25 | 29.97 | 30;
+    subset Format of Int where * ~~ 0 | 1 | 2;
+    subset TimeDivision of Str where * ~~ 'quarter' | 'frame';
+    subset FPS of Numeric where * ~~ 24 | 25 | 29.97 | 30;
 
     has Format $.format = 1;
     has TimeDivision $.time-division = 'quarter';
@@ -110,7 +110,7 @@ class Song is export {
 
 class Track is export {
     subset ASCII of Str where 32 ≤ *.ords.all ≤ 126;
-    subset TextMetaEvent where * ~~
+    subset TextMetaEvent of Str where * ~~
         | 'text'
         | 'copyright'
         | 'name'
