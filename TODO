@@ -1,0 +1,19 @@
+General:
+
+- Can code be simplified?
+- Fix all GitHub issues
+- Separate tests in various files?
+- Indicate in README.md which MIDI specification is implemented
+- Add alias for vel_note-on called velocity?
+
+To reach MIDI 1.0 Specification:
+
+- Add midi-event: channel-aftertouch
+- Rename ｢aftertouch｣ to ｢note-aftertouch｣
+- Add all types of SysEx-events
+- Add meta-events:
+    - Sequencer number
+    - SMPTE offset
+    - Key signature
+    - M-Live Tag (Not standard, but supported by MidiKit and QMidi)?
+- Question: Is it clear that program is for the program-name?
