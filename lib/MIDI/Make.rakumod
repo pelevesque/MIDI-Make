@@ -123,25 +123,26 @@ class Track is export {
     ;
 
     my %bytes =
-        'note-off'        => 0x80,
-        'note-on'         => 0x90,
-        'note-aftertouch' => 0xA0,
-        'controller'      => 0xB0,
-        'program-change'  => 0xC0,
-        'pitch-bend'      => 0xE0,
-        'meta-event'      => 0xFF,
-        'text'            => 0x01,
-        'copyright'       => 0x02,
-        'name'            => 0x03,
-        'instrument'      => 0x04,
-        'lyric'           => 0x05,
-        'marker'          => 0x06,
-        'cue'             => 0x07,
-        'program'         => 0x08,
-        'port'            => 0x09,
-        'tempo'           => 0x51,
-        'time-signature'  => 0x58,
-        'end-of-track'    => 0xF2,
+        'note-off'           => 0x80,
+        'note-on'            => 0x90,
+        'note-aftertouch'    => 0xA0,
+        'controller'         => 0xB0,
+        'program-change'     => 0xC0,
+        'channel-aftertouch' => 0xD0,
+        'pitch-bend'         => 0xE0,
+        'meta-event'         => 0xFF,
+        'text'               => 0x01,
+        'copyright'          => 0x02,
+        'name'               => 0x03,
+        'instrument'         => 0x04,
+        'lyric'              => 0x05,
+        'marker'             => 0x06,
+        'cue'                => 0x07,
+        'program'            => 0x08,
+        'port'               => 0x09,
+        'tempo'              => 0x51,
+        'time-signature'     => 0x58,
+        'end-of-track'       => 0xF2,
     ;
 
     has ASCII  $.copyright = '';
@@ -474,6 +475,15 @@ class Track is export {
         $!e.append: self!VLQ-encode($!dt);
         $!e.append: %bytes{'program-change'} + $!ch;
         $!e.append: $program-number;
+        $!dt = 0;
+    }
+
+    method channel-aftertouch (
+        UInt7 $amount,
+    ) {
+        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: %bytes{'channel-aftertouch'} + $!ch;
+        $!e.append: $amount;
         $!dt = 0;
     }
 

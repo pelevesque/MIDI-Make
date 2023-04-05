@@ -8,7 +8,6 @@ General:
 
 To reach MIDI 1.0 Specification:
 
-- Add midi-event: channel-aftertouch
 - Add all types of SysEx-events
 - Add meta-events:
     - Sequencer number

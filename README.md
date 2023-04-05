@@ -10,31 +10,32 @@ A [Raku](https://www.raku.org) module to make MIDI files.
 use MIDI::Make;
 
 my $t = Track.new;
-$t.copyright:       'c 2022 anonymous';
-$t.name:            'melody';
-$t.instrument:      'piano';
-$t.controller:      8, 100;
-$t.program:         'electric piano';
-$t.port:            'MIDI Out 1';
-$t.ch:              1;
-$t.program-change:  100;
-$t.pitch-bend:      0;
-$t.marker:                  'section I';
-$t.text:            'Lorem ipsum dolor sit amet.';
-$t.tempo:           ♩80;
-$t.time-signature:  3\2;
-$t.note-aftertouch: 60, 100;
-$t.note-on:         60;
-$t.lyric:           'one';
-$t.dt:                  128;
-$t.note-off:        60;
-$t.cue:             'door slam';
-$t.vel_note-on:     80;
-$t.vel_note-off:    10;
-$t.note-on:         72;
-$t.lyric:           'two';
-$t.dt:                  128;
-$t.note-off:        72;
+$t.copyright:          'c 2022 anonymous';
+$t.name:               'melody';
+$t.instrument:         'piano';
+$t.controller:         8, 100;
+$t.program:            'electric piano';
+$t.port:               'MIDI Out 1';
+$t.ch:                 1;
+$t.program-change:     100;
+$t.channel-aftertouch: 100;
+$t.pitch-bend:         0;
+$t.marker:                     'section I';
+$t.text:               'Lorem ipsum dolor sit amet.';
+$t.tempo:              ♩80;
+$t.time-signature:     3\2;
+$t.note-aftertouch:    60, 100;
+$t.note-on:            60;
+$t.lyric:              'one';
+$t.dt:                     128;
+$t.note-off:           60;
+$t.cue:                'door slam';
+$t.vel_note-on:        80;
+$t.vel_note-off:       10;
+$t.note-on:            72;
+$t.lyric:              'two';
+$t.dt:                     128;
+$t.note-off:           72;
 
 my $s = Song.new(:PPQ(96));
 $s.add-track($t.render);
@@ -682,6 +683,18 @@ It has one argument, the program number from 0 to 127.
 ```raku
 my $t = Track.new;
 $t.program-change: 100; # FX 5 in General MIDI.
+```
+
+#### channel-aftertouch
+
+The channel-aftertouch method adds aftertouch to all the notes of the
+channel it is applied to.
+
+The only argument is the aftertouch amount from 0 to 127.
+
+```raku
+my $t = Track.new;
+$t.channel-aftertouch: 100;
 ```
 
 #### pitch-bend
