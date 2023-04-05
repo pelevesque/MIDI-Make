@@ -22,7 +22,7 @@ sub prefix:<♩> (QPM $QPM) is export { (60000000 / $QPM).floor }
     # Helps to write human-like time signatures.
     # ➤ say (2\8).MIDI-nominator; «2␤»
     # ➤ say (2\8).MIDI-denominator; «3␤»
-class Time-Signature {
+class TimeSignature {
     has $.numerator;
     has $.denominator;
     method MIDI-numerator { $!numerator }
@@ -31,7 +31,7 @@ class Time-Signature {
 my constant @pow2 = ^256 »**» 2; # 2⁰ → 2²⁵⁵
 subset Pow2 of UInt where * ~~ any @pow2;
 sub infix:<\\> (UInt8 $numerator, Pow2 $denominator) is export {
-    Time-Signature.new: :$numerator, :$denominator;
+    TimeSignature.new: :$numerator, :$denominator;
 }
 
 sub write_2-bytes (UInt16 $n) { Buf.write-uint16(0, $n, BigEndian) }
@@ -258,7 +258,7 @@ class Track is export {
     }
 
     method time-signature (
-        Time-Signature $time-signature = 4\4,
+        TimeSignature $time-signature = 4\4,
         UInt8 $PPMC = 24, # Pulses per metronome click.
         UInt8 $_32PQ = 8, # 32nds per quarter note.
     ) {
