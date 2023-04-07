@@ -5,8 +5,8 @@ Revision history for MIDI::Make
     - Add TextMetaEvent type
     - Rename ｢aftertouch｣ method to ｢note-aftertouch｣
     - Add MIDI events:
-        channel-aftertouch
-        sysex
+        - channel-aftertouch
+        - sysex
     - Rename ｢Time-Signature｣ class to ｢TimeSignature｣
     - Change 6.* to 6.d in META6.json
     - Various internal clean up
