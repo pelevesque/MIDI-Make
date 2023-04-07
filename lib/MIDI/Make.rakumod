@@ -123,16 +123,6 @@ class Track is export {
     ;
 
     my %bytes =
-        'note-off'           => 0x80,
-        'note-on'            => 0x90,
-        'note-aftertouch'    => 0xA0,
-        'controller'         => 0xB0,
-        'program-change'     => 0xC0,
-        'channel-aftertouch' => 0xD0,
-        'pitch-bend'         => 0xE0,
-        'sysex-start'        => 0xF0,
-        'sysex-end'          => 0xF7,
-        'meta-event'         => 0xFF,
         'text'               => 0x01,
         'copyright'          => 0x02,
         'name'               => 0x03,
@@ -144,7 +134,17 @@ class Track is export {
         'port'               => 0x09,
         'tempo'              => 0x51,
         'time-signature'     => 0x58,
+        'note-off'           => 0x80,
+        'note-on'            => 0x90,
+        'note-aftertouch'    => 0xA0,
+        'controller'         => 0xB0,
+        'program-change'     => 0xC0,
+        'channel-aftertouch' => 0xD0,
+        'pitch-bend'         => 0xE0,
+        'sysex-start'        => 0xF0,
         'end-of-track'       => 0xF2,
+        'sysex-end'          => 0xF7,
+        'meta-event'         => 0xFF,
     ;
 
     has ASCII  $.copyright = '';
