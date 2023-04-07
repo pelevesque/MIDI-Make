@@ -36,6 +36,7 @@ $t.note-on:            72;
 $t.lyric:              'two';
 $t.dt:                     128;
 $t.note-off:           72;
+$t.sysex:              <0A 29 1E>;
 
 my $s = Song.new(:PPQ(96));
 $s.add-track($t.render);
@@ -710,6 +711,17 @@ instrument, but is usually +/- 2 semitones.
 my $t = Track.new;
 $t.pitch-bend: 0; # Bends the pitch as low as possible.
 $t.pitch-bend;    # Removes pitch bend by return to the default: 8192.
+```
+
+#### sysex
+
+The sysex method implements a simple sysex message. It takes a list
+of data bytes, and surrounds them with sysex start and end bytes:
+F0 <data bytes> F7
+
+```raku
+my $t = Track.new;
+$t.sysex: <0A 29 1E>;
 ```
 
 #### render

@@ -130,6 +130,8 @@ class Track is export {
         'program-change'     => 0xC0,
         'channel-aftertouch' => 0xD0,
         'pitch-bend'         => 0xE0,
+        'sysex-start'        => 0xF0,
+        'sysex-end'          => 0xF7,
         'meta-event'         => 0xFF,
         'text'               => 0x01,
         'copyright'          => 0x02,
@@ -494,6 +496,17 @@ class Track is export {
         $!e.append: %bytes{'pitch-bend'} + $!ch;
         $!e.append: self!LSB($pitch-bend);
         $!e.append: self!MSB($pitch-bend);
+        $!dt = 0;
+    }
+
+    subset DataBytes of List where 0 ≤ *.map({"0x$_"})».Int.all ≤ 127;
+    method sysex (
+       DataBytes $data,
+    ) {
+        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: %bytes{'sysex-start'};
+        $!e.append: Buf.new($data.map({"0x$_"})».Int);
+        $!e.append: %bytes{'sysex-end'};
         $!dt = 0;
     }
 
