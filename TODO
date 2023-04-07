@@ -1,6 +1,7 @@
 General:
 
 - Can code be simplified?
+- Can documentation be simplified?
 - Fix all GitHub issues
 - Separate tests in various files?
 - Indicate in README.md which MIDI specification is implemented
