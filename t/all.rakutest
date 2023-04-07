@@ -6,7 +6,7 @@ sub test ($label, $title, &renderable, $expected-bytes) {
     t $label => {
         is(
             &renderable().render,
-            Buf.new($expected-bytes.words.map({"0x$_"})>>.Int),
+            Buf.new($expected-bytes.words.map({"0x$_"})».Int),
             $title,
         );
     }
