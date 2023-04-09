@@ -18,13 +18,13 @@ $t.program:            'electric piano';
 $t.port:               'MIDI Out 1';
 $t.ch:                 1;
 $t.program-change:     100;
-$t.channel-aftertouch: 100;
+$t.aftertouch:         100;
 $t.pitch-bend:         0;
 $t.marker:                     'section I';
 $t.text:               'Lorem ipsum dolor sit amet.';
 $t.tempo:              ♩80;
 $t.time-signature:     3\2;
-$t.note-aftertouch:    60, 100;
+$t.aftertouch:         100, 53;
 $t.note-on:            60;
 $t.lyric:              'one';
 $t.dt:                     128;
@@ -525,16 +525,20 @@ $t.note-on: 62, 100; # vel_note-on == 100
 $t.note-on: 64;      # vel_note-on == 100
 ```
 
-#### note-aftertouch
+#### aftertouch
 
-The note-aftertouch method adds aftertouch to a given note.
+The aftertouch method is a multi method for both note aftertouch, and
+channel aftertouch.
 
-The first argument is the note number from 0 to 127. The second
-argument is the aftertouch amount from 0 to 127.
+For a note aftertouch, you provide two arguments: The aftertouch
+amount from 0 to 127, and the note number from 0 to 127.
+
+For a channel aftertouch, you simply provide the aftertouch amount.
 
 ```raku
 my $t = Track.new;
-$t.note-aftertouch: 60, 100;
+$t.aftertouch: 100, 53; # note aftertouch
+$t.aftertouch: 100;     # channel aftertouch
 ```
 
 #### controller
@@ -684,18 +688,6 @@ It has one argument, the program number from 0 to 127.
 ```raku
 my $t = Track.new;
 $t.program-change: 100; # FX 5 in General MIDI.
-```
-
-#### channel-aftertouch
-
-The channel-aftertouch method adds aftertouch to all the notes of the
-channel it is applied to.
-
-The only argument is the aftertouch amount from 0 to 127.
-
-```raku
-my $t = Track.new;
-$t.channel-aftertouch: 100;
 ```
 
 #### pitch-bend

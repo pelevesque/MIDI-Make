@@ -299,13 +299,22 @@ class Track is export {
         $!dt = 0;
     }
 
-    method note-aftertouch (
-        UInt7 $note,
+    multi method aftertouch (
         UInt7 $amount,
+        UInt7 $note,
     ) {
         $!e.append: self!VLQ-encode($!dt);
         $!e.append: %bytes{'note-aftertouch'} + $!ch;
         $!e.append: $note;
+        $!e.append: $amount;
+        $!dt = 0;
+    }
+
+    multi method aftertouch (
+        UInt7 $amount,
+    ) {
+        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: %bytes{'channel-aftertouch'} + $!ch;
         $!e.append: $amount;
         $!dt = 0;
     }
@@ -477,15 +486,6 @@ class Track is export {
         $!e.append: self!VLQ-encode($!dt);
         $!e.append: %bytes{'program-change'} + $!ch;
         $!e.append: $program-number;
-        $!dt = 0;
-    }
-
-    method channel-aftertouch (
-        UInt7 $amount,
-    ) {
-        $!e.append: self!VLQ-encode($!dt);
-        $!e.append: %bytes{'channel-aftertouch'} + $!ch;
-        $!e.append: $amount;
         $!dt = 0;
     }
 
