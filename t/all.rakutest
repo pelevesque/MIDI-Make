@@ -729,7 +729,19 @@ test('t38',
      00 FF F2 00',
 );
 
-t 't39' => {
+test('t39',
+    'Track: add-bytes',
+    {
+        my \t = Track.new;
+	    t.add-bytes: <00 F0 0A 29 1E F7>;
+	    t;
+    },
+    '4D 54 72 6B 00 00 00 0A
+     00 F0 0A 29 1E F7
+     00 FF F2 00',
+);
+
+t 't40' => {
     is(
         do {
             my \t = Track.new;
@@ -778,6 +790,7 @@ test('e1',
         t.dt:                 128;
         t.note-off:       72;
         t.sysex:          <0A 29 1E>;
+        t.add-bytes:      <00 F0 0A 29 1E F7>;
 
         my \s = Song.new;
         s.format: 2;
@@ -790,7 +803,7 @@ test('e1',
     },
     '4D 54 68 64 00 00 00 06
      00 02 00 01 E7 08
-     4D 54 72 6B 00 00 00 CB
+     4D 54 72 6B 00 00 00 D1
      00 FF 02 10 63 20 32 30 32 32 20 61 6E 6F 6E 79 6D 6F 75 73
      00 FF 03 06 6D 65 6C 6F 64 79
      00 FF 04 05 70 69 61 6E 6F
@@ -813,6 +826,7 @@ test('e1',
      00 91 48 50
      00 FF 05 03 74 77 6F 81
      00 81 48 0A
+     00 F0 0A 29 1E F7
      00 F0 0A 29 1E F7
      00 FF F2 00',
 );

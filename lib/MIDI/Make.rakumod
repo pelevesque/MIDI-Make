@@ -508,6 +508,13 @@ class Track is export {
         $!dt = 0;
     }
 
+    subset Bytes of List where 0 ≤ *.map({"0x$_"})».Int.all ≤ 255;
+    method add-bytes (
+        Bytes $bytes,
+    ) {
+        $!e.append: Buf.new($bytes.map({"0x$_"})».Int);
+    }
+
     method render {
         my $b = Buf.new;
         $b.append:  self!copyright;

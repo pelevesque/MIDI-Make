@@ -37,6 +37,7 @@ t.lyric:          'two';
 t.dt:                 128;
 t.note-off:       72;
 t.sysex:          <0A 29 1E>;
+t.add-bytes:      <00 F0 0A 29 1E F7>;
 
 my \s = Song.new(:PPQ(96));
 s.add-track(trender);
@@ -711,6 +712,17 @@ F0 <data bytes> F7
 ```raku
 my \t = Track.new;
 t.sysex: <0A 29 1E>;
+```
+
+#### add-bytes
+
+The add-bytes method lets you add arbitrary bytes to the track. Unlike
+other methods, it does not add dt nor does it reset dt to 0. add-bytes
+is mostly useful for testing purposes.
+
+```raku
+my \t = Track.new;
+t.add-bytes: <00 F0 0A 29 1E F7>;
 ```
 
 #### render
