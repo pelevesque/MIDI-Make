@@ -40,7 +40,7 @@ t.sysex:          <0A 29 1E>;
 t.add-bytes:      <00 F0 0A 29 1E F7>;
 
 my \s = Song.new(:PPQ(96));
-s.add-track(trender);
+s.add-track(t.render);
 
     # Print the MIDI contents.
 say s.render;
