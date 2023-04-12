@@ -229,9 +229,11 @@ This permits specifying tempo in a musical human-readable way.
 
 ```raku
     # 60 QPM using microseconds per quarter note.
+my \t = Track.new;
 t.tempo: 1000000;
 
     # 60 QPM using the MIDI::Make operator.
+my \t = Track.new;
 t.tempo: ♩60;
 ```
 
@@ -241,6 +243,7 @@ The time-signature operator is used to specify a time-signature for
 the Track class's time-signature method.
 
 ```raku
+my \t = Track.new;
 t.time-signature: 3\8;
 ```
 
