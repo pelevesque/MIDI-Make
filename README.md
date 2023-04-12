@@ -293,22 +293,6 @@ my $t = Track.new;
 $t.name: 'melody';
 ```
 
-#### instrument
-
-The instrument parameter lets you set the track's instrument using
-ASCII characters.
-
-```raku
-    # Set on instantiation.
-my $t = Track.new(:instrument('piano'));
-```
-
-```raku
-    # Set after instantiation.
-my $t = Track.new;
-$t.instrument: 'piano';
-```
-
 #### dt
 
 Delta time (dt) sets the time in MIDI pulses between MIDI events.
@@ -410,6 +394,16 @@ The text method adds any type of text to a track.
 ```raku
 my $t = Track.new;
 $t.text: 'Lorem ipsum dolor sit amet.';
+```
+
+#### instrument
+
+The instrument method lets you set the track's instrument using
+ASCII characters.
+
+```raku
+my $t = Track.new;
+$t.instrument: 'piano';
 ```
 
 #### lyric

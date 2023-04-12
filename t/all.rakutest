@@ -109,14 +109,6 @@ test('t3',
      00 FF F2 00',
 );
 
-test('t4',
-    'Track Instantiation: instrument => "piano"',
-    { Track.new(:instrument('piano')) },
-    '4D 54 72 6B 00 00 00 0D
-     00 FF 04 05 70 69 61 6E 6F
-     00 FF F2 00',
-);
-
 test('t5',
     'Track Instantiation: dt => 100',
     {
@@ -243,19 +235,6 @@ test('t14',
     '4D 54 72 6B 00 00 00 0D
      00 FF 04 05 70 69 61 6E 6F
      00 FF F2 00',
-);
-
-test('t15',
-    'Track: instrument with ignored dt',
-    {
-        my $t = Track.new;
-        $t.dt: 100; # Ignored.
-	    $t.instrument: 'piano';
-	    $t;
-    },
-    '4D 54 72 6B 00 00 00 0D
-     00 FF 04 05 70 69 61 6E 6F
-     64 FF F2 00',
 );
 
 test('t16',
@@ -757,7 +736,6 @@ t 't39' => {
             $t.dt: 100;
             $t.copyright: 'c 2022 anonymous';
             $t.name: 'melody';
-            $t.instrument: 'piano';
             $t.render;
             $t.dt;
         },

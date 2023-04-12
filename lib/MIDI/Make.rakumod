@@ -158,7 +158,6 @@ class Track is export {
         # Getters.
     multi method copyright { $!copyright }
     multi method name { $!name }
-    multi method instrument { $!instrument }
     multi method dt { $!dt }
     multi method ch { $!ch }
     multi method vel_note-off { $!vel_note-off }
@@ -167,7 +166,6 @@ class Track is export {
         # Setters.
     multi method copyright ($copyright) { $!copyright = $copyright }
     multi method name ($name) { $!name = $name }
-    multi method instrument ($instrument) { $!instrument = $instrument }
     multi method dt ($dt) { $!dt = $dt }
     multi method ch ($ch) { $!ch = $ch }
     multi method vel_note-off ($vel) { $!vel_note-off = $vel }
@@ -230,7 +228,6 @@ class Track is export {
 
     method !copyright  { self!lead-text('copyright',  $!copyright ) }
     method !name       { self!lead-text('name',       $!name      ) }
-    method !instrument { self!lead-text('instrument', $!instrument) }
 
     method !end-of-track {
         my $b = Buf.new;
@@ -241,12 +238,13 @@ class Track is export {
         return $b;
     }
 
-    method text    (ASCII $s) { $!e.append: self!text('text',    $s) }
-    method lyric   (ASCII $s) { $!e.append: self!text('lyric',   $s) }
-    method marker  (ASCII $s) { $!e.append: self!text('marker',  $s) }
-    method cue     (ASCII $s) { $!e.append: self!text('cue',     $s) }
-    method program (ASCII $s) { $!e.append: self!text('program', $s) }
-    method port    (ASCII $s) { $!e.append: self!text('port',    $s) }
+    method text       (ASCII $s) { $!e.append: self!text('text',       $s) }
+    method instrument (ASCII $s) { $!e.append: self!text('instrument', $s) }
+    method lyric      (ASCII $s) { $!e.append: self!text('lyric',      $s) }
+    method marker     (ASCII $s) { $!e.append: self!text('marker',     $s) }
+    method cue        (ASCII $s) { $!e.append: self!text('cue',        $s) }
+    method program    (ASCII $s) { $!e.append: self!text('program',    $s) }
+    method port       (ASCII $s) { $!e.append: self!text('port',       $s) }
 
     method tempo (
         UInt24 $tempo = 500000, # Microseconds per quarter note.
@@ -514,7 +512,6 @@ class Track is export {
         my $b = Buf.new;
         $b.append:  self!copyright;
         $b.append:  self!name;
-        $b.append:  self!instrument;
         $b.append:  $!e;
         $b.append:  self!end-of-track;
         $b.prepend: self!header($b.bytes);
