@@ -9,43 +9,43 @@ A [Raku](https://www.raku.org) module to make MIDI files.
 ```raku
 use MIDI::Make;
 
-my $t = Track.new;
-$t.copyright:          'c 2022 anonymous';
-$t.name:               'melody';
-$t.instrument:         'piano';
-$t.controller:         8, 100;
-$t.program:            'electric piano';
-$t.port:               'MIDI Out 1';
-$t.ch:                 1;
-$t.program-change:     100;
-$t.aftertouch:         100;
-$t.pitch-bend:         0;
-$t.marker:                     'section I';
-$t.text:               'Lorem ipsum dolor sit amet.';
-$t.tempo:              ♩80;
-$t.time-signature:     3\2;
-$t.aftertouch:         100, 53;
-$t.note-on:            60;
-$t.lyric:              'one';
-$t.dt:                     128;
-$t.note-off:           60;
-$t.cue:                'door slam';
-$t.vel_note-on:        80;
-$t.vel_note-off:       10;
-$t.note-on:            72;
-$t.lyric:              'two';
-$t.dt:                     128;
-$t.note-off:           72;
-$t.sysex:              <0A 29 1E>;
+my \t = Track.new;
+t.copyright:          'c 2022 anonymous';
+t.name:               'melody';
+t.instrument:         'piano';
+t.controller:         8, 100;
+t.program:            'electric piano';
+t.port:               'MIDI Out 1';
+t.ch:                 1;
+t.program-change:     100;
+t.aftertouch:         100;
+t.pitch-bend:         0;
+t.marker:                     'section I';
+t.text:               'Lorem ipsum dolor sit amet.';
+t.tempo:              ♩80;
+t.time-signature:     3\2;
+t.aftertouch:         100, 53;
+t.note-on:            60;
+t.lyric:              'one';
+t.dt:                     128;
+t.note-off:           60;
+t.cue:                'door slam';
+t.vel_note-on:        80;
+t.vel_note-off:       10;
+t.note-on:            72;
+t.lyric:              'two';
+t.dt:                     128;
+t.note-off:           72;
+t.sysex:              <0A 29 1E>;
 
-my $s = Song.new(:PPQ(96));
-$s.add-track($t.render);
+my \s = Song.new(:PPQ(96));
+s.add-track(trender);
 
     # Print the MIDI contents.
-say $s.render;
+say s.render;
 
     # Save the MIDI contents to file.
-spurt 'file.mid', $s.render;
+spurt 'file.mid', s.render;
 ```
 
 ## Versioning
@@ -81,7 +81,7 @@ information created up to that point.
 
 ```raku
     # Instantiating without parameters.
-my $f = Song.new;
+my \f = Song.new;
 ```
 
 ### Parameters
@@ -100,13 +100,13 @@ It can have three values: 0, 1, or 2. The default is 1.
 
 ```raku
     # Set on instantiation.
-my $f = Song.new(:format(0));
+my \f = Song.new(:format(0));
 ```
 
 ```raku
     # Set after instantiation.
-my $f = Song.new;
-$f.format: 0;
+my \f = Song.new;
+f.format: 0;
 ```
 
 #### time-division
@@ -118,13 +118,13 @@ default is quarter.
 
 ```raku
     # Set on instantiation.
-my $f = Song.new(:time-division('frame'));
+my \f = Song.new(:time-division('frame'));
 ```
 
 ```raku
     # Set after instantiation.
-my $f = Song.new;
-$f.time-division: 'frame';
+my \f = Song.new;
+f.time-division: 'frame';
 ```
 
 #### PPQ (pulses per quarter note)
@@ -137,13 +137,13 @@ The PPQ value is from 0 to 32767. The default is 48.
 
 ```raku
     # Set on instantiation.
-my $f = Song.new(:PPQ(96));
+my \f = Song.new(:PPQ(96));
 ```
 
 ```raku
     # Set after instantiation.
-my $f = Song.new;
-$f.PPQ: 96;
+my \f = Song.new;
+f.PPQ: 96;
 ```
 
 #### FPS (frames per second)
@@ -156,14 +156,14 @@ FPS can have four values: 24, 25, 29.97, or 30. The default is 24.
 
 ```raku
     # Set on instantiation.
-my $f = Song.new(:time-division('frame'), :FPS(30));
+my \f = Song.new(:time-division('frame'), :FPS(30));
 ```
 
 ```raku
     # Set after instantiation.
-my $f = Song.new;
-$f.time-division: 'frame';
-$f.FPS: 30;
+my \f = Song.new;
+f.time-division: 'frame';
+f.FPS: 30;
 ```
 
 #### PPF (pulses per frame)
@@ -176,14 +176,14 @@ The PPF value is from 0 to 255. The default is 4.
 
 ```raku
     # Set on instantiation.
-my $f = Song.new(:time-division('frame'), :PPF(8));
+my \f = Song.new(:time-division('frame'), :PPF(8));
 ```
 
 ```raku
     # Set after instantiation.
-my $f = Song.new;
-$f.time-division: 'frame';
-$f.PPF: 8;
+my \f = Song.new;
+f.time-division: 'frame';
+f.PPF: 8;
 ```
 
 ### Methods
@@ -195,14 +195,14 @@ class.
 
 ```raku
     # Create a track.
-my $t = Track.new;
-$t.note-on:  60;
-$t.dt:           100;
-$t.note-off: 60;
+my \t = Track.new;
+t.note-on:  60;
+t.dt:           100;
+t.note-off: 60;
 
     # Add it to the Song class.
-my $f = Song.new;
-$f.add-track($t.render);
+my \f = Song.new;
+f.add-track($t.render);
 ```
 
 #### render
@@ -211,8 +211,8 @@ The render method renders the MIDI file information gathered up to
 that point.
 
 ```raku
-my $f = Song.new;
-say $f.render;
+my \f = Song.new;
+say f.render;
 ```
 
 ## Operators
@@ -229,10 +229,10 @@ This permits specifying tempo in a musical human-readable way.
 
 ```raku
     # 60 QPM using microseconds per quarter note.
-$t.tempo: 1000000;
+t.tempo: 1000000;
 
     # 60 QPM using the MIDI::Make operator.
-$t.tempo: ♩60;
+t.tempo: ♩60;
 ```
 
 ### \
@@ -241,7 +241,7 @@ The time-signature operator is used to specify a time-signature for
 the Track class's time-signature method.
 
 ```raku
-$t.time-signature: 3\8;
+t.time-signature: 3\8;
 ```
 
 ## The Track class
@@ -251,7 +251,7 @@ to the Song class.
 
 ```raku
     # Instantiating without parameters.
-my $t = Track.new;
+my \t = Track.new;
 ```
 
 ### Parameters
@@ -268,13 +268,13 @@ in the sequence.
 
 ```raku
     # Set on instantiation.
-my $t = Track.new(:copyright('c 2022 anonymous'));
+my \t = Track.new(:copyright('c 2022 anonymous'));
 ```
 
 ```raku
     # Set after instantiation.
-my $t = Track.new;
-$t.copyright: 'c 2022 anonymous';
+my \t = Track.new;
+t.copyright: 'c 2022 anonymous';
 ```
 
 #### name
@@ -284,13 +284,13 @@ ASCII characters.
 
 ```raku
     # Set on instantiation.
-my $t = Track.new(:name('melody'));
+my \t = Track.new(:name('melody'));
 ```
 
 ```raku
     # Set after instantiation.
-my $t = Track.new;
-$t.name: 'melody';
+my \t = Track.new;
+t.name: 'melody';
 ```
 
 #### dt
@@ -305,13 +305,13 @@ period of time.
 
 ```raku
     # Set on instantiation.
-my $t = Track.new(:dt(100));
+my \t = Track.new(:dt(100));
 ```
 
 ```raku
     # Set after instantiation.
-my $t = Track.new;
-$t.dt: 100;
+my \t = Track.new;
+t.dt: 100;
 ```
 
 dt is automatically set to 0 after each of the MIDI events implemented
@@ -319,15 +319,15 @@ in the Track class. This is done so that you can enter many MIDI
 events consecutively before setting a new dt.
 
 ```raku
-my $t = Track.new;
-$t.note-on:  60;
-$t.dt:          100; # Wait 100 MIDI pulses before subsequent events.
-$t.note-off: 60;
-$t.note-on:  62;
-$t.note-on:  64;
-$t.dt:          200; # Wait 200 MIDI pulses before subsequent events.
-$t.note-off: 62;
-$t.note-off: 64;
+my \t = Track.new;
+t.note-on:  60;
+t.dt:          100; # Wait 100 MIDI pulses before subsequent events.
+t.note-off: 60;
+t.note-on:  62;
+t.note-on:  64;
+t.dt:          200; # Wait 200 MIDI pulses before subsequent events.
+t.note-off: 62;
+t.note-off: 64;
 ```
 
 #### ch
@@ -338,13 +338,13 @@ The ch value is from 0 to 15. The default is 0.
 
 ```raku
     # Set on instantiation.
-my $t = Track.new(:ch(1));
+my \t = Track.new(:ch(1));
 ```
 
 ```raku
     # Set after instantiation.
-my $t = Track.new;
-$t.ch: 1;
+my \t = Track.new;
+t.ch: 1;
 ```
 
 #### vel_note-off
@@ -359,13 +359,13 @@ depressed at different speeds.
 
 ```raku
     # Set on instantiation.
-my $t = Track.new(:vel_note-off(10));
+my \t = Track.new(:vel_note-off(10));
 ```
 
 ```raku
     # Set after instantiation.
-my $t = Track.new;
-$t.vel_note-off: 10;
+my \t = Track.new;
+t.vel_note-off: 10;
 ```
 
 #### vel_note-on
@@ -376,13 +376,13 @@ The vel_note-on value is from 0 to 127. The default is 0.
 
 ```raku
     # Set on instantiation.
-my $t = Track.new(:vel_note-on(60));
+my \t = Track.new(:vel_note-on(60));
 ```
 
 ```raku
     # Set after instantiation.
-my $t = Track.new;
-$t.vel_note-on: 60;
+my \t = Track.new;
+t.vel_note-on: 60;
 ```
 
 ### Methods
@@ -392,8 +392,8 @@ $t.vel_note-on: 60;
 The text method adds any type of text to a track.
 
 ```raku
-my $t = Track.new;
-$t.text: 'Lorem ipsum dolor sit amet.';
+my \t = Track.new;
+t.text: 'Lorem ipsum dolor sit amet.';
 ```
 
 #### instrument
@@ -402,8 +402,8 @@ The instrument method lets you set the track's instrument using
 ASCII characters.
 
 ```raku
-my $t = Track.new;
-$t.instrument: 'piano';
+my \t = Track.new;
+t.instrument: 'piano';
 ```
 
 #### lyric
@@ -411,8 +411,8 @@ $t.instrument: 'piano';
 The lyric method adds a lyric anywhere on the track.
 
 ```raku
-my $t = Track.new;
-$t.lyric: 'one';
+my \t = Track.new;
+t.lyric: 'one';
 ```
 
 #### marker
@@ -421,8 +421,8 @@ The marker method allows you to mark the beginning of important
 sequences in a track. E.g. section I, section II, outro, etc.
 
 ```raku
-my $t = Track.new;
-$t.marker: 'section I';
+my \t = Track.new;
+t.marker: 'section I';
 ```
 
 #### cue
@@ -430,8 +430,8 @@ $t.marker: 'section I';
 The cue method adds a cue anywhere on the track.
 
 ```raku
-my $t = Track.new;
-$t.cue: 'door slam';
+my \t = Track.new;
+t.cue: 'door slam';
 ```
 
 #### program
@@ -439,8 +439,8 @@ $t.cue: 'door slam';
 The program method adds a program name anywhere on the track.
 
 ```raku
-my $t = Track.new;
-$t.program: 'electric piano';
+my \t = Track.new;
+t.program: 'electric piano';
 ```
 
 #### port
@@ -448,8 +448,8 @@ $t.program: 'electric piano';
 The port method adds a MIDI port name anywhere on the track.
 
 ```raku
-my $t = Track.new;
-$t.port: 'MIDI Out 1';
+my \t = Track.new;
+t.port: 'MIDI Out 1';
 ```
 
 #### tempo
@@ -461,9 +461,9 @@ defined earlier in this file. The default value is 500000 which is
 equivalent to a tempo of 120 quarter notes per minute.
 
 ```raku
-my $t = Track.new;
-$t.tempo: 1000000; # Set the tempo to 60 quarter notes per minute.
-$t.tempo: ♩120;    # Set the tempo to 120 quarter notes per minute.
+my \t = Track.new;
+t.tempo: 1000000; # Set the tempo to 60 quarter notes per minute.
+t.tempo: ♩120;    # Set the tempo to 120 quarter notes per minute.
 ```
 
 #### time-signature
@@ -481,10 +481,10 @@ three optional arguments:
    The default is 8.
 
 ```raku
-my $t = Track.new;
-$t.time-signature: 3\4;
-$t.time-signature: 4\4, 48;
-$t.time-signature: 2\8, 32, 12;
+my \t = Track.new;
+t.time-signature: 3\4;
+t.time-signature: 4\4, 48;
+t.time-signature: 2\8, 32, 12;
 ```
 
 #### note-off
@@ -497,10 +497,10 @@ method, it will also set the vel_note-off parameter of the Track class
 for the next note-off events.
 
 ```raku
-my $t = Track.new;
-$t.note-off: 60;      # vel_note-off == 0
-$t.note-off: 62, 120; # vel_note-off == 120
-$t.note-off: 64;      # vel_note-off == 120
+my \t = Track.new;
+t.note-off: 60;      # vel_note-off == 0
+t.note-off: 62, 120; # vel_note-off == 120
+t.note-off: 64;      # vel_note-off == 120
 ```
 
 #### note-on
@@ -513,10 +513,10 @@ it will also set the vel_note-on parameter of the Track class for the
 next note-on events.
 
 ```raku
-my $t = Track.new;
-$t.note-on: 60;      # vel_note-on == 127
-$t.note-on: 62, 100; # vel_note-on == 100
-$t.note-on: 64;      # vel_note-on == 100
+my \t = Track.new;
+t.note-on: 60;      # vel_note-on == 127
+t.note-on: 62, 100; # vel_note-on == 100
+t.note-on: 64;      # vel_note-on == 100
 ```
 
 #### aftertouch
@@ -530,9 +530,9 @@ amount from 0 to 127, and the note number from 0 to 127.
 For a channel aftertouch, you simply provide the aftertouch amount.
 
 ```raku
-my $t = Track.new;
-$t.aftertouch: 100, 53; # note aftertouch
-$t.aftertouch: 100;     # channel aftertouch
+my \t = Track.new;
+t.aftertouch: 100, 53; # note aftertouch
+t.aftertouch: 100;     # channel aftertouch
 ```
 
 #### controller
@@ -543,8 +543,8 @@ The first argument is the controller number from 0 to 127. The second
 argument is the controller value also from 0 to 127.
 
 ```raku
-my $t = Track.new;
-$t.controller: 8, 100; # Balance_MSB of 100.
+my \t = Track.new;
+t.controller: 8, 100; # Balance_MSB of 100.
 ```
 
 You can also call specific controllers using the following methods:
@@ -639,8 +639,8 @@ You can also call specific controllers using the following methods:
 Ex:
 
 ```raku
-my $t = Track.new;
-$t.pan_MSB: 64;
+my \t = Track.new;
+t.pan_MSB: 64;
 ```
 
 It's also possible to call the MSB and LSB counterparts (controllers
@@ -669,8 +669,8 @@ value between 0 and 16383 in one go.
 Ex:
 
 ```raku
-my $t = Track.new;
-$t.pan: 3489;
+my \t = Track.new;
+t.pan: 3489;
 ```
 
 #### program-change
@@ -680,8 +680,8 @@ Changes the program of the current channel.
 It has one argument, the program number from 0 to 127.
 
 ```raku
-my $t = Track.new;
-$t.program-change: 100; # FX 5 in General MIDI.
+my \t = Track.new;
+t.program-change: 100; # FX 5 in General MIDI.
 ```
 
 #### pitch-bend
@@ -694,9 +694,9 @@ which is no pitch bend. The pitch range may vary from instrument to
 instrument, but is usually +/- 2 semitones.
 
 ```raku
-my $t = Track.new;
-$t.pitch-bend: 0; # Bends the pitch as low as possible.
-$t.pitch-bend;    # Removes pitch bend by return to the default: 8192.
+my \t = Track.new;
+t.pitch-bend: 0; # Bends the pitch as low as possible.
+t.pitch-bend;    # Removes pitch bend by return to the default: 8192.
 ```
 
 #### sysex
@@ -706,8 +706,8 @@ of data bytes, and surrounds them with sysex start and end bytes:
 F0 <data bytes> F7
 
 ```raku
-my $t = Track.new;
-$t.sysex: <0A 29 1E>;
+my \t = Track.new;
+t.sysex: <0A 29 1E>;
 ```
 
 #### render
@@ -717,13 +717,13 @@ that point. It is used to pass the track's MIDI data to the Song
 class.
 
 ```raku
-my $t = Track.new;
-$t.note-on:  60;
-$t.dt:           128;
-$t.note-off: 60;
+my \t = Track.new;
+t.note-on:  60;
+t.dt:           128;
+t.note-off: 60;
 
-my $f = Song.new;
-$f.add-track($t.render);
+my \f = Song.new;
+f.add-track($t.render);
 ```
 
 ## Running Tests

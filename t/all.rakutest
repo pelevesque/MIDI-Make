@@ -60,10 +60,10 @@ test('s6',
 test('s7',
     'Trackless Song: Set params after instantiation A',
     {
-        my $s = Song.new;
-        $s.format: 2;
-        $s.PPQ: 425;
-        $s;
+        my \s = Song.new;
+        s.format: 2;
+        s.PPQ: 425;
+        s;
     },
     '4D 54 68 64 00 00 00 06
      00 02 00 00 01 A9',
@@ -72,12 +72,12 @@ test('s7',
 test('s8',
     'Trackless Song: Set params after instantiation B',
     {
-        my $s = Song.new;
-        $s.format: 1;
-        $s.time-division: 'frame';
-        $s.FPS: 30;
-        $s.PPF: 48;
-        $s;
+        my \s = Song.new;
+        s.format: 1;
+        s.time-division: 'frame';
+        s.FPS: 30;
+        s.PPF: 48;
+        s;
     },
     '4D 54 68 64 00 00 00 06
      00 01 00 00 E2 30',
@@ -112,9 +112,9 @@ test('t3',
 test('t5',
     'Track Instantiation: dt => 100',
     {
-        my $t = Track.new(:dt(100));
-        $t.note-on: 60;
-        $t;
+        my \t = Track.new(:dt(100));
+        t.note-on: 60;
+        t;
     },
     '4D 54 72 6B 00 00 00 08
      64 90 3C 7F
@@ -124,9 +124,9 @@ test('t5',
 test('t6',
     'Track Instantiation: ch => 1',
     {
-        my $t = Track.new(:ch(1));
-        $t.note-on: 60;
-        $t;
+        my \t = Track.new(:ch(1));
+        t.note-on: 60;
+        t;
     },
     '4D 54 72 6B 00 00 00 08
      00 91 3C 7F
@@ -136,9 +136,9 @@ test('t6',
 test('t7',
     'Track Instantiation: vel_note-off => 10',
     {
-        my $t = Track.new(:vel_note-off(10));
-        $t.note-off: 60;
-        $t;
+        my \t = Track.new(:vel_note-off(10));
+        t.note-off: 60;
+        t;
     },
     '4D 54 72 6B 00 00 00 08
      00 80 3C 0A
@@ -148,9 +148,9 @@ test('t7',
 test('t8',
     'Track Instantiation: vel_note-on => 100',
     {
-        my $t = Track.new(:vel_note-on(100));
-        $t.note-on: 60;
-        $t;
+        my \t = Track.new(:vel_note-on(100));
+        t.note-on: 60;
+        t;
     },
     '4D 54 72 6B 00 00 00 08
      00 90 3C 64
@@ -160,14 +160,14 @@ test('t8',
 test('t9',
     'Track: Change params after instantiation',
     {
-        my $t = Track.new;
-        $t.dt: 100;
-        $t.ch: 1;
-        $t.vel_note-off: 10;
-        $t.vel_note-on:  100;
-        $t.note-on:  60;
-        $t.note-off: 60;
-        $t;
+        my \t = Track.new;
+        t.dt: 100;
+        t.ch: 1;
+        t.vel_note-off: 10;
+        t.vel_note-on:  100;
+        t.note-on:  60;
+        t.note-off: 60;
+        t;
     },
     '4D 54 72 6B 00 00 00 0C
      64 91 3C 64
@@ -178,9 +178,9 @@ test('t9',
 test('t10',
     'Track: copyright',
     {
-        my $t = Track.new;
-	    $t.copyright: 'c 2022 anonymous';
-	    $t;
+        my \t = Track.new;
+	    t.copyright: 'c 2022 anonymous';
+	    t;
     },
     '4D 54 72 6B 00 00 00 18
      00 FF 02 10 63 20 32 30 32 32 20 61 6E 6F 6E 79 6D 6F 75 73
@@ -190,10 +190,10 @@ test('t10',
 test('t11',
     'Track: copyright with ignored dt',
     {
-        my $t = Track.new;
-        $t.dt: 100; # Ignored.
-	    $t.copyright: 'c 2022 anonymous';
-	    $t;
+        my \t = Track.new;
+        t.dt: 100; # Ignored.
+	    t.copyright: 'c 2022 anonymous';
+	    t;
     },
     '4D 54 72 6B 00 00 00 18
      00 FF 02 10 63 20 32 30 32 32 20 61 6E 6F 6E 79 6D 6F 75 73
@@ -203,9 +203,9 @@ test('t11',
 test('t12',
     'Track: name',
     {
-        my $t = Track.new;
-	    $t.name: 'melody';
-	    $t;
+        my \t = Track.new;
+	    t.name: 'melody';
+	    t;
     },
     '4D 54 72 6B 00 00 00 0E
      00 FF 03 06 6D 65 6C 6F 64 79
@@ -215,10 +215,10 @@ test('t12',
 test('t13',
     'Track: name with ignored dt',
     {
-        my $t = Track.new;
-        $t.dt: 100; # Ignored.
-	    $t.name: 'melody';
-	    $t;
+        my \t = Track.new;
+        t.dt: 100; # Ignored.
+	    t.name: 'melody';
+	    t;
     },
     '4D 54 72 6B 00 00 00 0E
      00 FF 03 06 6D 65 6C 6F 64 79
@@ -228,9 +228,9 @@ test('t13',
 test('t14',
     'Track: instrument',
     {
-        my $t = Track.new;
-	    $t.instrument: 'piano';
-	    $t;
+        my \t = Track.new;
+	    t.instrument: 'piano';
+	    t;
     },
     '4D 54 72 6B 00 00 00 0D
      00 FF 04 05 70 69 61 6E 6F
@@ -240,9 +240,9 @@ test('t14',
 test('t16',
     'Track: text',
     {
-        my $t = Track.new;
-	    $t.text: 'Lorem ipsum dolor sit amet.';
-	    $t;
+        my \t = Track.new;
+	    t.text: 'Lorem ipsum dolor sit amet.';
+	    t;
     },
     '4D 54 72 6B 00 00 00 23
      00 FF 01 1B 4C 6F 72 65 6D 20 69 70 73 75 6D 20 64 6F 6C 6F 72 20
@@ -253,9 +253,9 @@ test('t16',
 test('t17',
     'Track: lyric',
     {
-        my $t = Track.new;
-	    $t.lyric: 'one';
-	    $t;
+        my \t = Track.new;
+	    t.lyric: 'one';
+	    t;
     },
     '4D 54 72 6B 00 00 00 0B
      00 FF 05 03 6F 6E 65
@@ -265,9 +265,9 @@ test('t17',
 test('t18',
     'Track: marker',
     {
-        my $t = Track.new;
-	    $t.marker: 'section I';
-	    $t;
+        my \t = Track.new;
+	    t.marker: 'section I';
+	    t;
     },
     '4D 54 72 6B 00 00 00 11
      00 FF 06 09 73 65 63 74 69 6F 6E 20 49
@@ -277,9 +277,9 @@ test('t18',
 test('t19',
     'Track: cue',
     {
-        my $t = Track.new;
-	    $t.cue: 'door slam';
-	    $t;
+        my \t = Track.new;
+	    t.cue: 'door slam';
+	    t;
     },
     '4D 54 72 6B 00 00 00 11
      00 FF 07 09 64 6F 6F 72 20 73 6C 61 6D
@@ -289,9 +289,9 @@ test('t19',
 test('t20',
     'Track: program',
     {
-        my $t = Track.new;
-	    $t.program: 'electric piano';
-	    $t;
+        my \t = Track.new;
+	    t.program: 'electric piano';
+	    t;
     },
     '4D 54 72 6B 00 00 00 16
      00 FF 08 0E 65 6C 65 63 74 72 69 63 20 70 69 61 6E 6F
@@ -301,9 +301,9 @@ test('t20',
 test('t21',
     'Track: port',
     {
-        my $t = Track.new;
-	    $t.port: 'MIDI Out 1';
-	    $t;
+        my \t = Track.new;
+	    t.port: 'MIDI Out 1';
+	    t;
     },
     '4D 54 72 6B 00 00 00 12
      00 FF 09 0A 4D 49 44 49 20 4F 75 74 20 31
@@ -313,9 +313,9 @@ test('t21',
 test('t22',
     'Track: tempo with default params',
     {
-        my $t = Track.new;
-	    $t.tempo;
-	    $t;
+        my \t = Track.new;
+	    t.tempo;
+	    t;
     },
     '4D 54 72 6B 00 00 00 0B
      00 FF 51 03 07 A1 20
@@ -325,9 +325,9 @@ test('t22',
 test('t23',
     'Track: tempo with custom params',
     {
-        my $t = Track.new;
-	    $t.tempo: 10250;
-	    $t;
+        my \t = Track.new;
+	    t.tempo: 10250;
+	    t;
     },
     '4D 54 72 6B 00 00 00 0B
      00 FF 51 03 00 28 0A
@@ -337,9 +337,9 @@ test('t23',
 test('t24',
     'Track: time-signature with default params',
     {
-        my $t = Track.new;
-	    $t.time-signature;
-	    $t;
+        my \t = Track.new;
+	    t.time-signature;
+	    t;
     },
     '4D 54 72 6B 00 00 00 0C
      00 FF 58 04 04 02 18 08
@@ -349,9 +349,9 @@ test('t24',
 test('t25',
     'Track: time-signature with custom params',
     {
-        my $t = Track.new;
-	    $t.time-signature: 2\8, 32, 4;
-	    $t;
+        my \t = Track.new;
+	    t.time-signature: 2\8, 32, 4;
+	    t;
     },
     '4D 54 72 6B 00 00 00 0C
      00 FF 58 04 02 03 20 04
@@ -361,14 +361,14 @@ test('t25',
 test('t26',
     'Track: note-on and note-off',
     {
-        my $t = Track.new;
-        $t.note-on:  60;
-        $t.note-off: 60;
-        $t.note-on:  127, 100;
-        $t.note-off: 127, 10;
-        $t.note-on:  60;
-        $t.note-off: 60;
-        $t;
+        my \t = Track.new;
+        t.note-on:  60;
+        t.note-off: 60;
+        t.note-on:  127, 100;
+        t.note-off: 127, 10;
+        t.note-on:  60;
+        t.note-off: 60;
+        t;
     },
     '4D 54 72 6B 00 00 00 1C
      00 90 3C 7F
@@ -383,9 +383,9 @@ test('t26',
 test('t27',
     'Track: note aftertouch',
     {
-        my $t = Track.new;
-        $t.aftertouch: 100, 53;
-        $t;
+        my \t = Track.new;
+        t.aftertouch: 100, 53;
+        t;
     },
     '4D 54 72 6B 00 00 00 08
      00 A0 35 64
@@ -395,9 +395,9 @@ test('t27',
 test('t28',
     'Track: channel aftertouch',
     {
-        my $t = Track.new;
-        $t.aftertouch: 100;
-        $t;
+        my \t = Track.new;
+        t.aftertouch: 100;
+        t;
     },
     '4D 54 72 6B 00 00 00 07
      00 D0 64
@@ -407,9 +407,9 @@ test('t28',
 test('t29',
     'Track: controller',
     {
-        my $t = Track.new;
-        $t.controller: 8, 100;
-        $t;
+        my \t = Track.new;
+        t.controller: 8, 100;
+        t;
     },
     '4D 54 72 6B 00 00 00 08
      00 B0 08 64
@@ -419,92 +419,92 @@ test('t29',
 test('t30',
     'Track: controller shortcuts',
     {
-        my $t = Track.new;
-        $t.bank-select_MSB:      0;
-        $t.modulation_MSB:       1;
-        $t.breath_MSB:           2;
+        my \t = Track.new;
+        t.bank-select_MSB:      0;
+        t.modulation_MSB:       1;
+        t.breath_MSB:           2;
             # 3 is undefined.
-        $t.foot-pedal_MSB:       4;
-        $t.portamento-time_MSB:  5;
-        $t.data-entry_MSB:       6;
-        $t.channel-volume_MSB:   7;
-        $t.balance_MSB:          8;
+        t.foot-pedal_MSB:       4;
+        t.portamento-time_MSB:  5;
+        t.data-entry_MSB:       6;
+        t.channel-volume_MSB:   7;
+        t.balance_MSB:          8;
             # 9 is undefined.
-        $t.pan_MSB:             10;
-        $t.expression_MSB:      11;
-        $t.FX-control_1_MSB:    12;
-        $t.FX-control_2_MSB:    13;
+        t.pan_MSB:             10;
+        t.expression_MSB:      11;
+        t.FX-control_1_MSB:    12;
+        t.FX-control_2_MSB:    13;
             # 14-15 are undefined.
-        $t.gen-control_1_MSB:   16;
-        $t.gen-control_2_MSB:   17;
-        $t.gen-control_3_MSB:   18;
-        $t.gen-control_4_MSB:   19;
+        t.gen-control_1_MSB:   16;
+        t.gen-control_2_MSB:   17;
+        t.gen-control_3_MSB:   18;
+        t.gen-control_4_MSB:   19;
             # 20-31 are undefined.
-        $t.bank-select_LSB:     32;
-        $t.modulation_LSB:      33;
-        $t.breath_LSB:          34;
+        t.bank-select_LSB:     32;
+        t.modulation_LSB:      33;
+        t.breath_LSB:          34;
             # 35 is undefined.
-        $t.foot-pedal_LSB:      36;
-        $t.portamento-time_LSB: 37;
-        $t.data-entry_LSB:      38;
-        $t.channel-volume_LSB:  39;
-        $t.balance_LSB:         40;
+        t.foot-pedal_LSB:      36;
+        t.portamento-time_LSB: 37;
+        t.data-entry_LSB:      38;
+        t.channel-volume_LSB:  39;
+        t.balance_LSB:         40;
             # 41 is undefined.
-        $t.pan_LSB:             42;
-        $t.expression_LSB:      43;
-        $t.FX-control_1_LSB:    44;
-        $t.FX-control_2_LSB:    45;
+        t.pan_LSB:             42;
+        t.expression_LSB:      43;
+        t.FX-control_1_LSB:    44;
+        t.FX-control_2_LSB:    45;
             # 46-47 are undefined.
-        $t.gen-control_1_LSB:   48;
-        $t.gen-control_2_LSB:   49;
-        $t.gen-control_3_LSB:   50;
-        $t.gen-control_4_LSB:   51;
+        t.gen-control_1_LSB:   48;
+        t.gen-control_2_LSB:   49;
+        t.gen-control_3_LSB:   50;
+        t.gen-control_4_LSB:   51;
             # 52-63 are undefined.
-        $t.hold_1-pedal:        64;
-        $t.portamento:          65;
-        $t.sostenuto:           66;
-        $t.soft-pedal:          67;
-        $t.legato-footswitch:   68;
-        $t.hold_2-pedal:        69;
-        $t.sound-control_1:     70;
-        $t.sound-control_2:     71;
-        $t.sound-control_3:     72;
-        $t.sound-control_4:     73;
-        $t.sound-control_5:     74;
-        $t.sound-control_6:     75;
-        $t.sound-control_7:     76;
-        $t.sound-control_8:     77;
-        $t.sound-control_9:     78;
-        $t.sound-control_10:    79;
-        $t.gen-control_5:       80;
-        $t.gen-control_6:       81;
-        $t.gen-control_7:       82;
-        $t.gen-control_8:       83;
-        $t.portamento-control:  84;
+        t.hold_1-pedal:        64;
+        t.portamento:          65;
+        t.sostenuto:           66;
+        t.soft-pedal:          67;
+        t.legato-footswitch:   68;
+        t.hold_2-pedal:        69;
+        t.sound-control_1:     70;
+        t.sound-control_2:     71;
+        t.sound-control_3:     72;
+        t.sound-control_4:     73;
+        t.sound-control_5:     74;
+        t.sound-control_6:     75;
+        t.sound-control_7:     76;
+        t.sound-control_8:     77;
+        t.sound-control_9:     78;
+        t.sound-control_10:    79;
+        t.gen-control_5:       80;
+        t.gen-control_6:       81;
+        t.gen-control_7:       82;
+        t.gen-control_8:       83;
+        t.portamento-control:  84;
             # 85-87 are undefined.
-        $t.hi-res-vel-prefix:   88;
+        t.hi-res-vel-prefix:   88;
             # 89-90 are undefined.
-        $t.FX_1-depth:          91;
-        $t.FX_2-depth:          92;
-        $t.FX_3-depth:          93;
-        $t.FX_4-depth:          94;
-        $t.FX_5-depth:          95;
-        $t.data-increment:      96;
-        $t.data-decrement:      97;
-        $t.NRPN_LSB:            98;
-        $t.NRPN_MSB:            99;
-        $t.RPN_LSB:            100;
-        $t.RPN_MSB:            101;
+        t.FX_1-depth:          91;
+        t.FX_2-depth:          92;
+        t.FX_3-depth:          93;
+        t.FX_4-depth:          94;
+        t.FX_5-depth:          95;
+        t.data-increment:      96;
+        t.data-decrement:      97;
+        t.NRPN_LSB:            98;
+        t.NRPN_MSB:            99;
+        t.RPN_LSB:            100;
+        t.RPN_MSB:            101;
              # 102-119 are undefined.
-        $t.all-sounds-off:     120;
-        $t.reset-controllers:  121;
-        $t.local-switch:       122;
-        $t.all-notes-off:      123;
-        $t.omni-mode-off:      124;
-        $t.omni-mode-on:       125;
-        $t.mono-mode:          126;
-        $t.poly-mode:          127;
-        $t;
+        t.all-sounds-off:     120;
+        t.reset-controllers:  121;
+        t.local-switch:       122;
+        t.all-notes-off:      123;
+        t.omni-mode-off:      124;
+        t.omni-mode-on:       125;
+        t.mono-mode:          126;
+        t.poly-mode:          127;
+        t;
     },
     '4D 54 72 6B 00 00 01 28
      00 B0 00 00
@@ -586,27 +586,27 @@ test('t30',
 test('t31',
     'Track: controller shortcuts (combined)',
     {
-        my $t = Track.new;
-        $t.bank-select:      32;
-        $t.modulation:      133;
-        $t.breath:          234;
+        my \t = Track.new;
+        t.bank-select:      32;
+        t.modulation:      133;
+        t.breath:          234;
             # 3 is undefined.
-        $t.foot-pedal:      436;
-        $t.portamento-time: 537;
-        $t.data-entry:      638;
-        $t.channel-volume:  739;
-        $t.balance:         840;
+        t.foot-pedal:      436;
+        t.portamento-time: 537;
+        t.data-entry:      638;
+        t.channel-volume:  739;
+        t.balance:         840;
             # 9 is undefined.
-        $t.pan:            1042;
-        $t.expression:     1143;
-        $t.FX-control_1:   1244;
-        $t.FX-control_2:   1345;
+        t.pan:            1042;
+        t.expression:     1143;
+        t.FX-control_1:   1244;
+        t.FX-control_2:   1345;
             # 14-15 are undefined.
-        $t.gen-control_1:  1648;
-        $t.gen-control_2:  1749;
-        $t.gen-control_3:  1850;
-        $t.gen-control_4:  1951;
-        $t;
+        t.gen-control_1:  1648;
+        t.gen-control_2:  1749;
+        t.gen-control_3:  1850;
+        t.gen-control_4:  1951;
+        t;
     },
     '4D 54 72 6B 00 00 00 84
      00 B0 00 00
@@ -647,9 +647,9 @@ test('t31',
 test('t32',
     'Track: program-change',
     {
-        my $t = Track.new;
-        $t.program-change: 100;
-        $t;
+        my \t = Track.new;
+        t.program-change: 100;
+        t;
     },
     '4D 54 72 6B 00 00 00 07
      00 C0 64
@@ -659,10 +659,10 @@ test('t32',
 test('t33',
     'Track: pitch-bend with default param, on channel 1',
     {
-        my $t = Track.new;
-        $t.ch: 1;
-	    $t.pitch-bend;
-	    $t;
+        my \t = Track.new;
+        t.ch: 1;
+	    t.pitch-bend;
+	    t;
     },
     '4D 54 72 6B 00 00 00 08
      00 E1 00 40
@@ -672,9 +672,9 @@ test('t33',
 test('t34',
     'Track: pitch-bend => none',
     {
-        my $t = Track.new;
-	    $t.pitch-bend: 8192;
-	    $t;
+        my \t = Track.new;
+	    t.pitch-bend: 8192;
+	    t;
     },
     '4D 54 72 6B 00 00 00 08
      00 E0 00 40
@@ -684,9 +684,9 @@ test('t34',
 test('t35',
     'Track: pitch-bend => lowest',
     {
-        my $t = Track.new;
-	    $t.pitch-bend: 0;
-	    $t;
+        my \t = Track.new;
+	    t.pitch-bend: 0;
+	    t;
     },
     '4D 54 72 6B 00 00 00 08
      00 E0 00 00
@@ -696,9 +696,9 @@ test('t35',
 test('t36',
     'Track: pitch-bend => highest',
     {
-        my $t = Track.new;
-	    $t.pitch-bend: 16383;
-	    $t;
+        my \t = Track.new;
+	    t.pitch-bend: 16383;
+	    t;
     },
     '4D 54 72 6B 00 00 00 08
      00 E0 7F 7F
@@ -708,9 +708,9 @@ test('t36',
 test('t37',
     'Track: pitch-bend => 10000',
     {
-        my $t = Track.new;
-	    $t.pitch-bend: 10000;
-	    $t;
+        my \t = Track.new;
+	    t.pitch-bend: 10000;
+	    t;
     },
     '4D 54 72 6B 00 00 00 08
      00 E0 10 4E
@@ -720,9 +720,9 @@ test('t37',
 test('t38',
     'Track: sysex',
     {
-        my $t = Track.new;
-	    $t.sysex: <0A 29 1E>;
-	    $t;
+        my \t = Track.new;
+	    t.sysex: <0A 29 1E>;
+	    t;
     },
     '4D 54 72 6B 00 00 00 0A
      00 F0 0A 29 1E F7
@@ -732,12 +732,12 @@ test('t38',
 t 't39' => {
     is(
         do {
-            my $t = Track.new;
-            $t.dt: 100;
-            $t.copyright: 'c 2022 anonymous';
-            $t.name: 'melody';
-            $t.render;
-            $t.dt;
+            my \t = Track.new;
+            t.dt: 100;
+            t.copyright: 'c 2022 anonymous';
+            t.name: 'melody';
+            t.render;
+            t.dt;
         },
         100,
         'Track: dt remains intact after render'
@@ -750,43 +750,43 @@ t 't39' => {
 test('e1',
     'Everything',
     {
-        my $t = Track.new;
-        $t.copyright:          'c 2022 anonymous';
-        $t.name:               'melody';
-        $t.instrument:         'piano';
-        $t.controller:         8, 100;
-        $t.program:            'electric piano';
-        $t.port:               'MIDI Out 1';
-        $t.ch:                 1;
-        $t.program-change:     100;
-        $t.aftertouch:         100;
-        $t.pitch-bend:         0;
-        $t.marker:                     'section I';
-        $t.text:               'Lorem ipsum dolor sit amet.';
-        $t.tempo:              ♩80;
-        $t.time-signature:     3\2;
-        $t.aftertouch:         100, 53;
-        $t.note-on:            60;
-        $t.lyric:              'one';
-        $t.dt:                     128;
-        $t.note-off:           60;
-        $t.cue:                'door slam';
-        $t.vel_note-on:        80;
-        $t.vel_note-off:       10;
-        $t.note-on:            72;
-        $t.lyric:              'two';
-        $t.dt:                     128;
-        $t.note-off:           72;
-        $t.sysex:              <0A 29 1E>;
+        my \t = Track.new;
+        t.copyright:          'c 2022 anonymous';
+        t.name:               'melody';
+        t.instrument:         'piano';
+        t.controller:         8, 100;
+        t.program:            'electric piano';
+        t.port:               'MIDI Out 1';
+        t.ch:                 1;
+        t.program-change:     100;
+        t.aftertouch:         100;
+        t.pitch-bend:         0;
+        t.marker:                     'section I';
+        t.text:               'Lorem ipsum dolor sit amet.';
+        t.tempo:              ♩80;
+        t.time-signature:     3\2;
+        t.aftertouch:         100, 53;
+        t.note-on:            60;
+        t.lyric:              'one';
+        t.dt:                     128;
+        t.note-off:           60;
+        t.cue:                'door slam';
+        t.vel_note-on:        80;
+        t.vel_note-off:       10;
+        t.note-on:            72;
+        t.lyric:              'two';
+        t.dt:                     128;
+        t.note-off:           72;
+        t.sysex:              <0A 29 1E>;
 
-        my $s = Song.new;
-        $s.format: 2;
-        $s.time-division: 'frame';
-        $s.PPQ: 96; # Should be ignored with time-division == frame.
-        $s.FPS: 25;
-        $s.PPF: 8;
-        $s.add-track($t.render);
-        $s;
+        my \s = Song.new;
+        s.format: 2;
+        s.time-division: 'frame';
+        s.PPQ: 96; # Should be ignored with time-division == frame.
+        s.FPS: 25;
+        s.PPF: 8;
+        s.add-track(t.render);
+        s;
     },
     '4D 54 68 64 00 00 00 06
      00 02 00 01 E7 08
