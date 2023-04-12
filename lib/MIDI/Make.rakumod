@@ -499,7 +499,7 @@ class Track is export {
 
     subset DataBytes of List where 0 ≤ *.map({"0x$_"})».Int.all ≤ 127;
     method sysex (
-       DataBytes $data,
+        DataBytes $data,
     ) {
         $!e.append: self!VLQ-encode($!dt);
         $!e.append: %bytes{'sysex-start'};
