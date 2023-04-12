@@ -132,6 +132,7 @@ class Track is export {
         'cue'                => 0x07,
         'program'            => 0x08,
         'port'               => 0x09,
+        'end-of-track'       => 0x2F,
         'tempo'              => 0x51,
         'time-signature'     => 0x58,
         'note-off'           => 0x80,
@@ -142,7 +143,6 @@ class Track is export {
         'channel-aftertouch' => 0xD0,
         'pitch-bend'         => 0xE0,
         'sysex-start'        => 0xF0,
-        'end-of-track'       => 0xF2,
         'sysex-end'          => 0xF7,
         'meta-event'         => 0xFF,
     ;
