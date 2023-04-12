@@ -706,8 +706,8 @@ t.pitch-bend;    # Removes pitch bend by return to the default: 8192.
 #### sysex
 
 The sysex method implements a simple sysex message. It takes a list
-of data bytes, and surrounds them with sysex start and end bytes:
-F0 <data bytes> F7
+of dataBytes, and surrounds them with sysex start and end bytes:
+F0 <dataBytes> F7
 
 ```raku
 my \t = Track.new;
