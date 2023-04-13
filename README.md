@@ -22,6 +22,7 @@ t.aftertouch:     100;
 t.pitch-bend:     0;
 t.marker:                 'section I';
 t.text:           'Lorem ipsum dolor sit amet.';
+t.key-signature:  -2, 1;
 t.tempo:          ♩80;
 t.time-signature: 3\2;
 t.aftertouch:     100, 53;
@@ -489,6 +490,22 @@ my \t = Track.new;
 t.time-signature: 3\4;
 t.time-signature: 4\4, 48;
 t.time-signature: 2\8, 32, 12;
+```
+
+#### key-signature
+
+The key-signature method sets the key-signature of the piece. It
+accepts two optional arguments:
+
+1. The key which is defined as the number of accidentals. This value
+   can be from -7 to 7 where -1 to -7 is the number of flats, and
+   1 to 7 is the number of sharps.
+
+2. The mode which is either 0 for major, or 1 for minor.
+
+```raku
+my \t = Track.new;
+t.key-signature: -2, 1; # G minor
 ```
 
 #### note-off

@@ -135,6 +135,7 @@ class Track is export {
         'end-of-track'       => 0x2F,
         'tempo'              => 0x51,
         'time-signature'     => 0x58,
+        'key-signature'      => 0x59,
         'note-off'           => 0x80,
         'note-on'            => 0x90,
         'note-aftertouch'    => 0xA0,
@@ -270,6 +271,21 @@ class Track is export {
         $!e.append: $time-signature.MIDI-denominator;
         $!e.append: $PPMC;
         $!e.append: $_32PQ;
+        $!dt = 0;
+    }
+
+    subset Key of Int where -7 ≤ * ≤ 7;
+    subset Mode of UInt where * ~~ 0 | 1;
+    method key-signature (
+        Key $key = 0,
+        Mode $mode = 0,
+    ) {
+        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: %bytes{'meta-event'};
+        $!e.append: %bytes{'key-signature'};
+        $!e.append: 2;
+        $!e.append: $key; # Two's complement.
+        $!e.append: $mode;
         $!dt = 0;
     }
 
