@@ -227,8 +227,8 @@ class Track is export {
         return $b;
     }
 
-    method !copyright  { self!lead-text('copyright',  $!copyright ) }
-    method !name       { self!lead-text('name',       $!name      ) }
+    method !copyright { self!lead-text('copyright',  $!copyright ) }
+    method !name      { self!lead-text('name',       $!name      ) }
 
     method !end-of-track {
         my $b = Buf.new;
