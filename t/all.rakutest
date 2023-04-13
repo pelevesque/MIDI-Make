@@ -287,10 +287,10 @@ test('t17',
 );
 
 test('t18',
-    'Track: program',
+    'Track: program-name',
     {
         my \t = Track.new;
-	    t.program: 'electric piano';
+	    t.program-name: 'electric piano';
 	    t;
     },
     '4D 54 72 6B 00 00 00 16
@@ -807,7 +807,7 @@ test('e1',
         t.name:           'melody';
         t.instrument:     'piano';
         t.controller:     8, 100;
-        t.program:        'electric piano';
+        t.program-name:   'electric piano';
         t.port:           'MIDI Out 1';
         t.ch:             1;
         t.program-change: 100;

@@ -118,7 +118,7 @@ class Track is export {
         | 'lyric'
         | 'marker'
         | 'cue'
-        | 'program'
+        | 'program-name'
         | 'port'
     ;
 
@@ -130,7 +130,7 @@ class Track is export {
         'lyric'              => 0x05,
         'marker'             => 0x06,
         'cue'                => 0x07,
-        'program'            => 0x08,
+        'program-name'       => 0x08,
         'port'               => 0x09,
         'end-of-track'       => 0x2F,
         'tempo'              => 0x51,
@@ -239,13 +239,13 @@ class Track is export {
         return $b;
     }
 
-    method text       (ASCII $s) { $!e.append: self!text('text',       $s) }
-    method instrument (ASCII $s) { $!e.append: self!text('instrument', $s) }
-    method lyric      (ASCII $s) { $!e.append: self!text('lyric',      $s) }
-    method marker     (ASCII $s) { $!e.append: self!text('marker',     $s) }
-    method cue        (ASCII $s) { $!e.append: self!text('cue',        $s) }
-    method program    (ASCII $s) { $!e.append: self!text('program',    $s) }
-    method port       (ASCII $s) { $!e.append: self!text('port',       $s) }
+    method text         (ASCII $s) { $!e.append: self!text('text',         $s) }
+    method instrument   (ASCII $s) { $!e.append: self!text('instrument',   $s) }
+    method lyric        (ASCII $s) { $!e.append: self!text('lyric',        $s) }
+    method marker       (ASCII $s) { $!e.append: self!text('marker',       $s) }
+    method cue          (ASCII $s) { $!e.append: self!text('cue',          $s) }
+    method program-name (ASCII $s) { $!e.append: self!text('program-name', $s) }
+    method port         (ASCII $s) { $!e.append: self!text('port',         $s) }
 
     method tempo (
         UInt24 $tempo = 500000, # Microseconds per quarter note.

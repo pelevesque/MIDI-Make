@@ -14,7 +14,7 @@ t.copyright:      'c 2022 anonymous';
 t.name:           'melody';
 t.instrument:     'piano';
 t.controller:     8, 100;
-t.program:        'electric piano';
+t.program-name:   'electric piano';
 t.port:           'MIDI Out 1';
 t.ch:             1;
 t.program-change: 100;
@@ -439,13 +439,13 @@ my \t = Track.new;
 t.cue: 'door slam';
 ```
 
-#### program
+#### program-name
 
-The program method adds a program name anywhere on the track.
+The program-name method adds a program name anywhere on the track.
 
 ```raku
 my \t = Track.new;
-t.program: 'electric piano';
+t.program-name: 'electric piano';
 ```
 
 #### port
@@ -507,7 +507,7 @@ accepts two optional arguments:
 my \t = Track.new;
 t.key-signature: -2, 1; # G minor
 ```
-
+Ç
 #### note-off
 
 The note-off method creates a note off. It accepts two arguments: The
