@@ -13,6 +13,5 @@ To reach MIDI 1.0 Specification:
 - Add meta-events:
     - Sequencer number
     - SMPTE offset
-    - Key signature
     - M-Live Tag (Not standard, but supported by MidiKit and QMidi)?
 - Question: Is it clear that program is for the program-name?
