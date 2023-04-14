@@ -25,5 +25,5 @@
     "test-depends": [
         "Test::Selector"
     ],
-    "version": "0.9.0"
+    "version": "0.10.0"
 }
