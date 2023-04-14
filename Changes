@@ -1,5 +1,14 @@
 Revision history for MIDI::Make
 
+0.10.0
+    - Various internal clean up and fixes
+    - Use a multi method for note/channel aftertouch
+    - Make instrument a normal text method
+    - Add add-bytes method
+    - Fix bad byte for end-of-track
+    - Add MIDI event: key-signature
+    - Rename method ｢program｣ to ｢program-name｣
+
 0.9.0
     - Capitalize fx method prefix
     - Add TextMetaEvent type
