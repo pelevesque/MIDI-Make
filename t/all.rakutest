@@ -110,9 +110,9 @@ test('t3',
 );
 
 test('t4',
-    'Track Instantiation: dt => 100',
+    'Track Instantiation: delta-time => 100',
     {
-        my \t = Track.new(:dt(100));
+        my \t = Track.new(:delta-time(100));
         t.note-on: 60;
         t;
     },
@@ -161,7 +161,7 @@ test('t8',
     'Track: Change params after instantiation',
     {
         my \t = Track.new;
-        t.dt: 100;
+        t.delta-time: 100;
         t.channel: 1;
         t.vel_note-off: 10;
         t.vel_note-on:  100;
@@ -188,10 +188,10 @@ test('t9',
 );
 
 test('t10',
-    'Track: copyright with ignored dt',
+    'Track: copyright with ignored delta-time',
     {
         my \t = Track.new;
-        t.dt: 100; # Ignored.
+        t.delta-time: 100; # Ignored.
 	    t.copyright: 'c 2022 anonymous';
 	    t;
     },
@@ -213,10 +213,10 @@ test('t11',
 );
 
 test('t12',
-    'Track: name with ignored dt',
+    'Track: name with ignored delta-time',
     {
         my \t = Track.new;
-        t.dt: 100; # Ignored.
+        t.delta-time: 100; # Ignored.
 	    t.name: 'melody';
 	    t;
     },
@@ -785,14 +785,14 @@ t 't39' => {
     is(
         do {
             my \t = Track.new;
-            t.dt: 100;
+            t.delta-time: 100;
             t.copyright: 'c 2022 anonymous';
             t.name: 'melody';
             t.render;
-            t.dt;
+            t.delta-time;
         },
         100,
-        'Track: dt remains intact after render'
+        'Track: delta-time remains intact after render'
     );
 }
 
@@ -821,14 +821,14 @@ test('e1',
         t.aftertouch:     100, 53;
         t.note-on:        60;
         t.lyric:          'one';
-        t.dt:                 128;
+        t.delta-time:         128;
         t.note-off:       60;
         t.cue:            'door slam';
         t.vel_note-on:    80;
         t.vel_note-off:   10;
         t.note-on:        72;
         t.lyric:          'two';
-        t.dt:                 128;
+        t.delta-time:         128;
         t.note-off:       72;
         t.sysex:          <0A 29 1E>;
         t.add-bytes:      <00 F0 0A 29 1E F7>;

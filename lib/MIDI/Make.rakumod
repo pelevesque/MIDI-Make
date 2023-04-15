@@ -151,7 +151,7 @@ class Track is export {
     has ASCII  $.copyright = '';
     has ASCII  $.name = '';
     has ASCII  $.instrument = '';
-    has UInt28 $.dt = 0;
+    has UInt28 $.delta-time = 0;
     has UInt4  $.channel = 0;
     has UInt7  $.vel_note-off = 0;
     has UInt7  $.vel_note-on = 127;
@@ -159,7 +159,7 @@ class Track is export {
         # Getters.
     multi method copyright { $!copyright }
     multi method name { $!name }
-    multi method dt { $!dt }
+    multi method delta-time { $!delta-time }
     multi method channel { $!channel }
     multi method vel_note-off { $!vel_note-off }
     multi method vel_note-on  { $!vel_note-on }
@@ -167,7 +167,7 @@ class Track is export {
         # Setters.
     multi method copyright ($copyright) { $!copyright = $copyright }
     multi method name ($name) { $!name = $name }
-    multi method dt ($dt) { $!dt = $dt }
+    multi method delta-time ($delta-time) { $!delta-time = $delta-time }
     multi method channel ($channel) { $!channel = $channel }
     multi method vel_note-off ($vel) { $!vel_note-off = $vel }
     multi method vel_note-on  ($vel) { $!vel_note-on = $vel }
@@ -199,11 +199,11 @@ class Track is export {
     method !text-buffer (
         TextMetaEvent $meta-event,
         ASCII $s,
-        UInt28 $dt,
+        UInt28 $delta-time
     ) {
         return [] if ! $s.chars;
         my $b = Buf.new;
-        $b.append: self!VLQ-encode($dt);
+        $b.append: self!VLQ-encode($delta-time);
         $b.append: %bytes{'meta-event'};
         $b.append: %bytes{$meta-event};
         $b.append: self!VLQ-encode($s.chars);
@@ -213,17 +213,18 @@ class Track is export {
 
         # Text that must be placed at a track's beginning.
         #
-        # Note: Unlike the other methods, dt is not automatically
-        # reset to 0 at the end of this method. This is so it remains
-        # unchanged for !end-of-track and future renders.
+        # Note: Unlike the other methods, delta-time is not
+        # automatically reset to 0 at the end of this method. This
+        # is so it remains unchanged for !end-of-track and future
+        # renders.
     method !lead-text (TextMetaEvent $meta-event, ASCII $s) {
         self!text-buffer($meta-event, $s, 0);
     }
 
         # Text that may be placed anywhere.
     method !text (TextMetaEvent $meta-event, ASCII $s) {
-        my $b = self!text-buffer($meta-event, $s, $!dt);
-        $!dt = 0;
+        my $b = self!text-buffer($meta-event, $s, $!delta-time);
+        $!delta-time = 0;
         return $b;
     }
 
@@ -232,7 +233,7 @@ class Track is export {
 
     method !end-of-track {
         my $b = Buf.new;
-        $b.append: self!VLQ-encode($!dt);
+        $b.append: self!VLQ-encode($!delta-time);
         $b.append: %bytes{'meta-event'};
         $b.append: %bytes{'end-of-track'};
         $b.append: 0;
@@ -250,12 +251,12 @@ class Track is export {
     method tempo (
         UInt24 $tempo = 500000, # Microseconds per quarter note.
     ) {
-        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'meta-event'};
         $!e.append: %bytes{'tempo'};
         $!e.append: self!VLQ-encode(3);
         $!e.append: write_4-bytes($tempo).splice(1);
-        $!dt = 0;
+        $!delta-time = 0;
     }
 
     method time-signature (
@@ -263,7 +264,7 @@ class Track is export {
         UInt8 $PPMC = 24, # Pulses per metronome click.
         UInt8 $_32PQ = 8, # 32nds per quarter note.
     ) {
-        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'meta-event'};
         $!e.append: %bytes{'time-signature'};
         $!e.append: self!VLQ-encode(4);
@@ -271,7 +272,7 @@ class Track is export {
         $!e.append: $time-signature.MIDI-denominator;
         $!e.append: $PPMC;
         $!e.append: $_32PQ;
-        $!dt = 0;
+        $!delta-time = 0;
     }
 
     subset Key of Int where -7 ≤ * ≤ 7;
@@ -280,68 +281,68 @@ class Track is export {
         Key $key = 0,
         Mode $mode = 0,
     ) {
-        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'meta-event'};
         $!e.append: %bytes{'key-signature'};
         $!e.append: 2;
         $!e.append: $key; # Two's complement.
         $!e.append: $mode;
-        $!dt = 0;
+        $!delta-time = 0;
     }
 
     method note-off (
         UInt7 $note,
         UInt7 $vel = $!vel_note-off,
     ) {
-        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'note-off'} + $!channel;
         $!e.append: $note;
         $!e.append: $vel;
         $!vel_note-off = $vel;
-        $!dt = 0;
+        $!delta-time = 0;
     }
 
     method note-on (
         UInt7 $note,
         UInt7 $vel = $!vel_note-on,
     ) {
-        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'note-on'} + $!channel;
         $!e.append: $note;
         $!e.append: $vel;
         $!vel_note-on = $vel;
-        $!dt = 0;
+        $!delta-time = 0;
     }
 
     multi method aftertouch (
         UInt7 $amount,
         UInt7 $note,
     ) {
-        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'note-aftertouch'} + $!channel;
         $!e.append: $note;
         $!e.append: $amount;
-        $!dt = 0;
+        $!delta-time = 0;
     }
 
     multi method aftertouch (
         UInt7 $amount,
     ) {
-        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'channel-aftertouch'} + $!channel;
         $!e.append: $amount;
-        $!dt = 0;
+        $!delta-time = 0;
     }
 
     method controller (
         UInt7 $controller,
         UInt7 $val,
     ) {
-        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'controller'} + $!channel;
         $!e.append: $controller;
         $!e.append: $val;
-        $!dt = 0;
+        $!delta-time = 0;
     }
 
     method bank-select_MSB     (UInt7 $v) { self.controller(  0, $v) }
@@ -497,31 +498,31 @@ class Track is export {
     method program-change (
         UInt7 $program-number,
     ) {
-        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'program-change'} + $!channel;
         $!e.append: $program-number;
-        $!dt = 0;
+        $!delta-time= 0;
     }
 
     method pitch-bend (
         UInt14 $pitch-bend = 8192, # Defaults to no pitch-bend.
     ) {
-        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'pitch-bend'} + $!channel;
         $!e.append: self!LSB($pitch-bend);
         $!e.append: self!MSB($pitch-bend);
-        $!dt = 0;
+        $!delta-time = 0;
     }
 
     subset DataBytes of List where 0 ≤ *.map({"0x$_"})».Int.all ≤ 127;
     method sysex (
         DataBytes $dataBytes,
     ) {
-        $!e.append: self!VLQ-encode($!dt);
+        $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'sysex-start'};
         $!e.append: Buf.new($dataBytes.map({"0x$_"})».Int);
         $!e.append: %bytes{'sysex-end'};
-        $!dt = 0;
+        $!delta-time = 0;
     }
 
     subset Bytes of List where 0 ≤ *.map({"0x$_"})».Int.all ≤ 255;

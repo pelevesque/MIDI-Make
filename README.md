@@ -28,14 +28,14 @@ t.time-signature: 3\2;
 t.aftertouch:     100, 53;
 t.note-on:        60;
 t.lyric:          'one';
-t.dt:                 128;
+t.delta-time:         128;
 t.note-off:       60;
 t.cue:            'door slam';
 t.vel_note-on:    80;
 t.vel_note-off:   10;
 t.note-on:        72;
 t.lyric:          'two';
-t.dt:                 128;
+t.delta-time:         128;
 t.note-off:       72;
 t.sysex:          <0A 29 1E>;
 t.add-bytes:      <00 F0 0A 29 1E F7>;
@@ -198,9 +198,9 @@ class.
 ```raku
     # Create a track.
 my \t = Track.new;
-t.note-on:  60;
-t.dt:           100;
-t.note-off: 60;
+t.note-on:    60;
+t.delta-time:     100;
+t.note-off:   60;
 
     # Add it to the Song class.
 my \s = Song.new;
@@ -298,41 +298,41 @@ my \t = Track.new;
 t.name: 'melody';
 ```
 
-#### dt
+#### delta-time
 
-Delta time (dt) sets the time in MIDI pulses between MIDI events.
+Delta time sets the time in MIDI pulses between MIDI events.
 
-The dt value is from O to 268435455. The default is 0.
+The delta-time value is from O to 268435455. The default is 0.
 
-Note: Although it's possible to instantiate dt to a value other than
-0, usually you will start a MIDI file with a MIDI event, and not a
-period of time.
+Note: Although it's possible to instantiate delta-time to a value
+other than 0, usually you will start a MIDI file with a MIDI event,
+and not a period of time.
 
 ```raku
     # Set on instantiation.
-my \t = Track.new(:dt(100));
+my \t = Track.new(:delta-time(100));
 ```
 
 ```raku
     # Set after instantiation.
 my \t = Track.new;
-t.dt: 100;
+t.delta-time: 100;
 ```
 
-dt is automatically set to 0 after each of the MIDI events implemented
-in the Track class. This is done so that you can enter many MIDI
-events consecutively before setting a new dt.
+Delta-time is automatically set to 0 after each of the MIDI events
+implemented in the Track class. This is done so that you can enter
+many MIDI events consecutively before setting a new delta-time.
 
 ```raku
 my \t = Track.new;
-t.note-on:  60;
-t.dt:          100; # Wait 100 MIDI pulses before subsequent events.
-t.note-off: 60;
-t.note-on:  62;
-t.note-on:  64;
-t.dt:          200; # Wait 200 MIDI pulses before subsequent events.
-t.note-off: 62;
-t.note-off: 64;
+t.note-on:    60;
+t.delta-time:     100; # Wait 100 MIDI pulses before following events.
+t.note-off:   60;
+t.note-on:    62;
+t.note-on:    64;
+t.delta-time:     200; # Wait 200 MIDI pulses before following events.
+t.note-off:   62;
+t.note-off:   64;
 ```
 
 #### channel
@@ -734,8 +734,8 @@ t.sysex: <0A 29 1E>;
 #### add-bytes
 
 The add-bytes method lets you add arbitrary bytes to the track. Unlike
-other methods, it does not add dt nor does it reset dt to 0. add-bytes
-is mostly useful for testing purposes.
+other methods, it does not add delta-time nor does it reset delta-time
+to 0. add-bytes is mostly useful for testing purposes.
 
 ```raku
 my \t = Track.new;
@@ -750,9 +750,9 @@ class.
 
 ```raku
 my \t = Track.new;
-t.note-on:  60;
-t.dt:           128;
-t.note-off: 60;
+t.note-on:    60;
+t.delta-time:     128;
+t.note-off:   60;
 
 my \s = Song.new;
 s.add-track($t.render);
