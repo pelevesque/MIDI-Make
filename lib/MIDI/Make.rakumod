@@ -515,11 +515,11 @@ class Track is export {
 
     subset DataBytes of List where 0 ≤ *.map({"0x$_"})».Int.all ≤ 127;
     method sysex (
-        DataBytes $data,
+        DataBytes $dataBytes,
     ) {
         $!e.append: self!VLQ-encode($!dt);
         $!e.append: %bytes{'sysex-start'};
-        $!e.append: Buf.new($data.map({"0x$_"})».Int);
+        $!e.append: Buf.new($dataBytes.map({"0x$_"})».Int);
         $!e.append: %bytes{'sysex-end'};
         $!dt = 0;
     }
