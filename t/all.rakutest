@@ -122,9 +122,9 @@ test('t4',
 );
 
 test('t5',
-    'Track Instantiation: ch => 1',
+    'Track Instantiation: channel => 1',
     {
-        my \t = Track.new(:ch(1));
+        my \t = Track.new(:channel(1));
         t.note-on: 60;
         t;
     },
@@ -162,7 +162,7 @@ test('t8',
     {
         my \t = Track.new;
         t.dt: 100;
-        t.ch: 1;
+        t.channel: 1;
         t.vel_note-off: 10;
         t.vel_note-on:  100;
         t.note-on:  60;
@@ -700,7 +700,7 @@ test('t32',
     'Track: pitch-bend with default param, on channel 1',
     {
         my \t = Track.new;
-        t.ch: 1;
+        t.channel: 1;
 	    t.pitch-bend;
 	    t;
     },
@@ -809,7 +809,7 @@ test('e1',
         t.controller:     8, 100;
         t.program-name:   'electric piano';
         t.port:           'MIDI Out 1';
-        t.ch:             1;
+        t.channel:        1;
         t.program-change: 100;
         t.aftertouch:     100;
         t.pitch-bend:     0;

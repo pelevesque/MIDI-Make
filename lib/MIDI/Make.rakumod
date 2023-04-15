@@ -152,7 +152,7 @@ class Track is export {
     has ASCII  $.name = '';
     has ASCII  $.instrument = '';
     has UInt28 $.dt = 0;
-    has UInt4  $.ch = 0;
+    has UInt4  $.channel = 0;
     has UInt7  $.vel_note-off = 0;
     has UInt7  $.vel_note-on = 127;
 
@@ -160,7 +160,7 @@ class Track is export {
     multi method copyright { $!copyright }
     multi method name { $!name }
     multi method dt { $!dt }
-    multi method ch { $!ch }
+    multi method channel { $!channel }
     multi method vel_note-off { $!vel_note-off }
     multi method vel_note-on  { $!vel_note-on }
 
@@ -168,7 +168,7 @@ class Track is export {
     multi method copyright ($copyright) { $!copyright = $copyright }
     multi method name ($name) { $!name = $name }
     multi method dt ($dt) { $!dt = $dt }
-    multi method ch ($ch) { $!ch = $ch }
+    multi method channel ($channel) { $!channel = $channel }
     multi method vel_note-off ($vel) { $!vel_note-off = $vel }
     multi method vel_note-on  ($vel) { $!vel_note-on = $vel }
 
@@ -294,7 +294,7 @@ class Track is export {
         UInt7 $vel = $!vel_note-off,
     ) {
         $!e.append: self!VLQ-encode($!dt);
-        $!e.append: %bytes{'note-off'} + $!ch;
+        $!e.append: %bytes{'note-off'} + $!channel;
         $!e.append: $note;
         $!e.append: $vel;
         $!vel_note-off = $vel;
@@ -306,7 +306,7 @@ class Track is export {
         UInt7 $vel = $!vel_note-on,
     ) {
         $!e.append: self!VLQ-encode($!dt);
-        $!e.append: %bytes{'note-on'} + $!ch;
+        $!e.append: %bytes{'note-on'} + $!channel;
         $!e.append: $note;
         $!e.append: $vel;
         $!vel_note-on = $vel;
@@ -318,7 +318,7 @@ class Track is export {
         UInt7 $note,
     ) {
         $!e.append: self!VLQ-encode($!dt);
-        $!e.append: %bytes{'note-aftertouch'} + $!ch;
+        $!e.append: %bytes{'note-aftertouch'} + $!channel;
         $!e.append: $note;
         $!e.append: $amount;
         $!dt = 0;
@@ -328,7 +328,7 @@ class Track is export {
         UInt7 $amount,
     ) {
         $!e.append: self!VLQ-encode($!dt);
-        $!e.append: %bytes{'channel-aftertouch'} + $!ch;
+        $!e.append: %bytes{'channel-aftertouch'} + $!channel;
         $!e.append: $amount;
         $!dt = 0;
     }
@@ -338,7 +338,7 @@ class Track is export {
         UInt7 $val,
     ) {
         $!e.append: self!VLQ-encode($!dt);
-        $!e.append: %bytes{'controller'} + $!ch;
+        $!e.append: %bytes{'controller'} + $!channel;
         $!e.append: $controller;
         $!e.append: $val;
         $!dt = 0;
@@ -498,7 +498,7 @@ class Track is export {
         UInt7 $program-number,
     ) {
         $!e.append: self!VLQ-encode($!dt);
-        $!e.append: %bytes{'program-change'} + $!ch;
+        $!e.append: %bytes{'program-change'} + $!channel;
         $!e.append: $program-number;
         $!dt = 0;
     }
@@ -507,7 +507,7 @@ class Track is export {
         UInt14 $pitch-bend = 8192, # Defaults to no pitch-bend.
     ) {
         $!e.append: self!VLQ-encode($!dt);
-        $!e.append: %bytes{'pitch-bend'} + $!ch;
+        $!e.append: %bytes{'pitch-bend'} + $!channel;
         $!e.append: self!LSB($pitch-bend);
         $!e.append: self!MSB($pitch-bend);
         $!dt = 0;
