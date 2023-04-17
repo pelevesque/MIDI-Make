@@ -717,7 +717,7 @@ instrument, but is usually +/- 2 semitones.
 ```raku
 my \t = Track.new;
 t.pitch-bend: 0; # Bends the pitch as low as possible.
-t.pitch-bend;    # Removes pitch bend by return to the default: 8192.
+t.pitch-bend;    # Removes pitch bend by applying the default: 8192.
 ```
 
 #### sysex
