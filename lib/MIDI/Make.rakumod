@@ -345,90 +345,90 @@ class Track is export {
         $!delta-time = 0;
     }
 
-    method bank-select_MSB     (UInt7 $v) { self.controller(  0, $v) }
-    method modulation_MSB      (UInt7 $v) { self.controller(  1, $v) }
-    method breath_MSB          (UInt7 $v) { self.controller(  2, $v) }
+    method bank-select_MSB      (UInt7 $v) { self.controller(  0, $v) }
+    method modulation_MSB       (UInt7 $v) { self.controller(  1, $v) }
+    method breath_MSB           (UInt7 $v) { self.controller(  2, $v) }
         # 3 is undefined.
-    method foot-pedal_MSB      (UInt7 $v) { self.controller(  4, $v) }
-    method portamento-time_MSB (UInt7 $v) { self.controller(  5, $v) }
-    method data-entry_MSB      (UInt7 $v) { self.controller(  6, $v) }
-    method channel-volume_MSB  (UInt7 $v) { self.controller(  7, $v) }
-    method balance_MSB         (UInt7 $v) { self.controller(  8, $v) }
+    method foot-pedal_MSB       (UInt7 $v) { self.controller(  4, $v) }
+    method portamento-time_MSB  (UInt7 $v) { self.controller(  5, $v) }
+    method data-entry_MSB       (UInt7 $v) { self.controller(  6, $v) }
+    method channel-volume_MSB   (UInt7 $v) { self.controller(  7, $v) }
+    method balance_MSB          (UInt7 $v) { self.controller(  8, $v) }
         # 9 is undefined.
-    method pan_MSB             (UInt7 $v) { self.controller( 10, $v) }
-    method expression_MSB      (UInt7 $v) { self.controller( 11, $v) }
-    method FX-control_1_MSB    (UInt7 $v) { self.controller( 12, $v) }
-    method FX-control_2_MSB    (UInt7 $v) { self.controller( 13, $v) }
+    method pan_MSB              (UInt7 $v) { self.controller( 10, $v) }
+    method expression_MSB       (UInt7 $v) { self.controller( 11, $v) }
+    method effect-control_1_MSB (UInt7 $v) { self.controller( 12, $v) }
+    method effect-control_2_MSB (UInt7 $v) { self.controller( 13, $v) }
         # 14-15 are undefined.
-    method gen-control_1_MSB   (UInt7 $v) { self.controller( 16, $v) }
-    method gen-control_2_MSB   (UInt7 $v) { self.controller( 17, $v) }
-    method gen-control_3_MSB   (UInt7 $v) { self.controller( 18, $v) }
-    method gen-control_4_MSB   (UInt7 $v) { self.controller( 19, $v) }
+    method gen-control_1_MSB    (UInt7 $v) { self.controller( 16, $v) }
+    method gen-control_2_MSB    (UInt7 $v) { self.controller( 17, $v) }
+    method gen-control_3_MSB    (UInt7 $v) { self.controller( 18, $v) }
+    method gen-control_4_MSB    (UInt7 $v) { self.controller( 19, $v) }
         # 20-31 are undefined.
-    method bank-select_LSB     (UInt7 $v) { self.controller( 32, $v) }
-    method modulation_LSB      (UInt7 $v) { self.controller( 33, $v) }
-    method breath_LSB          (UInt7 $v) { self.controller( 34, $v) }
+    method bank-select_LSB      (UInt7 $v) { self.controller( 32, $v) }
+    method modulation_LSB       (UInt7 $v) { self.controller( 33, $v) }
+    method breath_LSB           (UInt7 $v) { self.controller( 34, $v) }
         # 35 is undefined.
-    method foot-pedal_LSB      (UInt7 $v) { self.controller( 36, $v) }
-    method portamento-time_LSB (UInt7 $v) { self.controller( 37, $v) }
-    method data-entry_LSB      (UInt7 $v) { self.controller( 38, $v) }
-    method channel-volume_LSB  (UInt7 $v) { self.controller( 39, $v) }
-    method balance_LSB         (UInt7 $v) { self.controller( 40, $v) }
+    method foot-pedal_LSB       (UInt7 $v) { self.controller( 36, $v) }
+    method portamento-time_LSB  (UInt7 $v) { self.controller( 37, $v) }
+    method data-entry_LSB       (UInt7 $v) { self.controller( 38, $v) }
+    method channel-volume_LSB   (UInt7 $v) { self.controller( 39, $v) }
+    method balance_LSB          (UInt7 $v) { self.controller( 40, $v) }
         # 41 is undefined.
-    method pan_LSB             (UInt7 $v) { self.controller( 42, $v) }
-    method expression_LSB      (UInt7 $v) { self.controller( 43, $v) }
-    method FX-control_1_LSB    (UInt7 $v) { self.controller( 44, $v) }
-    method FX-control_2_LSB    (UInt7 $v) { self.controller( 45, $v) }
+    method pan_LSB              (UInt7 $v) { self.controller( 42, $v) }
+    method expression_LSB       (UInt7 $v) { self.controller( 43, $v) }
+    method effect-control_1_LSB (UInt7 $v) { self.controller( 44, $v) }
+    method effect-control_2_LSB (UInt7 $v) { self.controller( 45, $v) }
         # 46-47 are undefined.
-    method gen-control_1_LSB   (UInt7 $v) { self.controller( 48, $v) }
-    method gen-control_2_LSB   (UInt7 $v) { self.controller( 49, $v) }
-    method gen-control_3_LSB   (UInt7 $v) { self.controller( 50, $v) }
-    method gen-control_4_LSB   (UInt7 $v) { self.controller( 51, $v) }
+    method gen-control_1_LSB    (UInt7 $v) { self.controller( 48, $v) }
+    method gen-control_2_LSB    (UInt7 $v) { self.controller( 49, $v) }
+    method gen-control_3_LSB    (UInt7 $v) { self.controller( 50, $v) }
+    method gen-control_4_LSB    (UInt7 $v) { self.controller( 51, $v) }
         # 52-63 are undefined.
-    method hold_1-pedal        (UInt7 $v) { self.controller( 64, $v) }
-    method portamento          (UInt7 $v) { self.controller( 65, $v) }
-    method sostenuto           (UInt7 $v) { self.controller( 66, $v) }
-    method soft-pedal          (UInt7 $v) { self.controller( 67, $v) }
-    method legato-footswitch   (UInt7 $v) { self.controller( 68, $v) }
-    method hold_2-pedal        (UInt7 $v) { self.controller( 69, $v) }
-    method sound-control_1     (UInt7 $v) { self.controller( 70, $v) }
-    method sound-control_2     (UInt7 $v) { self.controller( 71, $v) }
-    method sound-control_3     (UInt7 $v) { self.controller( 72, $v) }
-    method sound-control_4     (UInt7 $v) { self.controller( 73, $v) }
-    method sound-control_5     (UInt7 $v) { self.controller( 74, $v) }
-    method sound-control_6     (UInt7 $v) { self.controller( 75, $v) }
-    method sound-control_7     (UInt7 $v) { self.controller( 76, $v) }
-    method sound-control_8     (UInt7 $v) { self.controller( 77, $v) }
-    method sound-control_9     (UInt7 $v) { self.controller( 78, $v) }
-    method sound-control_10    (UInt7 $v) { self.controller( 79, $v) }
-    method gen-control_5       (UInt7 $v) { self.controller( 80, $v) }
-    method gen-control_6       (UInt7 $v) { self.controller( 81, $v) }
-    method gen-control_7       (UInt7 $v) { self.controller( 82, $v) }
-    method gen-control_8       (UInt7 $v) { self.controller( 83, $v) }
-    method portamento-control  (UInt7 $v) { self.controller( 84, $v) }
+    method hold_1-pedal         (UInt7 $v) { self.controller( 64, $v) }
+    method portamento           (UInt7 $v) { self.controller( 65, $v) }
+    method sostenuto            (UInt7 $v) { self.controller( 66, $v) }
+    method soft-pedal           (UInt7 $v) { self.controller( 67, $v) }
+    method legato-footswitch    (UInt7 $v) { self.controller( 68, $v) }
+    method hold_2-pedal         (UInt7 $v) { self.controller( 69, $v) }
+    method sound-control_1      (UInt7 $v) { self.controller( 70, $v) }
+    method sound-control_2      (UInt7 $v) { self.controller( 71, $v) }
+    method sound-control_3      (UInt7 $v) { self.controller( 72, $v) }
+    method sound-control_4      (UInt7 $v) { self.controller( 73, $v) }
+    method sound-control_5      (UInt7 $v) { self.controller( 74, $v) }
+    method sound-control_6      (UInt7 $v) { self.controller( 75, $v) }
+    method sound-control_7      (UInt7 $v) { self.controller( 76, $v) }
+    method sound-control_8      (UInt7 $v) { self.controller( 77, $v) }
+    method sound-control_9      (UInt7 $v) { self.controller( 78, $v) }
+    method sound-control_10     (UInt7 $v) { self.controller( 79, $v) }
+    method gen-control_5        (UInt7 $v) { self.controller( 80, $v) }
+    method gen-control_6        (UInt7 $v) { self.controller( 81, $v) }
+    method gen-control_7        (UInt7 $v) { self.controller( 82, $v) }
+    method gen-control_8        (UInt7 $v) { self.controller( 83, $v) }
+    method portamento-control   (UInt7 $v) { self.controller( 84, $v) }
         # 85-87 are undefined.
-    method hi-res-vel-prefix   (UInt7 $v) { self.controller( 88, $v) }
+    method hi-res-vel-prefix    (UInt7 $v) { self.controller( 88, $v) }
         # 89-90 are undefined.
-    method FX_1-depth          (UInt7 $v) { self.controller( 91, $v) }
-    method FX_2-depth          (UInt7 $v) { self.controller( 92, $v) }
-    method FX_3-depth          (UInt7 $v) { self.controller( 93, $v) }
-    method FX_4-depth          (UInt7 $v) { self.controller( 94, $v) }
-    method FX_5-depth          (UInt7 $v) { self.controller( 95, $v) }
-    method data-increment      (UInt7 $v) { self.controller( 96, $v) }
-    method data-decrement      (UInt7 $v) { self.controller( 97, $v) }
-    method NRPN_LSB            (UInt7 $v) { self.controller( 98, $v) }
-    method NRPN_MSB            (UInt7 $v) { self.controller( 99, $v) }
-    method RPN_LSB             (UInt7 $v) { self.controller(100, $v) }
-    method RPN_MSB             (UInt7 $v) { self.controller(101, $v) }
+    method effect_1-depth       (UInt7 $v) { self.controller( 91, $v) }
+    method effect_2-depth       (UInt7 $v) { self.controller( 92, $v) }
+    method effect_3-depth       (UInt7 $v) { self.controller( 93, $v) }
+    method effect_4-depth       (UInt7 $v) { self.controller( 94, $v) }
+    method effect_5-depth       (UInt7 $v) { self.controller( 95, $v) }
+    method data-increment       (UInt7 $v) { self.controller( 96, $v) }
+    method data-decrement       (UInt7 $v) { self.controller( 97, $v) }
+    method NRPN_LSB             (UInt7 $v) { self.controller( 98, $v) }
+    method NRPN_MSB             (UInt7 $v) { self.controller( 99, $v) }
+    method RPN_LSB              (UInt7 $v) { self.controller(100, $v) }
+    method RPN_MSB              (UInt7 $v) { self.controller(101, $v) }
         # 102-119 are undefined.
-    method all-sounds-off      (UInt7 $v) { self.controller(120, $v) }
-    method reset-controllers   (UInt7 $v) { self.controller(121, $v) }
-    method local-switch        (UInt7 $v) { self.controller(122, $v) }
-    method all-notes-off       (UInt7 $v) { self.controller(123, $v) }
-    method omni-mode-off       (UInt7 $v) { self.controller(124, $v) }
-    method omni-mode-on        (UInt7 $v) { self.controller(125, $v) }
-    method mono-mode           (UInt7 $v) { self.controller(126, $v) }
-    method poly-mode           (UInt7 $v) { self.controller(127, $v) }
+    method all-sounds-off       (UInt7 $v) { self.controller(120, $v) }
+    method reset-controllers    (UInt7 $v) { self.controller(121, $v) }
+    method local-switch         (UInt7 $v) { self.controller(122, $v) }
+    method all-notes-off        (UInt7 $v) { self.controller(123, $v) }
+    method omni-mode-off        (UInt7 $v) { self.controller(124, $v) }
+    method omni-mode-on         (UInt7 $v) { self.controller(125, $v) }
+    method mono-mode            (UInt7 $v) { self.controller(126, $v) }
+    method poly-mode            (UInt7 $v) { self.controller(127, $v) }
 
     method bank-select (UInt14 $v) {
         self.bank-select_MSB(self!MSB($v));
@@ -470,13 +470,13 @@ class Track is export {
         self.expression_MSB(self!MSB($v));
         self.expression_LSB(self!LSB($v));
     }
-    method FX-control_1 (UInt14 $v) {
-        self.FX-control_1_MSB(self!MSB($v));
-        self.FX-control_1_LSB(self!LSB($v));
+    method effect-control_1 (UInt14 $v) {
+        self.effect-control_1_MSB(self!MSB($v));
+        self.effect-control_1_LSB(self!LSB($v));
     }
-    method FX-control_2 (UInt14 $v) {
-        self.FX-control_2_MSB(self!MSB($v));
-        self.FX-control_2_LSB(self!LSB($v));
+    method effect-control_2 (UInt14 $v) {
+        self.effect-control_2_MSB(self!MSB($v));
+        self.effect-control_2_LSB(self!LSB($v));
     }
     method gen-control_1 (UInt14 $v) {
         self.gen-control_1_MSB(self!MSB($v));
