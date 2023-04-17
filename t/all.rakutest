@@ -460,90 +460,90 @@ test('t29',
     'Track: controller shortcuts',
     {
         my \t = Track.new;
-        t.bank-select_MSB:       0;
-        t.modulation_MSB:        1;
-        t.breath_MSB:            2;
+        t.bank-select_MSB:        0;
+        t.modulation_MSB:         1;
+        t.breath_MSB:             2;
             # 3 is undefined.
-        t.foot-pedal_MSB:        4;
-        t.portamento-time_MSB:   5;
-        t.data-entry_MSB:        6;
-        t.channel-volume_MSB:    7;
-        t.balance_MSB:           8;
+        t.foot-pedal_MSB:         4;
+        t.portamento-time_MSB:    5;
+        t.data-entry_MSB:         6;
+        t.channel-volume_MSB:     7;
+        t.balance_MSB:            8;
             # 9 is undefined.
-        t.pan_MSB:              10;
-        t.expression_MSB:       11;
-        t.effect-control_1_MSB: 12;
-        t.effect-control_2_MSB: 13;
+        t.pan_MSB:               10;
+        t.expression_MSB:        11;
+        t.effect-control_1_MSB:  12;
+        t.effect-control_2_MSB:  13;
             # 14-15 are undefined.
-        t.gen-control_1_MSB:    16;
-        t.gen-control_2_MSB:    17;
-        t.gen-control_3_MSB:    18;
-        t.gen-control_4_MSB:    19;
+        t.general-control_1_MSB: 16;
+        t.general-control_2_MSB: 17;
+        t.general-control_3_MSB: 18;
+        t.general-control_4_MSB: 19;
             # 20-31 are undefined.
-        t.bank-select_LSB:      32;
-        t.modulation_LSB:       33;
-        t.breath_LSB:           34;
+        t.bank-select_LSB:       32;
+        t.modulation_LSB:        33;
+        t.breath_LSB:            34;
             # 35 is undefined.
-        t.foot-pedal_LSB:       36;
-        t.portamento-time_LSB:  37;
-        t.data-entry_LSB:       38;
-        t.channel-volume_LSB:   39;
-        t.balance_LSB:          40;
+        t.foot-pedal_LSB:        36;
+        t.portamento-time_LSB:   37;
+        t.data-entry_LSB:        38;
+        t.channel-volume_LSB:    39;
+        t.balance_LSB:           40;
             # 41 is undefined.
-        t.pan_LSB:              42;
-        t.expression_LSB:       43;
-        t.effect-control_1_LSB: 44;
-        t.effect-control_2_LSB: 45;
+        t.pan_LSB:               42;
+        t.expression_LSB:        43;
+        t.effect-control_1_LSB:  44;
+        t.effect-control_2_LSB:  45;
             # 46-47 are undefined.
-        t.gen-control_1_LSB:    48;
-        t.gen-control_2_LSB:    49;
-        t.gen-control_3_LSB:    50;
-        t.gen-control_4_LSB:    51;
+        t.general-control_1_LSB: 48;
+        t.general-control_2_LSB: 49;
+        t.general-control_3_LSB: 50;
+        t.general-control_4_LSB: 51;
             # 52-63 are undefined.
-        t.hold_1-pedal:         64;
-        t.portamento:           65;
-        t.sostenuto:            66;
-        t.soft-pedal:           67;
-        t.legato-footswitch:    68;
-        t.hold_2-pedal:         69;
-        t.sound-control_1:      70;
-        t.sound-control_2:      71;
-        t.sound-control_3:      72;
-        t.sound-control_4:      73;
-        t.sound-control_5:      74;
-        t.sound-control_6:      75;
-        t.sound-control_7:      76;
-        t.sound-control_8:      77;
-        t.sound-control_9:      78;
-        t.sound-control_10:     79;
-        t.gen-control_5:        80;
-        t.gen-control_6:        81;
-        t.gen-control_7:        82;
-        t.gen-control_8:        83;
-        t.portamento-control:   84;
+        t.hold_1-pedal:          64;
+        t.portamento:            65;
+        t.sostenuto:             66;
+        t.soft-pedal:            67;
+        t.legato-footswitch:     68;
+        t.hold_2-pedal:          69;
+        t.sound-control_1:       70;
+        t.sound-control_2:       71;
+        t.sound-control_3:       72;
+        t.sound-control_4:       73;
+        t.sound-control_5:       74;
+        t.sound-control_6:       75;
+        t.sound-control_7:       76;
+        t.sound-control_8:       77;
+        t.sound-control_9:       78;
+        t.sound-control_10:      79;
+        t.general-control_5:     80;
+        t.general-control_6:     81;
+        t.general-control_7:     82;
+        t.general-control_8:     83;
+        t.portamento-control:    84;
             # 85-87 are undefined.
-        t.hi-res-vel-prefix:    88;
+        t.hi-res-vel-prefix:     88;
             # 89-90 are undefined.
-        t.effect_1-depth:       91;
-        t.effect_2-depth:       92;
-        t.effect_3-depth:       93;
-        t.effect_4-depth:       94;
-        t.effect_5-depth:       95;
-        t.data-increment:       96;
-        t.data-decrement:       97;
-        t.NRPN_LSB:             98;
-        t.NRPN_MSB:             99;
-        t.RPN_LSB:             100;
-        t.RPN_MSB:             101;
+        t.effect_1-depth:        91;
+        t.effect_2-depth:        92;
+        t.effect_3-depth:        93;
+        t.effect_4-depth:        94;
+        t.effect_5-depth:        95;
+        t.data-increment:        96;
+        t.data-decrement:        97;
+        t.NRPN_LSB:              98;
+        t.NRPN_MSB:              99;
+        t.RPN_LSB:              100;
+        t.RPN_MSB:              101;
              # 102-119 are undefined.
-        t.all-sounds-off:      120;
-        t.reset-controllers:   121;
-        t.local-switch:        122;
-        t.all-notes-off:       123;
-        t.omni-mode-off:       124;
-        t.omni-mode-on:        125;
-        t.mono-mode:           126;
-        t.poly-mode:           127;
+        t.all-sounds-off:       120;
+        t.reset-controllers:    121;
+        t.local-switch:         122;
+        t.all-notes-off:        123;
+        t.omni-mode-off:        124;
+        t.omni-mode-on:         125;
+        t.mono-mode:            126;
+        t.poly-mode:            127;
         t;
     },
     '4D 54 72 6B 00 00 01 28
@@ -627,25 +627,25 @@ test('t30',
     'Track: controller shortcuts (combined)',
     {
         my \t = Track.new;
-        t.bank-select:       32;
-        t.modulation:        133;
-        t.breath:            234;
+        t.bank-select:         32;
+        t.modulation:         133;
+        t.breath:             234;
             # 3 is undefined.
-        t.foot-pedal:        436;
-        t.portamento-time:   537;
-        t.data-entry:        638;
-        t.channel-volume:    739;
-        t.balance:           840;
+        t.foot-pedal:         436;
+        t.portamento-time:    537;
+        t.data-entry:         638;
+        t.channel-volume:     739;
+        t.balance:            840;
             # 9 is undefined.
-        t.pan:              1042;
-        t.expression:       1143;
-        t.effect-control_1: 1244;
-        t.effect-control_2: 1345;
+        t.pan:               1042;
+        t.expression:        1143;
+        t.effect-control_1:  1244;
+        t.effect-control_2:  1345;
             # 14-15 are undefined.
-        t.gen-control_1:    1648;
-        t.gen-control_2:    1749;
-        t.gen-control_3:    1850;
-        t.gen-control_4:    1951;
+        t.general-control_1: 1648;
+        t.general-control_2: 1749;
+        t.general-control_3: 1850;
+        t.general-control_4: 1951;
         t;
     },
     '4D 54 72 6B 00 00 00 84

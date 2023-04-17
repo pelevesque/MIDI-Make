@@ -570,92 +570,92 @@ t.controller: 8, 100; # Balance_MSB of 100.
 
 You can also call specific controllers using the following methods:
 
-| #       | method               | value   | use         | definition                             |
-|:--------|:---------------------|:--------|:------------|:---------------------------------------|
-| 0       | bank-select_MSB      | 0-127   | MSB         | Change patch banks.                    |
-| 1       | modulation_MSB       | 0-127   | MSB         | Create a vibrato effect.               |
-| 2       | breath_MSB           | 0-127   | MSB         | Breath controller.                     |
-| 3       | -                    | -       | -           | -                                      |
-| 4       | foot-pedal_MSB       | 0-127   | MSB         | Foot pedal data.                       |
-| 5       | portamento-time_MSB  | 0-127   | MSB         | Control portamento rate.               |
-| 6       | data-entry_MSB       | 0-127   | MSB         | Control value for NRPN/RPN parameters. |
-| 7       | channel-volume_MSB   | 0-127   | MSB         | Control the channel volume.            |
-| 8       | balance_MSB          | 0-127   | MSB         | Control left/right balance for stereo. |
-| 9       | -                    | -       | -           | -                                      |
-| 10      | pan_MSB              | 0-127   | MSB         | Control left/right balance for mono.   |
-| 11      | expression_MSB       | 0-127   | MSB         | Expression is a percentage of volume.  |
-| 12      | effect-control_1_MSB | 0-127   | MSB         | Control an effect parameter.           |
-| 13      | effect-control_2_MSB | 0-127   | MSB         | Control an effect parameter.           |
-| 14-15   | -                    | -       | -           | -                                      |
-| 16      | gen-control_1_MSB    | 0-127   | MSB         | General purpose controller.            |
-| 17      | gen-control_2_MSB    | 0-127   | MSB         | General purpose controller.            |
-| 18      | gen-control_3_MSB    | 0-127   | MSB         | General purpose controller.            |
-| 19      | gen-control_4_MSB    | 0-127   | MSB         | General purpose controller.            |
-| 20-31   | -                    | -       | -           | -                                      |
-| 32      | bank-select_LSB      | 0-127   | LSB         | Change patch banks.                    |
-| 33      | modulation_LSB       | 0-127   | LSB         | Create a vibrato effect.               |
-| 34      | breath_LSB           | 0-127   | LSB         | Breath controller.                     |
-| 35      | -                    | -       | -           | -                                      |
-| 36      | foot-pedal_LSB       | 0-127   | LSB         | Foot pedal data.                       |
-| 37      | portamento-time_LSB  | 0-127   | LSB         | Control portamento rate.               |
-| 38      | data-entry_LSB       | 0-127   | LSB         | Control value for NRPN/RPN parameters. |
-| 39      | channel-volume_LSB   | 0-127   | LSB         | Control the channel volume.            |
-| 40      | balance_LSB          | 0-127   | LSB         | Control left/right balance for stereo. |
-| 41      | -                    | -       | -           | -                                      |
-| 42      | pan_LSB              | 0-127   | LSB         | Control left/right balance for mono.   |
-| 43      | expression_LSB       | 0-127   | LSB         | Expression is a percentage of volume.  |
-| 44      | effect-control_1_LSB | 0-127   | LSB         | Control an effect parameter.           |
-| 45      | effect-control_2_LSB | 0-127   | LSB         | Control an effect parameter.           |
-| 46-47   | -                    | -       | -           | -                                      |
-| 48      | gen-control_1_LSB    | 0-127   | LSB         | General purpose controller.            |
-| 49      | gen-control_2_LSB    | 0-127   | LSB         | General purpose controller.            |
-| 50      | gen-control_3_LSB    | 0-127   | LSB         | General purpose controller.            |
-| 51      | gen-control_4_LSB    | 0-127   | LSB         | General purpose controller.            |
-| 52-63   | -                    | -       | -           | -                                      |
-| 64      | hold_1-pedal         | <63=off | 64>=0n      | Sustain pedal 1 on/off switch.         |
-| 65      | portamento           | <63=off | 64>=0n      | Portmento on/off switch.               |
-| 66      | sostenuto            | <63=off | 64>=0n      | Sostenuto on/off switch.               |
-| 67      | soft-pedal           | <63=off | 64>=0n      | Soft pedal on/off switch.              |
-| 68      | legato-footswitch    | <63=off | 64>=0n      | Legato on/off switch.                  |
-| 69      | hold_2-pedal         | <63=off | 64>=0n      | Sustain pedal 2 on/off switch.         |
-| 70      | sound-control_1      | 0-127   | LSB         | Sound control. (variation)             |
-| 71      | sound-control_2      | 0-127   | LSB         | Sound control. (resonance)             |
-| 72      | sound-control_3      | 0-127   | LSB         | Sound control. (release time)          |
-| 73      | sound-control_4      | 0-127   | LSB         | Sound control. (attack time)           |
-| 74      | sound-control_5      | 0-127   | LSB         | Sound control. (cutoff frequency)      |
-| 75      | sound-control_6      | 0-127   | LSB         | Generic sound control.                 |
-| 76      | sound-control_7      | 0-127   | LSB         | Generic sound control.                 |
-| 77      | sound-control_8      | 0-127   | LSB         | Generic sound control.                 |
-| 78      | sound-control_9      | 0-127   | LSB         | Generic sound control.                 |
-| 79      | sound-control_10     | 0-127   | LSB         | Generic sound control.                 |
-| 80      | gen-control_5        | 0-127   | LSB         | Generic or decay on/off switch.        |
-| 81      | gen-control_6        | 0-127   | LSB         | Generic or hi-pass on/off switch.      |
-| 82      | gen-control_7        | 0-127   | LSB         | Generic on/off switch.                 |
-| 83      | gen-control_8        | 0-127   | LSB         | Generic on/off switch.                 |
-| 84      | portamento-control   | 0-127   | note        | Control portamento amount.             |
-| 85-87   | -                    | -       | -           | -                                      |
-| 88      | hi-res-vel-prefix    | 0-127   | MSB         | Extend the range of velocities.        |
-| 89-90   | -                    | -       | -           | -                                      |
-| 91      | effect_1-depth       | 0-127   | LSB         | Effect control. (reverb)               |
-| 92      | effect_2-depth       | 0-127   | LSB         | Effect control. (tremolo)              |
-| 93      | effect_3-depth       | 0-127   | LSB         | Effect control. (chorus)               |
-| 94      | effect_4-depth       | 0-127   | LSB         | Effect control. (detune)               |
-| 95      | effect_5-depth       | 0-127   | LSB         | Effect control. (phaser)               |
-| 96      | data-increment       | N/A     | N/A         | Increment data for NRPN/RPN messages.  |
-| 97      | data-decrement       | N/A     | N/A         | Decrement data for NRPN/RPN messages.  |
-| 98      | NRPN_LSB             | 0-127   | LSB         | NRPN for controllers: 6, 38, 96, 97    |
-| 99      | NRPN_MSB             | 0-127   | MSB         | NRPN for controllers: 6, 38, 96, 97    |
-| 100     | RPN_LSB              | 0-127   | LSB         | RPN for controllers: 6, 38, 96, 97     |
-| 101     | RPN_MSB              | 0-127   | MSB         | RPN for controllers: 6, 38, 96, 97     |
-| 102-119 | -                    | -       | -           | -                                      |
-| 120     | all-sounds-off       | 0       | -           | Mute all sounds.                       |
-| 121     | reset-controllers    | 0       | -           | Reset all controllers to defaults.     |
-| 122     | local-switch         | 0=off   | 127=on      | MIDI workstation on/off switch.        |
-| 123     | all-notes-off        | 0       | -           | Mute all sounding notes.               |
-| 124     | omni-mode-off        | 0       | -           | Set to omni mode off.                  |
-| 125     | omni-mode-on         | 0       | -           | Set to omni mode on.                   |
-| 126     | mono-mode            | 0-127   | num-channel | Set device mode to monophonic.         |
-| 127     | poly-mode            | 0       | -           | Set device mode to polyphonic.         |
+| #       | method                | value   | use         | definition                             |
+|:--------|:----------------------|:--------|:------------|:---------------------------------------|
+| 0       | bank-select_MSB       | 0-127   | MSB         | Change patch banks.                    |
+| 1       | modulation_MSB        | 0-127   | MSB         | Create a vibrato effect.               |
+| 2       | breath_MSB            | 0-127   | MSB         | Breath controller.                     |
+| 3       | -                     | -       | -           | -                                      |
+| 4       | foot-pedal_MSB        | 0-127   | MSB         | Foot pedal data.                       |
+| 5       | portamento-time_MSB   | 0-127   | MSB         | Control portamento rate.               |
+| 6       | data-entry_MSB        | 0-127   | MSB         | Control value for NRPN/RPN parameters. |
+| 7       | channel-volume_MSB    | 0-127   | MSB         | Control the channel volume.            |
+| 8       | balance_MSB           | 0-127   | MSB         | Control left/right balance for stereo. |
+| 9       | -                     | -       | -           | -                                      |
+| 10      | pan_MSB               | 0-127   | MSB         | Control left/right balance for mono.   |
+| 11      | expression_MSB        | 0-127   | MSB         | Expression is a percentage of volume.  |
+| 12      | effect-control_1_MSB  | 0-127   | MSB         | Control an effect parameter.           |
+| 13      | effect-control_2_MSB  | 0-127   | MSB         | Control an effect parameter.           |
+| 14-15   | -                     | -       | -           | -                                      |
+| 16      | general-control_1_MSB | 0-127   | MSB         | General purpose controller.            |
+| 17      | general-control_2_MSB | 0-127   | MSB         | General purpose controller.            |
+| 18      | general-control_3_MSB | 0-127   | MSB         | General purpose controller.            |
+| 19      | general-control_4_MSB | 0-127   | MSB         | General purpose controller.            |
+| 20-31   | -                     | -       | -           | -                                      |
+| 32      | bank-select_LSB       | 0-127   | LSB         | Change patch banks.                    |
+| 33      | modulation_LSB        | 0-127   | LSB         | Create a vibrato effect.               |
+| 34      | breath_LSB            | 0-127   | LSB         | Breath controller.                     |
+| 35      | -                     | -       | -           | -                                      |
+| 36      | foot-pedal_LSB        | 0-127   | LSB         | Foot pedal data.                       |
+| 37      | portamento-time_LSB   | 0-127   | LSB         | Control portamento rate.               |
+| 38      | data-entry_LSB        | 0-127   | LSB         | Control value for NRPN/RPN parameters. |
+| 39      | channel-volume_LSB    | 0-127   | LSB         | Control the channel volume.            |
+| 40      | balance_LSB           | 0-127   | LSB         | Control left/right balance for stereo. |
+| 41      | -                     | -       | -           | -                                      |
+| 42      | pan_LSB               | 0-127   | LSB         | Control left/right balance for mono.   |
+| 43      | expression_LSB        | 0-127   | LSB         | Expression is a percentage of volume.  |
+| 44      | effect-control_1_LSB  | 0-127   | LSB         | Control an effect parameter.           |
+| 45      | effect-control_2_LSB  | 0-127   | LSB         | Control an effect parameter.           |
+| 46-47   | -                     | -       | -           | -                                      |
+| 48      | general-control_1_LSB | 0-127   | LSB         | General purpose controller.            |
+| 49      | general-control_2_LSB | 0-127   | LSB         | General purpose controller.            |
+| 50      | general-control_3_LSB | 0-127   | LSB         | General purpose controller.            |
+| 51      | general-control_4_LSB | 0-127   | LSB         | General purpose controller.            |
+| 52-63   | -                     | -       | -           | -                                      |
+| 64      | hold_1-pedal          | <63=off | 64>=0n      | Sustain pedal 1 on/off switch.         |
+| 65      | portamento            | <63=off | 64>=0n      | Portmento on/off switch.               |
+| 66      | sostenuto             | <63=off | 64>=0n      | Sostenuto on/off switch.               |
+| 67      | soft-pedal            | <63=off | 64>=0n      | Soft pedal on/off switch.              |
+| 68      | legato-footswitch     | <63=off | 64>=0n      | Legato on/off switch.                  |
+| 69      | hold_2-pedal          | <63=off | 64>=0n      | Sustain pedal 2 on/off switch.         |
+| 70      | sound-control_1       | 0-127   | LSB         | Sound control. (variation)             |
+| 71      | sound-control_2       | 0-127   | LSB         | Sound control. (resonance)             |
+| 72      | sound-control_3       | 0-127   | LSB         | Sound control. (release time)          |
+| 73      | sound-control_4       | 0-127   | LSB         | Sound control. (attack time)           |
+| 74      | sound-control_5       | 0-127   | LSB         | Sound control. (cutoff frequency)      |
+| 75      | sound-control_6       | 0-127   | LSB         | Generic sound control.                 |
+| 76      | sound-control_7       | 0-127   | LSB         | Generic sound control.                 |
+| 77      | sound-control_8       | 0-127   | LSB         | Generic sound control.                 |
+| 78      | sound-control_9       | 0-127   | LSB         | Generic sound control.                 |
+| 79      | sound-control_10      | 0-127   | LSB         | Generic sound control.                 |
+| 80      | general-control_5     | 0-127   | LSB         | Generic or decay on/off switch.        |
+| 81      | general-control_6     | 0-127   | LSB         | Generic or hi-pass on/off switch.      |
+| 82      | general-control_7     | 0-127   | LSB         | Generic on/off switch.                 |
+| 83      | general-control_8     | 0-127   | LSB         | Generic on/off switch.                 |
+| 84      | portamento-control    | 0-127   | note        | Control portamento amount.             |
+| 85-87   | -                     | -       | -           | -                                      |
+| 88      | hi-res-vel-prefix     | 0-127   | MSB         | Extend the range of velocities.        |
+| 89-90   | -                     | -       | -           | -                                      |
+| 91      | effect_1-depth        | 0-127   | LSB         | Effect control. (reverb)               |
+| 92      | effect_2-depth        | 0-127   | LSB         | Effect control. (tremolo)              |
+| 93      | effect_3-depth        | 0-127   | LSB         | Effect control. (chorus)               |
+| 94      | effect_4-depth        | 0-127   | LSB         | Effect control. (detune)               |
+| 95      | effect_5-depth        | 0-127   | LSB         | Effect control. (phaser)               |
+| 96      | data-increment        | N/A     | N/A         | Increment data for NRPN/RPN messages.  |
+| 97      | data-decrement        | N/A     | N/A         | Decrement data for NRPN/RPN messages.  |
+| 98      | NRPN_LSB              | 0-127   | LSB         | NRPN for controllers: 6, 38, 96, 97    |
+| 99      | NRPN_MSB              | 0-127   | MSB         | NRPN for controllers: 6, 38, 96, 97    |
+| 100     | RPN_LSB               | 0-127   | LSB         | RPN for controllers: 6, 38, 96, 97     |
+| 101     | RPN_MSB               | 0-127   | MSB         | RPN for controllers: 6, 38, 96, 97     |
+| 102-119 | -                     | -       | -           | -                                      |
+| 120     | all-sounds-off        | 0       | -           | Mute all sounds.                       |
+| 121     | reset-controllers     | 0       | -           | Reset all controllers to defaults.     |
+| 122     | local-switch          | 0=off   | 127=on      | MIDI workstation on/off switch.        |
+| 123     | all-notes-off         | 0       | -           | Mute all sounding notes.               |
+| 124     | omni-mode-off         | 0       | -           | Set to omni mode off.                  |
+| 125     | omni-mode-on          | 0       | -           | Set to omni mode on.                   |
+| 126     | mono-mode             | 0-127   | num-channel | Set device mode to monophonic.         |
+| 127     | poly-mode             | 0       | -           | Set device mode to polyphonic.         |
 
 Ex:
 
@@ -668,24 +668,24 @@ It's also possible to call the MSB and LSB counterparts (controllers
 in the range of 0-63) with one function. This permits specifying a
 value between 0 and 16383 in one go.
 
-| method           | value   | definition                             |
-|:-----------------|:--------|:---------------------------------------|
-| bank-select      | 0-16383 | Change patch banks.                    |
-| modulation       | 0-16383 | Create a vibrato effect.               |
-| breath           | 0-16383 | Breath controller.                     |
-| foot-pedal       | 0-16383 | Foot pedal data.                       |
-| portamento-time  | 0-16383 | Control portamento rate.               |
-| data-entry       | 0-16383 | Control value for NRPN/RPN parameters. |
-| channel-volume   | 0-16383 | Control the channel volume.            |
-| balance          | 0-16383 | Control left/right balance for stereo. |
-| pan              | 0-16383 | Control left/right balance for mono.   |
-| expression       | 0-16383 | Expression is a percentage of volume.  |
-| effect-control_1 | 0-16383 | Control an effect parameter.           |
-| effect-control_2 | 0-16383 | Control an effect parameter.           |
-| gen-control_1    | 0-16383 | General purpose controller.            |
-| gen-control_2    | 0-16383 | General purpose controller.            |
-| gen-control_3    | 0-16383 | General purpose controller.            |
-| gen-control_4    | 0-16383 | General purpose controller.            |
+| method            | value   | definition                             |
+|:------------------|:--------|:---------------------------------------|
+| bank-select       | 0-16383 | Change patch banks.                    |
+| modulation        | 0-16383 | Create a vibrato effect.               |
+| breath            | 0-16383 | Breath controller.                     |
+| foot-pedal        | 0-16383 | Foot pedal data.                       |
+| portamento-time   | 0-16383 | Control portamento rate.               |
+| data-entry        | 0-16383 | Control value for NRPN/RPN parameters. |
+| channel-volume    | 0-16383 | Control the channel volume.            |
+| balance           | 0-16383 | Control left/right balance for stereo. |
+| pan               | 0-16383 | Control left/right balance for mono.   |
+| expression        | 0-16383 | Expression is a percentage of volume.  |
+| effect-control_1  | 0-16383 | Control an effect parameter.           |
+| effect-control_2  | 0-16383 | Control an effect parameter.           |
+| general-control_1 | 0-16383 | General purpose controller.            |
+| general-control_2 | 0-16383 | General purpose controller.            |
+| general-control_3 | 0-16383 | General purpose controller.            |
+| general-control_4 | 0-16383 | General purpose controller.            |
 
 Ex:
 
