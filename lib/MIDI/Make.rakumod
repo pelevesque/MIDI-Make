@@ -153,24 +153,24 @@ class Track is export {
     has ASCII  $.instrument = '';
     has UInt28 $.delta-time = 0;
     has UInt4  $.channel = 0;
-    has UInt7  $.vel_note-off = 0;
-    has UInt7  $.vel_note-on = 127;
+    has UInt7  $.velocity_note-off = 0;
+    has UInt7  $.velocity_note-on = 127;
 
         # Getters.
     multi method copyright { $!copyright }
     multi method name { $!name }
     multi method delta-time { $!delta-time }
     multi method channel { $!channel }
-    multi method vel_note-off { $!vel_note-off }
-    multi method vel_note-on  { $!vel_note-on }
+    multi method velocity_note-off { $!velocity_note-off }
+    multi method velocity_note-on  { $!velocity_note-on }
 
         # Setters.
     multi method copyright ($copyright) { $!copyright = $copyright }
     multi method name ($name) { $!name = $name }
     multi method delta-time ($delta-time) { $!delta-time = $delta-time }
     multi method channel ($channel) { $!channel = $channel }
-    multi method vel_note-off ($vel) { $!vel_note-off = $vel }
-    multi method vel_note-on  ($vel) { $!vel_note-on = $vel }
+    multi method velocity_note-off ($velocity) { $!velocity_note-off = $velocity }
+    multi method velocity_note-on  ($velocity) { $!velocity_note-on  = $velocity }
 
     has $!e = Buf.new; # Meta/Midi Events.
 
@@ -292,25 +292,25 @@ class Track is export {
 
     method note-off (
         UInt7 $note,
-        UInt7 $vel = $!vel_note-off,
+        UInt7 $velocity = $!velocity_note-off,
     ) {
         $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'note-off'} + $!channel;
         $!e.append: $note;
-        $!e.append: $vel;
-        $!vel_note-off = $vel;
+        $!e.append: $velocity;
+        $!velocity_note-off = $velocity;
         $!delta-time = 0;
     }
 
     method note-on (
         UInt7 $note,
-        UInt7 $vel = $!vel_note-on,
+        UInt7 $velocity = $!velocity_note-on,
     ) {
         $!e.append: self!VLQ-encode($!delta-time);
         $!e.append: %bytes{'note-on'} + $!channel;
         $!e.append: $note;
-        $!e.append: $vel;
-        $!vel_note-on = $vel;
+        $!e.append: $velocity;
+        $!velocity_note-on = $velocity;
         $!delta-time = 0;
     }
 
