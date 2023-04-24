@@ -507,7 +507,7 @@ accepts two optional arguments:
 my \t = Track.new;
 t.key-signature: -2, 1; # G minor
 ```
-Ç
+
 #### note-off
 
 The note-off method creates a note off. It accepts two arguments: The
