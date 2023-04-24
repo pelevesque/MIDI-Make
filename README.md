@@ -10,35 +10,35 @@ A [Raku](https://www.raku.org) module to make MIDI files.
 use MIDI::Make;
 
 my \t = Track.new;
-t.copyright:         'c 2022 anonymous';
-t.name:              'melody';
-t.instrument:        'piano';
-t.controller:        8, 100;
-t.program-name:      'electric piano';
-t.port:              'MIDI Out 1';
-t.channel            1;
-t.program-change:    100;
-t.aftertouch:        100;
-t.pitch-bend:        0;
-t.marker:                    'section I';
-t.text:              'Lorem ipsum dolor sit amet.';
-t.key-signature:     -2, 1;
-t.tempo:             ♩80;
-t.time-signature:    3\2;
-t.aftertouch:        100, 53;
-t.note-on:           60;
-t.lyric:             'one';
-t.delta-time:            128;
-t.note-off:          60;
-t.cue:               'door slam';
-t.velocity_note-on:  80;
-t.velocity_note-off: 10;
-t.note-on:           72;
-t.lyric:             'two';
-t.delta-time:            128;
-t.note-off:          72;
-t.sysex:             <0A 29 1E>;
-t.add-bytes:         <00 F0 0A 29 1E F7>;
+t.copyright:      'c 2022 anonymous';
+t.name:           'melody';
+t.instrument:     'piano';
+t.controller:     8, 100;
+t.program-name:   'electric piano';
+t.port:           'MIDI Out 1';
+t.channel         1;
+t.program-change: 100;
+t.aftertouch:     100;
+t.pitch-bend:     0;
+t.marker:                 'section I';
+t.text:           'Lorem ipsum dolor sit amet.';
+t.key-signature:  -2, 1;
+t.tempo:          ♩80;
+t.time-signature: 3\2;
+t.aftertouch:     100, 53;
+t.note-on:        60;
+t.lyric:          'one';
+t.delta-time:         128;
+t.note-off:       60;
+t.cue:            'door slam';
+t.velocity-on:    80;
+t.velocity-off:   10;
+t.note-on:        72;
+t.lyric:          'two';
+t.delta-time:         128;
+t.note-off:       72;
+t.sysex:          <0A 29 1E>;
+t.add-bytes:      <00 F0 0A 29 1E F7>;
 
 my \s = Song.new(:PPQ(96));
 s.add-track(t.render);
@@ -352,11 +352,11 @@ my \t = Track.new;
 t.channel: 1;
 ```
 
-#### velocity_note-off
+#### velocity-off
 
-velocity_note-off sets the note-off velocity.
+velocity-off sets the note-off velocity.
 
-The velocity_note-off value is from 0 to 127. The default is 0.
+The velocity-off value is from 0 to 127. The default is 0.
 
 Note: A velocity for a note-off seems weird, but it can change the
 sound on certain instruments like an organ on which notes can be
@@ -364,30 +364,30 @@ depressed at different speeds.
 
 ```raku
     # Set on instantiation.
-my \t = Track.new(:velocity_note-off(10));
+my \t = Track.new(:velocity-off(10));
 ```
 
 ```raku
     # Set after instantiation.
 my \t = Track.new;
-t.velocity_note-off: 10;
+t.velocity-off: 10;
 ```
 
-#### velocity_note-on
+#### velocity-on
 
-velocity_note-on sets the note-on velocity.
+velocity-on sets the note-on velocity.
 
-The velocity_note-on value is from 0 to 127. The default is 0.
+The velocity-on value is from 0 to 127. The default is 0.
 
 ```raku
     # Set on instantiation.
-my \t = Track.new(:velocity_note-on(60));
+my \t = Track.new(:velocity-on(60));
 ```
 
 ```raku
     # Set after instantiation.
 my \t = Track.new;
-t.velocity_note-on: 60;
+t.velocity-on: 60;
 ```
 
 ### Methods
@@ -511,33 +511,33 @@ t.key-signature: -2, 1; # G minor
 #### note-off
 
 The note-off method creates a note off. It accepts two arguments: The
-note number from 0 to 127 (required), and the velocity_note-off from
-0 to 127 (optional). The default velocity_note-off is the one set by
-the velocity_note-off parameter. If velocity_note-off is set by this
-note-off method, it will also set the velocity_note-off parameter of
+note number from 0 to 127 (required), and the velocity-off from
+0 to 127 (optional). The default velocity-off is the one set by
+the velocity-off parameter. If velocity-off is set by this
+note-off method, it will also set the velocity-off parameter of
 the Track class for the next note-off events.
 
 ```raku
 my \t = Track.new;
-t.note-off: 60;      # velocity_note-off == 0
-t.note-off: 62, 120; # velocity_note-off == 120
-t.note-off: 64;      # velocity_note-off == 120
+t.note-off: 60;      # velocity-off == 0
+t.note-off: 62, 120; # velocity-off == 120
+t.note-off: 64;      # velocity-off == 120
 ```
 
 #### note-on
 
 The note-on method creates a note on. It accepts two arguments: The
-note number from 0 to 127 (required), and the velocity_note-on from
-0 to 127 (optional). The default velocity_note-on is the one set by
-the velocity_note-on parameter. If velocity_note-on is set by this
-note-on method, it will also set the velocity_note-on parameter of
+note number from 0 to 127 (required), and the velocity-on from
+0 to 127 (optional). The default velocity-on is the one set by
+the velocity-on parameter. If velocity-on is set by this
+note-on method, it will also set the velocity-on parameter of
 the Track class for the next note-on events.
 
 ```raku
 my \t = Track.new;
-t.note-on: 60;      # velocity_note-on == 127
-t.note-on: 62, 100; # velocity_note-on == 100
-t.note-on: 64;      # velocity_note-on == 100
+t.note-on: 60;      # velocity-on == 127
+t.note-on: 62, 100; # velocity-on == 100
+t.note-on: 64;      # velocity-on == 100
 ```
 
 #### aftertouch

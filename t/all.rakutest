@@ -134,9 +134,9 @@ test('t5',
 );
 
 test('t6',
-    'Track Instantiation: velocity_note-off => 10',
+    'Track Instantiation: velocity-off => 10',
     {
-        my \t = Track.new(:velocity_note-off(10));
+        my \t = Track.new(:velocity-off(10));
         t.note-off: 60;
         t;
     },
@@ -146,9 +146,9 @@ test('t6',
 );
 
 test('t7',
-    'Track Instantiation: velocity_note-on => 100',
+    'Track Instantiation: velocity-on => 100',
     {
-        my \t = Track.new(:velocity_note-on(100));
+        my \t = Track.new(:velocity-on(100));
         t.note-on: 60;
         t;
     },
@@ -163,8 +163,8 @@ test('t8',
         my \t = Track.new;
         t.delta-time: 100;
         t.channel: 1;
-        t.velocity_note-off: 10;
-        t.velocity_note-on:  100;
+        t.velocity-off: 10;
+        t.velocity-on:  100;
         t.note-on:  60;
         t.note-off: 60;
         t;
@@ -803,35 +803,35 @@ test('e1',
     'Everything',
     {
         my \t = Track.new;
-        t.copyright:         'c 2022 anonymous';
-        t.name:              'melody';
-        t.instrument:        'piano';
-        t.controller:        8, 100;
-        t.program-name:      'electric piano';
-        t.port:              'MIDI Out 1';
-        t.channel:           1;
-        t.program-change:    100;
-        t.aftertouch:        100;
-        t.pitch-bend:        0;
-        t.marker:                    'section I';
-        t.text:              'Lorem ipsum dolor sit amet.';
-        t.key-signature:     -2, 1;
-        t.tempo:             ♩80;
-        t.time-signature:    3\2;
-        t.aftertouch:        100, 53;
-        t.note-on:           60;
-        t.lyric:             'one';
-        t.delta-time:            128;
-        t.note-off:          60;
-        t.cue:               'door slam';
-        t.velocity_note-on:  80;
-        t.velocity_note-off: 10;
-        t.note-on:           72;
-        t.lyric:             'two';
-        t.delta-time:            128;
-        t.note-off:          72;
-        t.sysex:             <0A 29 1E>;
-        t.add-bytes:         <00 F0 0A 29 1E F7>;
+        t.copyright:      'c 2022 anonymous';
+        t.name:           'melody';
+        t.instrument:     'piano';
+        t.controller:     8, 100;
+        t.program-name:   'electric piano';
+        t.port:           'MIDI Out 1';
+        t.channel:        1;
+        t.program-change: 100;
+        t.aftertouch:     100;
+        t.pitch-bend:     0;
+        t.marker:                 'section I';
+        t.text:           'Lorem ipsum dolor sit amet.';
+        t.key-signature:  -2, 1;
+        t.tempo:          ♩80;
+        t.time-signature: 3\2;
+        t.aftertouch:     100, 53;
+        t.note-on:        60;
+        t.lyric:          'one';
+        t.delta-time:         128;
+        t.note-off:       60;
+        t.cue:            'door slam';
+        t.velocity-on:    80;
+        t.velocity-off:   10;
+        t.note-on:        72;
+        t.lyric:          'two';
+        t.delta-time:         128;
+        t.note-off:       72;
+        t.sysex:          <0A 29 1E>;
+        t.add-bytes:      <00 F0 0A 29 1E F7>;
 
         my \s = Song.new;
         s.format: 2;
