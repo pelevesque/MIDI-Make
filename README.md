@@ -22,7 +22,7 @@ t.aftertouch:     100;
 t.pitch-bend:     0;
 t.marker:                 'section I';
 t.text:           'Lorem ipsum dolor sit amet.';
-t.key-signature:  -2, 1;
+t.key-signature:  -2, minor;
 t.tempo:          ♩80;
 t.time-signature: 3\2;
 t.aftertouch:     100, 53;
@@ -501,11 +501,14 @@ accepts two optional arguments:
    can be from -7 to 7 where -1 to -7 is the number of flats, and
    1 to 7 is the number of sharps.
 
-2. The mode which is either 0 for major, or 1 for minor.
+2. The mode which is either 0 for major, or 1 for minor. MIDI::Make
+   provides you with the Modes enums <major minor> that you may use
+   instead of 0 and 1.
 
 ```raku
 my \t = Track.new;
-t.key-signature: -2, 1; # G minor
+t.key-signature: -2, 1;     # G minor
+t.key-signature: -2, minor: # G minor with Modes enum.
 ```
 
 #### note-off

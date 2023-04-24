@@ -34,6 +34,8 @@ sub infix:<\\> (UInt8 $numerator, Pow2 $denominator) is export {
     TimeSignature.new: :$numerator, :$denominator;
 }
 
+enum Modes is export <major minor>;
+
 sub write_2-bytes (UInt16 $n) { Buf.write-uint16(0, $n, BigEndian) }
 sub write_4-bytes (UInt32 $n) { Buf.write-uint32(0, $n, BigEndian) }
 
