@@ -22,7 +22,7 @@ t.aftertouch:     100;
 t.pitch-bend:     0;
 t.marker:                 'section I';
 t.text:           'Lorem ipsum dolor sit amet.';
-t.key-signature:  -2, minor;
+t.key-signature:  2♭, minor;
 t.tempo:          ♩80;
 t.time-signature: 3\2;
 t.aftertouch:     100, 53;
@@ -499,7 +499,10 @@ accepts two optional arguments:
 
 1. The key which is defined as the number of accidentals. This value
    can be from -7 to 7 where -1 to -7 is the number of flats, and
-   1 to 7 is the number of sharps.
+   1 to 7 is the number of sharps. It is also possible to use
+   1♭, 2♭ ... 7♭ instead of -1 to -7 for flats, and 1♯, 2♯ ... 7♯
+   instead of 1 to 7 for sharps. You can also use 0♭ or 0♯ instead of
+   0.
 
 2. The mode which is either 0 for major, or 1 for minor. MIDI::Make
    provides you with the Modes enums <major minor> that you may use
@@ -508,7 +511,8 @@ accepts two optional arguments:
 ```raku
 my \t = Track.new;
 t.key-signature: -2, 1;     # G minor
-t.key-signature: -2, minor: # G minor with Modes enum.
+t.key-signature: 2♭, 1;     # G minor with unicode number of flats.
+t.key-signature: 2♭, minor: # G minor with Modes enum.
 ```
 
 #### note-off

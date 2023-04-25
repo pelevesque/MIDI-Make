@@ -34,6 +34,10 @@ sub infix:<\\> (UInt8 $numerator, Pow2 $denominator) is export {
     TimeSignature.new: :$numerator, :$denominator;
 }
 
+subset NumAccidentals of UInt where * ≤ 7;
+sub postfix:<♭> (NumAccidentals $n) is export { -$n }
+sub postfix:<♯> (NumAccidentals $n) is export {  $n }
+
 enum Modes is export <major minor>;
 
 sub write_2-bytes (UInt16 $n) { Buf.write-uint16(0, $n, BigEndian) }

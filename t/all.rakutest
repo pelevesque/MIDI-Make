@@ -399,6 +399,48 @@ test('t24',
 );
 
 test('t25',
+    'Track: key-signature using ♭/♯ postfix for accidentals',
+    {
+        my \t = Track.new;
+	    t.key-signature: 7♭;
+        t.key-signature: 6♭;
+        t.key-signature: 5♭;
+        t.key-signature: 4♭;
+	    t.key-signature: 3♭;
+        t.key-signature: 2♭;
+        t.key-signature: 1♭;
+        t.key-signature: 0♭, 1;
+        t.key-signature: 0♯, 1;
+        t.key-signature: 1♯, 1;
+        t.key-signature: 2♯, 1;
+        t.key-signature: 3♯, 1;
+        t.key-signature: 4♯, 1;
+        t.key-signature: 5♯, 1;
+        t.key-signature: 6♯, 1;
+        t.key-signature: 7♯, 1;
+	    t;
+    },
+    '4D 54 72 6B 00 00 00 64
+     00 FF 59 02 F9 00
+     00 FF 59 02 FA 00
+     00 FF 59 02 FB 00
+     00 FF 59 02 FC 00
+     00 FF 59 02 FD 00
+     00 FF 59 02 FE 00
+     00 FF 59 02 FF 00
+     00 FF 59 02 00 01
+     00 FF 59 02 00 01
+     00 FF 59 02 01 01
+     00 FF 59 02 02 01
+     00 FF 59 02 03 01
+     00 FF 59 02 04 01
+     00 FF 59 02 05 01
+     00 FF 59 02 06 01
+     00 FF 59 02 07 01
+     00 FF 2F 00',
+);
+
+test('t26',
     'Track: key-signature using Modes enums',
     {
         my \t = Track.new;
@@ -412,7 +454,7 @@ test('t25',
      00 FF 2F 00',
 );
 
-test('t26',
+test('t27',
     'Track: note-on and note-off',
     {
         my \t = Track.new;
@@ -434,7 +476,7 @@ test('t26',
      00 FF 2F 00',
 );
 
-test('t27',
+test('t28',
     'Track: note aftertouch',
     {
         my \t = Track.new;
@@ -446,7 +488,7 @@ test('t27',
      00 FF 2F 00',
 );
 
-test('t28',
+test('t29',
     'Track: channel aftertouch',
     {
         my \t = Track.new;
@@ -458,7 +500,7 @@ test('t28',
      00 FF 2F 00',
 );
 
-test('t29',
+test('t30',
     'Track: controller',
     {
         my \t = Track.new;
@@ -470,7 +512,7 @@ test('t29',
      00 FF 2F 00',
 );
 
-test('t30',
+test('t31',
     'Track: controller shortcuts',
     {
         my \t = Track.new;
@@ -637,7 +679,7 @@ test('t30',
      00 FF 2F 00',
 );
 
-test('t31',
+test('t32',
     'Track: controller shortcuts (combined)',
     {
         my \t = Track.new;
@@ -698,7 +740,7 @@ test('t31',
      00 FF 2F 00',
 );
 
-test('t32',
+test('t33',
     'Track: program-change',
     {
         my \t = Track.new;
@@ -710,7 +752,7 @@ test('t32',
      00 FF 2F 00',
 );
 
-test('t33',
+test('t34',
     'Track: pitch-bend with default param, on channel 1',
     {
         my \t = Track.new;
@@ -723,7 +765,7 @@ test('t33',
      00 FF 2F 00',
 );
 
-test('t34',
+test('t35',
     'Track: pitch-bend => none',
     {
         my \t = Track.new;
@@ -735,7 +777,7 @@ test('t34',
      00 FF 2F 00',
 );
 
-test('t35',
+test('t36',
     'Track: pitch-bend => lowest',
     {
         my \t = Track.new;
@@ -747,7 +789,7 @@ test('t35',
      00 FF 2F 00',
 );
 
-test('t36',
+test('t37',
     'Track: pitch-bend => highest',
     {
         my \t = Track.new;
@@ -759,7 +801,7 @@ test('t36',
      00 FF 2F 00',
 );
 
-test('t37',
+test('t38',
     'Track: pitch-bend => 10000',
     {
         my \t = Track.new;
@@ -771,7 +813,7 @@ test('t37',
      00 FF 2F 00',
 );
 
-test('t38',
+test('t39',
     'Track: sysex',
     {
         my \t = Track.new;
@@ -783,7 +825,7 @@ test('t38',
      00 FF 2F 00',
 );
 
-test('t39',
+test('t40',
     'Track: add-bytes',
     {
         my \t = Track.new;
@@ -795,7 +837,7 @@ test('t39',
      00 FF 2F 00',
 );
 
-t 't40' => {
+t 't41' => {
     is(
         do {
             my \t = Track.new;
@@ -829,7 +871,7 @@ test('e1',
         t.pitch-bend:     0;
         t.marker:                 'section I';
         t.text:           'Lorem ipsum dolor sit amet.';
-        t.key-signature:  -2, minor;
+        t.key-signature:  2♭, minor;
         t.tempo:          ♩80;
         t.time-signature: 3\2;
         t.aftertouch:     100, 53;
