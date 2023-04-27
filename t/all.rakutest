@@ -464,13 +464,19 @@ test('t27',
         t.note-off: 127, 10;
         t.note-on:  60;
         t.note-off: 60;
+        t.velocity-on: 100;
+        t.velocity-off: 10;
+        t.note-on:  60;
+        t.note-off: 60;
         t;
     },
-    '4D 54 72 6B 00 00 00 1C
+    '4D 54 72 6B 00 00 00 24
      00 90 3C 7F
      00 80 3C 00
      00 90 7F 64
      00 80 7F 0A
+     00 90 3C 7F
+     00 80 3C 00
      00 90 3C 64
      00 80 3C 0A
      00 FF 2F 00',

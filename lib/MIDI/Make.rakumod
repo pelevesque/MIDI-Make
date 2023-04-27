@@ -304,7 +304,6 @@ class Track is export {
         $!e.append: %bytes{'note-off'} + $!channel;
         $!e.append: $note;
         $!e.append: $velocity;
-        $!velocity-off = $velocity;
         $!delta-time = 0;
     }
 
@@ -316,7 +315,6 @@ class Track is export {
         $!e.append: %bytes{'note-on'} + $!channel;
         $!e.append: $note;
         $!e.append: $velocity;
-        $!velocity-on = $velocity;
         $!delta-time = 0;
     }
 

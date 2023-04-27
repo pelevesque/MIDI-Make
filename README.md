@@ -520,15 +520,15 @@ t.key-signature: 2♭, minor: # G minor with Modes enum.
 The note-off method creates a note off. It accepts two arguments: The
 note number from 0 to 127 (required), and the velocity-off from
 0 to 127 (optional). The default velocity-off is the one set by
-the velocity-off parameter. If velocity-off is set by this
-note-off method, it will also set the velocity-off parameter of
-the Track class for the next note-off events.
+the velocity-off parameter.
 
 ```raku
 my \t = Track.new;
-t.note-off: 60;      # velocity-off == 0
-t.note-off: 62, 120; # velocity-off == 120
-t.note-off: 64;      # velocity-off == 120
+t.note-off: 60;     # velocity-off == 0
+t.note-off: 62, 10; # velocity-off == 10
+t.note-off: 64;     # velocity-off == 0
+t.velocity-off: 10;
+t.note-off: 66;     # velocity-off == 10
 ```
 
 #### note-on
@@ -536,15 +536,15 @@ t.note-off: 64;      # velocity-off == 120
 The note-on method creates a note on. It accepts two arguments: The
 note number from 0 to 127 (required), and the velocity-on from
 0 to 127 (optional). The default velocity-on is the one set by
-the velocity-on parameter. If velocity-on is set by this
-note-on method, it will also set the velocity-on parameter of
-the Track class for the next note-on events.
+the velocity-on parameter.
 
 ```raku
 my \t = Track.new;
 t.note-on: 60;      # velocity-on == 127
 t.note-on: 62, 100; # velocity-on == 100
-t.note-on: 64;      # velocity-on == 100
+t.note-on: 64;      # velocity-on == 127
+t.velocity-on: 100;
+t.note-on: 66;      # velocity-on == 100
 ```
 
 #### aftertouch
