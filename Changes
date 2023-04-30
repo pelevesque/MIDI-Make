@@ -1,5 +1,21 @@
 Revision history for MIDI::Make
 
+0.11.0
+    - Rename ｢data｣ variable to ｢dataBytes｣
+    - Rename ch to channel
+    - Rename dt to delta-time
+    - Rename FX_ to effect_
+    - Rename gen_ to general_
+    - Rename FX_ to effect_
+    - Rename gen_ to general_
+    - Rename hi-res-vel-prefix to hi-res-velocity-prefix
+    - Rename vel_ to velocity_
+    - Rename velocity_note-off/on to velocity-off/on
+    - Add Modes enum for key-signature
+    - Add ♭/♯ postfix for key-signature key
+    - Do not automatically set velocity-off/on from note-off/on
+    - Various small fixes
+
 0.10.0
     - Various internal clean up and fixes
     - Use a multi method for note/channel aftertouch
