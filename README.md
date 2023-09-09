@@ -204,7 +204,7 @@ t.note-off:   60;
 
     # Add it to the Song class.
 my \s = Song.new;
-s.add-track($t.render);
+s.add-track(t.render);
 ```
 
 #### render
@@ -762,7 +762,7 @@ t.delta-time:     128;
 t.note-off:   60;
 
 my \s = Song.new;
-s.add-track($t.render);
+s.add-track(t.render);
 ```
 
 ## Running Tests
