@@ -794,4 +794,5 @@ selectively run tests.
 
 ## License
 
-MIT, copyright © 2022 Pierre-Emmanuel Lévesque
+MIT\
+Copyright 2022 Pierre-Emmanuel Lévesque
